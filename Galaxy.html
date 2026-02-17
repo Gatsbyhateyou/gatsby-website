@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>镜像星海 | 灵感档案馆</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --deep-black: #050505;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: "Georgia", "Source Han Serif SC", "Spectral", serif;
+        }
+
+        body {
+            /* 深蓝到极黑渐变，模拟宇宙深处星云 */
+            background: radial-gradient(circle at 50% 50%, #0a0c1a 0%, #050505 100%);
+        }
+
+        canvas {
+            display: block;
+            position: relative;
+            z-index: 0;
+            /* 隐藏原生鼠标指针 */
+            cursor: none !important;
+        }
+
+        /* 召唤浮层：太空感 + 虚幻 */
+        #search-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(ellipse 120% 100% at 50% 50%, rgba(20, 25, 50, 0.85) 0%, rgba(5, 5, 15, 0.95) 50%, rgba(0, 0, 5, 0.98) 100%);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 100;
+        }
+        #search-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 20% 30%, rgba(170, 204, 255, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.04) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        #search-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+            cursor: auto;
+        }
+
+        .search-box {
+            position: relative;
+            z-index: 1;
+            padding: 2rem 3rem;
+            background: rgba(10, 12, 26, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 4px;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.08),
+                0 0 80px rgba(170, 204, 255, 0.05),
+                inset 0 0 60px rgba(0, 0, 20, 0.5);
+            animation: searchGlow 4s ease-in-out infinite;
+        }
+        @keyframes searchGlow {
+            50% {
+                box-shadow: 0 0 50px rgba(212, 175, 55, 0.12),
+                    0 0 90px rgba(170, 204, 255, 0.08),
+                    inset 0 0 60px rgba(0, 0, 20, 0.5);
+            }
+        }
+
+        #search-input {
+            display: block;
+            width: 280px;
+            max-width: 80vw;
+            padding: 12px 16px;
+            font-size: 1.25rem;
+            font-family: "Georgia", "Source Han Serif SC", "Spectral", serif;
+            color: rgba(255, 235, 200, 0.95);
+            background: rgba(5, 8, 18, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 2px;
+            outline: none;
+            letter-spacing: 2px;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        #search-input::placeholder {
+            color: rgba(212, 175, 55, 0.45);
+        }
+        #search-input:focus {
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 24px rgba(212, 175, 55, 0.15);
+        }
+
+        .search-hint {
+            margin-top: 1.25rem;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: rgba(170, 204, 255, 0.4);
+            text-shadow: 0 0 12px rgba(170, 204, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="galaxyCanvas"></canvas>
+
+    <div id="search-overlay">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="输入残存的关键词..." autocomplete="off">
+            <div class="search-hint">按 ENTER 释放召唤 · 按 ESC 退出</div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/supabase-config.js"></script>
+<script src="/supabase-idea-bin.js"></script>
+<script>
+/**
+ * 镜像星海核心脚本
+ */
+const canvas = document.getElementById('galaxyCanvas');
+const ctx = canvas.getContext('2d');
+const searchOverlay = document.getElementById('search-overlay');
+const searchInput = document.getElementById('search-input');
+
+let particles = [];
+let mouse = { x: -1000, y: -1000, prevX: -1000, prevY: -1000 };
+let mouseVel = { x: 0, y: 0 };
+let tick = 0; // 在函数外部定义，用于驱动呼吸动画
+let isSearching = false;
+let searchTerm = "";
+
+// 背景星群
+const backgroundStars = [];
+const STAR_COUNT = 200;
+const PARALLAX_FACTOR = 0.01; // 视差反向位移系数
+
+function initBackgroundStars() {
+    backgroundStars.length = 0;
+    for (let i = 0; i < STAR_COUNT; i++) {
+        backgroundStars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 1.2,
+            opacity: Math.random() * 0.5,
+            blinkSpeed: 0.01 + Math.random() * 0.02,
+            phase: Math.random() * Math.PI * 2,
+            color: Math.random() > 0.8 ? '#aaccff' : '#d4af37' // 80% 金，20% 星际蓝
+        });
+    }
+}
+
+function drawDeepSpace() {
+    // 视差：根据鼠标速度对背景星做极小幅反向位移（远山感）
+    const offsetX = mouseVel.x * PARALLAX_FACTOR;
+    const offsetY = mouseVel.y * PARALLAX_FACTOR;
+
+    backgroundStars.forEach(s => {
+        s.phase += s.blinkSpeed;
+        const currentOpacity = s.opacity * (Math.sin(s.phase) * 0.5 + 0.5);
+        const px = s.x - offsetX;
+        const py = s.y - offsetY;
+
+        ctx.save();
+        ctx.globalAlpha = currentOpacity;
+        ctx.fillStyle = s.color;
+        ctx.beginPath();
+        ctx.arc(px, py, s.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 大而亮的星（size > 1.0）画十字星芒，望远镜感
+        if (s.size > 1.0) {
+            const len = s.size * 5;
+            ctx.strokeStyle = s.color;
+            ctx.lineWidth = 0.4;
+            ctx.globalAlpha = currentOpacity * 0.7;
+            ctx.beginPath();
+            ctx.moveTo(px - len, py);
+            ctx.lineTo(px + len, py);
+            ctx.moveTo(px, py - len);
+            ctx.lineTo(px, py + len);
+            ctx.stroke();
+        }
+        ctx.restore();
+    });
+}
+
+// 设置画布大小
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initBackgroundStars();
+}
+window.addEventListener('resize', resize);
+resize();
+
+// 粒子类
+class StarDust {
+    constructor(data) {
+        this.content = data.content;
+        this.timestamp = data.timestamp;
+        this.id = data.id;
+
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+
+        this.baseSize = Math.random() * 0.8 + 1; // 范围 1～1.8，更统一、无过小星点
+        this.angle = Math.random() * Math.PI * 2;
+        this.pulseSpeed = 0.02 + Math.random() * 0.05;
+        this.active = false;
+        this.isTarget = false; // 天选之子：核心圈内离鼠标最近的那颗
+    }
+
+    update() {
+        if (isSearching) {
+            if (this.content.includes(searchTerm)) {
+                let dx = canvas.width / 2 - this.x;
+                let dy = canvas.height / 2 - this.y;
+                this.x += dx * 0.02;
+                this.y += dy * 0.02;
+            }
+            this.vx *= 0.94;
+            this.vy *= 0.94;
+            this.x += this.vx;
+            this.y += this.vy;
+            this.angle += this.pulseSpeed;
+            const margin = 2;
+            this.x = Math.max(margin, Math.min(canvas.width - margin, this.x));
+            this.y = Math.max(margin, Math.min(canvas.height - margin, this.y));
+            return;
+        }
+
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+
+        let repelDist = 180;
+        let attractDist = 40;
+
+        if (distance < repelDist && distance > attractDist) {
+            let force = (repelDist - distance) / repelDist;
+            this.vx -= (dx / distance) * force * 0.6;
+            this.vy -= (dy / distance) * force * 0.6;
+        } else if (distance <= attractDist && distance > 0) {
+            this.vx += (dx / distance) * 0.2;
+            this.vy += (dy / distance) * 0.2;
+            this.active = true;
+        } else {
+            this.active = false;
+        }
+
+        this.vx *= 0.94;
+        this.vy *= 0.94;
+        // 限制最大速度，防止被排斥力推出界面
+        const maxSpeed = 2.5;
+        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        if (speed > maxSpeed) {
+            this.vx *= maxSpeed / speed;
+            this.vy *= maxSpeed / speed;
+        }
+        this.x += this.vx + Math.cos(this.angle) * 0.1;
+        this.y += this.vy + Math.sin(this.angle) * 0.1;
+        this.angle += this.pulseSpeed;
+
+        // 严格限制在画布内，保证所有星星始终在界面内可见（不穿出、不环绕）
+        const margin = 2;
+        this.x = Math.max(margin, Math.min(canvas.width - margin, this.x));
+        this.y = Math.max(margin, Math.min(canvas.height - margin, this.y));
+        if (this.x === margin || this.x === canvas.width - margin) this.vx *= -0.3;
+        if (this.y === margin || this.y === canvas.height - margin) this.vy *= -0.3;
+    }
+
+    draw(c) {
+        let g = c || ctx;
+        g.save();
+
+        let pulse = Math.sin(this.angle) * 0.5 + 1;
+        const distToMouse = Math.sqrt((mouse.x - this.x) ** 2 + (mouse.y - this.y) ** 2);
+        const nearMouse = distToMouse < 40;
+        const showText = (this.isTarget && !isSearching) || (isSearching && this.content.includes(searchTerm) && nearMouse);
+        if (showText) {
+            g.shadowBlur = 15;
+            g.shadowColor = "rgba(255, 230, 150, 0.8)";
+            g.fillStyle = "#ffffff";
+            g.font = "italic 18px serif";
+            g.fillText(this.content, this.x, this.y);
+
+            g.strokeStyle = "rgba(212, 175, 55, 0.2)";
+            g.beginPath();
+            g.moveTo(this.x, this.y);
+            g.lineTo(this.x - this.vx * 5, this.y - this.vy * 5);
+            g.stroke();
+
+            g.font = "10px serif";
+            g.fillStyle = "rgba(212, 175, 55, 0.5)";
+            g.fillText(this.timestamp, this.x, this.y + 20);
+        } else {
+            let brightness = Math.max(0.2, 1 - distToMouse / 500);
+
+            g.globalAlpha = brightness;
+            g.fillStyle = "#d4af37";
+            g.beginPath();
+            g.arc(this.x, this.y, this.baseSize * pulse, 0, Math.PI * 2);
+            g.fill();
+
+            if (this.baseSize > 1.0) {
+                g.shadowBlur = 5;
+                g.shadowColor = "#d4af37";
+                g.strokeStyle = "rgba(212, 175, 55, 0.3)";
+                g.beginPath();
+                g.arc(this.x, this.y, this.baseSize * pulse, 0, Math.PI * 2);
+                g.stroke();
+            }
+        }
+        g.restore();
+    }
+}
+
+// 初始化粒子：优先从 Supabase 拉取，失败则用 localStorage
+function init() {
+    const api = window.ideaBinApi;
+    if (api) {
+        return api.load().then(function (data) {
+            particles = data.map(function (item) { return new StarDust(item); });
+        }).catch(function () {
+            const rawData = localStorage.getItem('LOST_INSPIRATIONS') || '[]';
+            const data = JSON.parse(rawData);
+            particles = data.map(function (item) { return new StarDust(item); });
+        });
+    }
+    const rawData = localStorage.getItem('LOST_INSPIRATIONS') || '[]';
+    const data = JSON.parse(rawData);
+    particles = data.map(function (item) { return new StarDust(item); });
+    return Promise.resolve();
+}
+
+// 绘制鼠标光晕
+function drawAura() {
+    if (mouse.x <= 0 || mouse.y <= 0) return;
+    ctx.save();
+    let breathingRadius = 150 + Math.sin(tick) * 15;
+    let gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, breathingRadius);
+    gradient.addColorStop(0, 'rgba(212, 175, 55, 0.4)');
+    gradient.addColorStop(0.2, 'rgba(212, 175, 55, 0.15)');
+    gradient.addColorStop(1, 'rgba(212, 175, 55, 0)');
+    ctx.fillStyle = gradient;
+    ctx.globalCompositeOperation = 'screen';
+    ctx.beginPath();
+    ctx.arc(mouse.x, mouse.y, breathingRadius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+}
+
+// 动画循环
+function animate() {
+    // 鼠标速度（用于背景星视差）
+    if (mouse.prevX === -1000) mouse.prevX = mouse.x;
+    if (mouse.prevY === -1000) mouse.prevY = mouse.y;
+    mouseVel.x = mouse.x - mouse.prevX;
+    mouseVel.y = mouse.y - mouse.prevY;
+    mouse.prevX = mouse.x;
+    mouse.prevY = mouse.y;
+
+    // 1. 清除画布（用透明色，保留 CSS 渐变背景）
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 2. 绘制最远处的静止星空（含视差与星芒）
+    drawDeepSpace();
+
+    tick += 0.03;
+    // 3. 绘制鼠标光晕（光晕会照亮背景星空）
+    drawAura();
+
+    // 4. 寻找并标记天选之子粒子
+    let closestDist = Infinity;
+    let targetStar = null;
+    particles.forEach(p => {
+        let d = Math.sqrt((mouse.x - p.x) ** 2 + (mouse.y - p.y) ** 2);
+        if (d < 40) {
+            if (d < closestDist) {
+                closestDist = d;
+                targetStar = p;
+            }
+        }
+        p.isTarget = false;
+    });
+    if (targetStar) targetStar.isTarget = true;
+
+    // 5. 绘制动态文字粒子
+    particles.forEach(p => {
+        p.update();
+        p.draw(ctx);
+    });
+
+    requestAnimationFrame(animate);
+}
+
+// 交互监听
+window.addEventListener('mousemove', e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+});
+
+window.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+        if (!searchOverlay.classList.contains('active')) {
+            searchInput.value = "";
+            searchOverlay.classList.add('active');
+            searchInput.focus();
+        } else {
+            searchTerm = searchInput.value;
+            searchOverlay.classList.remove('active');
+            isSearching = true;
+        }
+    }
+    if (e.key === 'Escape') {
+        isSearching = false;
+        searchTerm = "";
+        searchOverlay.classList.remove('active');
+        searchInput.value = "";
+    }
+});
+
+init().then(function () { animate(); });
+</script>
+</body>
+</html>
