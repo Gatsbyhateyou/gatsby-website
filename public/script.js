@@ -95,7 +95,7 @@
   // 胶片集：本地照片数组 → map 渲染瀑布流 → 随机旋转、入场序号、灯箱
   var GALLERY_PHOTOS = [
     '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
-    '6.jpg', '7.jpg', '8.jpg', '9.jpg'
+    '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg'
   ];
   var GALLERY_PHOTO_DIR = '/photo';
 
@@ -148,6 +148,13 @@
 
       lightboxImg.src = img.src;
       lightboxImg.alt = img.alt || '';
+      var imgId = (img.src || '').split('/').pop() || img.alt || 'unknown';
+      if (window.posthog) {
+        window.posthog.capture('image_clicked', {
+          image_id: imgId,
+          page: location.pathname || '/gallery.html'
+        });
+      }
       lightboxInner.style.width = finalW + 'px';
       lightboxInner.style.height = finalH + 'px';
       lightboxInner.style.transform = 'translate(' + dx + 'px,' + dy + 'px) translate(-50%,-50%) scale(' + scale0 + ')';
@@ -243,6 +250,17 @@
     function throwIntoBlackHole() {
       var text = input.value.trim();
       if (!text) return;
+      var now = Date.now();
+      var usedAt = new Date().toISOString();
+      var durationSec = ideaBinOpenTime != null ? (now - ideaBinOpenTime) / 1000 : 0;
+      if (window.posthog) {
+        window.posthog.capture('idea_bin_used', {
+          page: location.pathname || '/',
+          timestamp: usedAt,
+          duration_seconds: Math.round(durationSec * 10) / 10
+        });
+      }
+      ideaBinOpenTime = null;
       var api = window.ideaBinApi;
       if (api) {
         api.save(text).then(function () {
@@ -260,7 +278,10 @@
       }
     }
 
+    var ideaBinOpenTime = null;
+
     function openBin() {
+      ideaBinOpenTime = Date.now();
       overlay.setAttribute('aria-hidden', 'false');
       overlay.classList.add('is-open');
       input.value = '';

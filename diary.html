@@ -107,6 +107,9 @@
     </div>
   </div>
 
+  <script>window.__GA_MEASUREMENT_ID__=window.__GA_MEASUREMENT_ID__||'';window.__POSTHOG_KEY__=window.__POSTHOG_KEY__||'';window.__POSTHOG_HOST__=window.__POSTHOG_HOST__||'';</script>
+  <script src="/analytics-config.js"></script>
+  <script src="/analytics-loader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/supabase-config.js"></script>
   <script src="/supabase-idea-bin.js"></script>
@@ -276,9 +279,21 @@
         });
         localStorage.setItem(VAULT_KEY, JSON.stringify(vault));
       }
+      var ideaBinOpenTime = null;
       function throwIntoBlackHole() {
         var text = input.value.trim();
         if (!text) return;
+        var now = Date.now();
+        var usedAt = new Date().toISOString();
+        var durationSec = ideaBinOpenTime != null ? (now - ideaBinOpenTime) / 1000 : 0;
+        if (window.posthog) {
+          window.posthog.capture('idea_bin_used', {
+            page: location.pathname || '/diary.html',
+            timestamp: usedAt,
+            duration_seconds: Math.round(durationSec * 10) / 10
+          });
+        }
+        ideaBinOpenTime = null;
         var api = window.ideaBinApi;
         if (api) {
           api.save(text).then(function () {
@@ -296,6 +311,7 @@
         }
       }
       function openBin() {
+        ideaBinOpenTime = Date.now();
         overlay.setAttribute('aria-hidden', 'false');
         overlay.classList.add('is-open');
         input.value = '';

@@ -5,8 +5,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const url = process.env.SUPABASE_URL;
-const key = process.env.SUPABASE_ANON_KEY;
+// 构建时调试：仅显示是否读到变量，不打印具体值
+const hasUrl = !!(process.env.SUPABASE_URL && process.env.SUPABASE_URL.trim());
+const hasKey = !!(process.env.SUPABASE_ANON_KEY && process.env.SUPABASE_ANON_KEY.trim());
+console.log('scripts/generate-supabase-config.js: SUPABASE_URL=' + (hasUrl ? '已设置' : '未设置') + ', SUPABASE_ANON_KEY=' + (hasKey ? '已设置' : '未设置'));
+
+const url = (process.env.SUPABASE_URL || '').trim();
+const key = (process.env.SUPABASE_ANON_KEY || '').trim();
 
 if (!url || !key) {
   console.log('scripts/generate-supabase-config.js: 未设置 SUPABASE_URL 或 SUPABASE_ANON_KEY，跳过生成。');

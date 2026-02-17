@@ -70,6 +70,8 @@
 
 重新部署完成后，线上网站的「灵感垃圾桶」会写入 Supabase，「星尘遗落」也会从 Supabase 读数据。
 
+**如何确认第三步生效：** 在浏览器打开 `https://你的域名.vercel.app/supabase-config.js`，若能看到两行 `window.__SUPABASE_URL__` 和 `window.__SUPABASE_ANON_KEY__` 且不是空字符串，说明配置已注入；若是 404，说明环境变量未填或未在「添加后」重新部署。
+
 ---
 
 ## 之后更新网站
