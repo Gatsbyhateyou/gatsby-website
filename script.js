@@ -1,6 +1,18 @@
 (function () {
   'use strict';
 
+  // 移动端导航：用 JS 根据宽度给 body 加 class，避免 iOS 媒体查询不生效
+  (function initMobileNavClass() {
+    function update() {
+      var w = window.innerWidth || document.documentElement.clientWidth || 768;
+      if (w <= 768) document.body.classList.add('mobile-nav');
+      else document.body.classList.remove('mobile-nav');
+    }
+    if (document.body) update();
+    else document.addEventListener('DOMContentLoaded', update);
+    window.addEventListener('resize', update);
+  })();
+
   // 名字悬停位移：悬停某字时按规则位移，移出后丝滑归位；曲线 cubic-bezier(0.34, 1.56, 0.64, 1)
   (function initNameHover() {
     var nameEl = document.querySelector('.name');
