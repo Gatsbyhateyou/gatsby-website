@@ -1624,8 +1624,8 @@ p:first-child {
   }
 }
 
-/* ========== 整站移动端适配 ========== */
-@media (max-width: 768px) {
+/* ========== 整站移动端适配（含 iOS：视口 + 设备宽度双保险）========== */
+@media (max-width: 768px), (max-device-width: 768px) {
   .nav-toggle {
     display: flex;
   }
