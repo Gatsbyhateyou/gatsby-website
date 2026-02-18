@@ -112,6 +112,44 @@ p:first-child {
   z-index: 1;
 }
 
+/* 导航外层（移动端放汉堡按钮） */
+.nav-wrap {
+  position: relative;
+}
+
+/* 汉堡按钮：仅移动端显示 */
+.nav-toggle {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 201;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #fff;
+  color: #1d1d1f;
+  font-size: 1.25rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s, border-color 0.2s;
+}
+.nav-toggle:hover {
+  background: #f5f5f5;
+}
+[data-theme="dark"] .nav-toggle {
+  background: rgba(20, 20, 20, 0.9);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+[data-theme="dark"] .nav-toggle:hover {
+  background: rgba(40, 40, 40, 0.95);
+}
+
 /* 悬浮导航栏：亮色=极简实色，暗色=玻璃+发光 */
 .site-nav {
   position: fixed;
@@ -1588,12 +1626,30 @@ p:first-child {
 
 /* ========== 整站移动端适配 ========== */
 @media (max-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
   .site-nav {
     display: none;
+    top: 4.5rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    margin-top: 0;
+    transform: none;
+    width: auto;
+    flex-direction: column;
+    border-radius: 12px;
+    padding: 0.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+  .site-nav.is-open {
+    display: flex;
   }
   .site-nav__link {
-    padding: 0.5rem 0.65rem;
-    font-size: 0.8rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    text-align: left;
   }
   .container {
     padding: 7rem 5vw 5rem;
@@ -1616,7 +1672,7 @@ p:first-child {
   }
   .back-link {
     top: 1rem;
-    left: 1rem;
+    left: 3.5rem;
     font-size: 0.9rem;
     min-height: 44px;
     min-width: 44px;

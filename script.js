@@ -78,6 +78,30 @@
 
   themeToggle?.addEventListener('click', toggleTheme);
 
+  // 移动端导航：汉堡按钮展开/收起
+  (function initNavToggle() {
+    var btn = document.querySelector('.nav-toggle');
+    var nav = document.querySelector('.site-nav');
+    if (!btn || !nav) return;
+    function open() {
+      nav.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', '关闭菜单');
+    }
+    function close() {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', '打开菜单');
+    }
+    function toggle() {
+      if (nav.classList.contains('is-open')) close(); else open();
+    }
+    btn.addEventListener('click', toggle);
+    nav.querySelectorAll('.site-nav__link').forEach(function (a) {
+      a.addEventListener('click', close);
+    });
+  })();
+
   // 联系我 - 悬停显示邮箱，点击复制
   const contactEmail = document.querySelector('.contact-email');
   if (contactEmail) {
