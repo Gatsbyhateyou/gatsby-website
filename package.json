@@ -6,7 +6,8 @@
   "scripts": {
   "dev": "vite",
   "build": "node scripts/generate-supabase-config.js && node scripts/generate-analytics-config.js && vite build",
-  "preview": "vite preview"
+  "preview": "vite preview",
+    "deploy": "git add -A && git commit -m \"deploy\" && git push"
 },
   "keywords": [],
   "author": "",
