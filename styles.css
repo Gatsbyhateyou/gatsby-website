@@ -1630,7 +1630,7 @@ p:first-child {
     display: flex;
   }
   .site-nav {
-    display: none;
+    display: none !important;
     top: 4.5rem;
     left: 0.75rem;
     right: 0.75rem;
