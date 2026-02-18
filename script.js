@@ -1,15 +1,13 @@
 (function () {
   'use strict';
 
-  // 移动端导航：用 JS 根据宽度给 body 加 class，避免 iOS 媒体查询不生效
+  // 移动端导航：与 head 内联一致，用 html.mobile-nav，宽度取 innerWidth 与 screen.width 较小值（兼容夸克等）
   (function initMobileNavClass() {
     function update() {
-      var w = window.innerWidth || document.documentElement.clientWidth || 768;
-      if (w <= 768) document.body.classList.add('mobile-nav');
-      else document.body.classList.remove('mobile-nav');
+      var w = Math.min(window.innerWidth || 9999, screen.width || 9999);
+      document.documentElement.classList.toggle('mobile-nav', w <= 768);
     }
-    if (document.body) update();
-    else document.addEventListener('DOMContentLoaded', update);
+    update();
     window.addEventListener('resize', update);
   })();
 

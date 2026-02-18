@@ -150,8 +150,8 @@ p:first-child {
   background: rgba(40, 40, 40, 0.95);
 }
 
-/* 移动端由 JS 设置 body.mobile-nav，不依赖媒体查询（解决 iOS 不生效） */
-body.mobile-nav .site-nav {
+/* 移动端由 JS 设置 html.mobile-nav（head 内联 + script.js），兼容 iOS / 夸克等 */
+html.mobile-nav .site-nav {
   display: none !important;
   top: 4.5rem;
   left: 0.75rem;
@@ -164,10 +164,10 @@ body.mobile-nav .site-nav {
   padding: 0.5rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
-body.mobile-nav .site-nav.is-open {
+html.mobile-nav .site-nav.is-open {
   display: flex !important;
 }
-body.mobile-nav .nav-toggle {
+html.mobile-nav .nav-toggle {
   display: flex !important;
 }
 
