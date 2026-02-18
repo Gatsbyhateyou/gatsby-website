@@ -1585,3 +1585,118 @@ p:first-child {
     opacity: 0;
   }
 }
+
+/* ========== 整站移动端适配 ========== */
+@media (max-width: 768px) {
+  .site-nav {
+    padding: 0.5rem 0.75rem;
+    margin-top: 0.5rem;
+    gap: 0.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: calc(100vw - 1.5rem);
+  }
+  .site-nav__link {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.8rem;
+  }
+  .container {
+    padding: 7rem 5vw 5rem;
+  }
+  .container.subpage {
+    padding-top: 6rem;
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+  .hero.glass-card {
+    padding: 3rem 1.5rem 3rem;
+  }
+  .name {
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: clamp(2.2rem, 8vw, 3.5rem);
+  }
+  .glass-card {
+    padding: 1.5rem;
+  }
+  .back-link {
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.9rem;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .theme-toggle {
+    top: 1rem;
+    right: 1rem;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem;
+  }
+  .diary-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .diary-motto-box {
+    top: 3.5rem;
+    right: 0.75rem;
+    max-width: calc(100vw - 2rem);
+    padding: 0.6rem 0.75rem;
+  }
+  .diary-motto-text {
+    font-size: 0.85rem;
+  }
+  .timeline-item {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0;
+  }
+  .timeline-year {
+    width: auto;
+  }
+  .lightbox__card {
+    max-width: 96vw;
+    max-height: 90vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 6rem 4vw 4rem;
+  }
+  .container.subpage {
+    padding-top: 5.5rem;
+    padding-left: 4vw;
+    padding-right: 4vw;
+  }
+  .site-nav__link {
+    padding: 0.45rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  .name {
+    font-size: clamp(1.9rem, 9vw, 2.8rem);
+  }
+  .tagline {
+    font-size: 0.95rem;
+  }
+  .diary-section {
+    padding: 1.25rem;
+  }
+  .diary-entry__row {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  .diary-entry__date {
+    width: 5rem;
+    min-width: 5rem;
+    font-size: 0.85rem;
+  }
+  .idea-bin-trigger {
+    right: 1rem;
+    bottom: 1.5rem;
+    width: 52px;
+    height: 52px;
+  }
+}
