@@ -314,7 +314,7 @@ class StarDust {
         this.vx = (Math.random() - 0.5) * 0.3;
         this.vy = (Math.random() - 0.5) * 0.3;
 
-        this.baseSize = Math.random() * 0.6 + 0.9; // 固定星大小
+        this.baseSize = Math.random() * 3 + 5; // 固定星大小（5～8），明显易见、保留层次
         this.angle = Math.random() * Math.PI * 2;
         this.pulseSpeed = 0.02 + Math.random() * 0.05;
         this.active = false;
@@ -323,49 +323,8 @@ class StarDust {
     }
 
     update() {
-        if (isSearching) {
-            // 查找时星星固定不移动
-            return;
-        }
-
-        let dx = mouse.x - this.x;
-        let dy = mouse.y - this.y;
-        let distance = Math.sqrt(dx * dx + dy * dy);
-
-        let repelDist = 180;
-        let attractDist = 40;
-
-        if (distance < repelDist && distance > attractDist) {
-            let force = (repelDist - distance) / repelDist;
-            this.vx -= (dx / distance) * force * 0.6;
-            this.vy -= (dy / distance) * force * 0.6;
-        } else if (distance <= attractDist && distance > 0) {
-            this.vx += (dx / distance) * 0.2;
-            this.vy += (dy / distance) * 0.2;
-            this.active = true;
-        } else {
-            this.active = false;
-        }
-
-        this.vx *= 0.94;
-        this.vy *= 0.94;
-        // 限制最大速度，防止被排斥力推出界面
-        const maxSpeed = 2.5;
-        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-        if (speed > maxSpeed) {
-            this.vx *= maxSpeed / speed;
-            this.vy *= maxSpeed / speed;
-        }
-        this.x += this.vx + Math.cos(this.angle) * 0.1;
-        this.y += this.vy + Math.sin(this.angle) * 0.1;
+        // 灵感星固定不移动，只更新呼吸相位
         this.angle += this.pulseSpeed;
-
-        // 严格限制在画布内，保证所有星星始终在界面内可见（不穿出、不环绕）
-        const margin = 2;
-        this.x = Math.max(margin, Math.min(canvas.width - margin, this.x));
-        this.y = Math.max(margin, Math.min(canvas.height - margin, this.y));
-        if (this.x === margin || this.x === canvas.width - margin) this.vx *= -0.3;
-        if (this.y === margin || this.y === canvas.height - margin) this.vy *= -0.3;
     }
 
     draw(c) {
@@ -376,24 +335,43 @@ class StarDust {
         const nearMouse = distToMouse < 40;
         const showText = (this.isTarget && !isSearching) || (isSearching && this.content.includes(searchTerm));
         if (showText) {
+            var pad = 20;
+            var cw = canvas.width;
+            var ch = canvas.height;
+            g.font = "italic 18px serif";
+            var textW = g.measureText(this.content).width;
+            g.font = "10px serif";
+            var timeW = g.measureText(this.timestamp || "").width;
+            var maxW = Math.max(textW, timeW);
+            g.font = "italic 18px serif";
+            var tx, ty;
+            if (this.x < cw / 2) {
+                g.textAlign = "left";
+                tx = Math.max(pad, Math.min(this.x, cw - pad - maxW));
+            } else {
+                g.textAlign = "right";
+                tx = Math.min(cw - pad, Math.max(this.x, pad + maxW));
+            }
+            ty = Math.max(28, Math.min(ch - 34, this.y));
+            g.textBaseline = "middle";
             g.shadowBlur = 15;
             g.shadowColor = "rgba(255, 230, 250, 0.8)";
             g.fillStyle = "#ffffff";
-            g.font = "italic 18px serif";
-            g.fillText(this.content, this.x, this.y);
+            g.fillText(this.content, tx, ty);
+            g.font = "10px serif";
+            g.fillStyle = "rgba(170, 204, 255, 0.6)";
+            g.textBaseline = "top";
+            g.fillText(this.timestamp || "", tx, ty + 14);
 
             g.strokeStyle = "rgba(170, 204, 255, 0.25)";
             g.beginPath();
             g.moveTo(this.x, this.y);
             g.lineTo(this.x - this.vx * 5, this.y - this.vy * 5);
             g.stroke();
-
-            g.font = "10px serif";
-            g.fillStyle = "rgba(170, 204, 255, 0.6)";
-            g.fillText(this.timestamp, this.x, this.y + 20);
         } else {
-            let brightness = Math.max(0.35, 1 - distToMouse / 500);
-            g.globalAlpha = brightness;
+            let brightness = Math.max(0.6, 1 - distToMouse / 500);
+            let breath = Math.sin(this.angle) * 0.12 + 0.88; // 呼吸约 0.76～1，最亮更亮
+            g.globalAlpha = brightness * breath;
 
             var rOut = this.baseSize * 2.2;
             var rIn = this.baseSize * 0.55;
