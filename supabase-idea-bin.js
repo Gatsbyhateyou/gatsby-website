@@ -46,6 +46,16 @@
             };
           });
         });
+    },
+    /** 按 id 删除一条灵感 */
+    delete: function (id) {
+      return client
+        .from(TABLE)
+        .delete()
+        .eq('id', id)
+        .then(function (res) {
+          if (res.error) throw res.error;
+        });
     }
   };
 

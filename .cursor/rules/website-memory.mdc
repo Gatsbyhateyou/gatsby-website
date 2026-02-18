@@ -1,0 +1,124 @@
+---
+description: 网站长期记忆（项目事实、日记约定、技术脉络、避坑、待办）
+alwaysApply: true
+---
+
+# 网站长期记忆
+
+以下合并自：项目与日记规则、Agent 接手背景、项目长期记忆·交接摘要。请在此上下文中延续任务。
+
+---
+
+## 一、项目与日记规则
+
+### 项目事实
+
+- 个人站「刘锦麟」；workspace 名 `gatsby-website`，实为 **Vite 静态站**（非 Gatsby）。构建：`npm run build`（先执行 `scripts/generate-supabase-config.js`、`scripts/generate-analytics-config.js`，再 `vite build`）。
+- 入口：根目录 `index.html`、`diary.html`、`gallery.html`；全局 `styles.css`、`script.js`；产出在 `public/`。
+- 日记在 `diary.html`：手写 HTML，单条为 `.diary-entry.diary-entry--expandable` → `__row`（`__date`、`__title--toggle`）→ `__body`（若干 `<p>`）。新增时复制任一条的 DOM 结构即可。
+
+### 日记顺序（必须遵守）
+
+- **最早日期在最上方，越往下日期越晚**（时间正序）。当前：02-14 → 02-15 → 02-16。
+- **新增日记一律插在 `diary-section` 内最下面**（最后一个 `.diary-entry` 之后）。`diary-section` 开头已有 HTML 注释说明此约定。
+
+### 禁止
+
+- 禁止把新日记插在列表**顶部**（会破坏「最早在上」）。
+- 禁止假设「最新日记置顶」；本项目为**最早在上、最晚在下**，与常见博客相反。未获用户明确要求时，不得改动既有顺序或约定。
+
+### 新增日记时
+
+在 `diary-section` **最下方**追加一条 `.diary-entry`，日期/标题/正文按用户或约定填写，版式复制现有条目。其他需求（改版、新页、脚本/样式）不改变日记顺序约定，除非用户明确要求。
+
+---
+
+## 二、Agent 接手背景 · 长期记忆
+
+### 核心项目事实 (Core Facts)
+
+- **项目实质**：静态多页站，Vite 构建（`vite build`），非 Gatsby。根目录 `index.html` / `gallery.html` / `diary.html` / `Galaxy.html` 为入口；`public/` 为静态资源目录，构建时整体拷贝到 `dist/` 根。
+- **技术栈**：HTML + 原生 JS（无框架）、Vite 7、Supabase（仅 Data API + 表，Auth 未接）。
+- **站点身份**：刘锦麟个人主页；页：首页、胶片集、AI 日记、星尘遗落（Galaxy，镜像星海）。
+- **已实现模块**：
+  - **灵感垃圾桶**：多页右下角入口，输入文字后「吞噬」或 Enter 写入；数据存 `localStorage.LOST_INSPIRATIONS` 或 Supabase 表 `inspirations`（优先 Supabase，失败回退 localStorage）。
+  - **Supabase 集成**：表 `inspirations`（id uuid, content text, user_id uuid nullable, created_at）；RLS 开放匿名 insert/select。前端通过 `window.ideaBinApi`（`supabase-idea-bin.js`）调用 `save(content)` / `load()`；未配置或加载失败时 `ideaBinApi === null`，逻辑回退 localStorage。
+  - **配置与构建**：本地用 `supabase-config.js`（gitignore，含 `__SUPABASE_URL__` / `__SUPABASE_ANON_KEY__`）；线上由 Vercel 环境变量 `SUPABASE_URL`、`SUPABASE_ANON_KEY` 在构建时经 `scripts/generate-supabase-config.js` 生成 `public/supabase-config.js`。
+  - **星尘遗落**：Galaxy 页从 `ideaBinApi.load()` 或 localStorage 读列表，渲染为粒子；StarDust 需 `content`、`timestamp`、`id`（x/y 可随机生成）。
+  - **SEO**：各页已加 description、keywords、robots、canonical、og、twitter；基础 URL 为 `https://gatsby-website-nine.vercel.app`。
+  - **Favicon**：`public/favicon.svg`，各页 `<link rel="icon" href="/favicon.svg" type="image/svg+xml">`。
+- **部署**：GitHub 仓库推送到 main → Vercel 自动构建部署；生产域名 `gatsby-website-nine.vercel.app`。
+
+### 技术推导脉络 (Logic Evolution)
+
+- **灵感存储**：从纯 localStorage 演进为「Supabase 优先 + localStorage 回退」，以便多设备/多用户（user_id 已预留，Auth 未做）。
+- **线上 Supabase**：因 `supabase-config.js` 不提交，采用构建时根据 env 生成 `public/supabase-config.js`，保证部署产物内含配置。
+- **发布流程**：用户无 Git/无部署经验 → 选用 GitHub + Vercel 免费子域名；文档写清「先加 env 再 Redeploy」。
+- **Favicon**：先做几何标签 SVG → 用户希望用手绘图标；按描述手写 SVG 效果差 → 建议用户用图片转 SVG 工具，图标形态暂保留现状、延后替换。
+
+### 负面约束与避坑指南 (Negative Constraints)
+
+| 事项 | 禁止/避免 | 原因 |
+|------|-----------|------|
+| Supabase Key | 前端使用 `service_role` 或 Secret key | 仅 Publishable key（或 Legacy anon）可暴露于浏览器。 |
+| 环境变量名 | 使用 `VITE_*` 或拼写错误 | 构建脚本只读 `SUPABASE_URL`、`SUPABASE_ANON_KEY`；错名会导致「未设置」且不生成配置。 |
+| 部署后改 env | 只改 Vercel env 不重新部署 | 新 env 仅在下一次构建生效，必须 Redeploy（或推新 commit）后线上才用新配置。 |
+| Favicon 只提交图 | 只 push `public/favicon.svg` 不提交 HTML | 线上 HTML 无 `<link rel="icon">` 时，即使 `/favicon.svg` 可访问，标签页仍显示默认图标。需同时提交引用 favicon 的 HTML。 |
+| 灵感逻辑入口 | 在 diary 页依赖根目录 `script.js` 的 灵感垃圾桶 | `script.js` 内对 `page-diary` 跳过 initIdeaBin；diary 使用自身内联脚本，需单独接 ideaBinApi。 |
+| 文档用语 | 写「Project Settings → API」 | 当前 Supabase 控制台为「API Keys」；Publishable key 即原 anon 用途。 |
+| 手绘图标实现 | 仅凭文字描述重画复杂一笔画 SVG | 已证明还原度不足；应让用户用 vectorizer.io / convertio 等转 SVG，再由 Agent 做 viewBox/描边等适配。 |
+
+**Bug 修复路径摘要**：  
+- 线上 Supabase 不生效 → 查 `/supabase-config.js` 是否 404；若 404 则 env 未注入或未 Redeploy；构建日志可见 `SUPABASE_URL=已设置/未设置` 调试输出。  
+- 环境变量含换行 → 脚本内已对 URL/Key 做 `.trim()`。
+
+### 待办与现状 (Status & Todo)
+
+- **当前状态**：站已部署；灵感垃圾桶与星尘遗落逻辑已接 Supabase；SEO、favicon 已做；用户曾遇 Vercel env 未生效（「未设置」），已加调试日志与排查步骤。
+- **未决/可选**：① 若用户反馈线上仍「未设置」，需在其 Vercel 项目内确认 Environment Variables 已勾选 Production 且 Redeploy；② 自定义 favicon（手绘）已搁置，后续可让用户提供 tracer 导出的 SVG 再替换 `public/favicon.svg`；③ 绑定自定义域名后需全局替换 `gatsby-website-nine.vercel.app`（SEO、canonical、og 等）。
+- **下一步逻辑起点**：任何新需求前，先确认 main 分支与本地未提交改动是否一致（曾有大量未 push 的 HTML/脚本/文档），避免在过期基线上升级。
+
+---
+
+## 三、项目长期记忆 · 交接摘要
+
+### 核心项目事实 (Core Facts)
+
+- **项目形态**：静态站，**非** Gatsby。Vite 构建，多入口 HTML（`index.html`、`gallery.html`、`diary.html`、`Galaxy.html`），根目录 + `public/` 双轨（构建时 `public/` 拷贝到 `dist/`）。
+- **技术栈**：原生 HTML/CSS/JS，Vite 7，Supabase（灵感垃圾桶持久化），GA4 + PostHog（数据采集）。
+- **已实现模块**：
+  - **灵感垃圾桶**：`script.js` 中 `initIdeaBin()`，`diary.html` 内联一套；打开记 `ideaBinOpenTime`，吞噬时 PostHog `idea_bin_used`（page、timestamp、duration_seconds）。
+  - **胶片集**：`GALLERY_PHOTOS` 数组 + `GALLERY_PHOTO_DIR = '/photo'`，图片必须为 **小写** `1.jpg`…`10.jpg`；点击灯箱时 PostHog `image_clicked`（image_id、page）。
+  - **Analytics**：`public/analytics-config.js`（gitignore，本地手填或 Vercel 构建时由 `scripts/generate-analytics-config.js` 从环境变量生成）→ `public/analytics-loader.js` 加载 GA gtag + PostHog。**PostHog 必须用官方 snippet（stub + `posthog.init`）**，保证 `window.posthog` 立即可用。
+- **构建命令**：`node scripts/generate-supabase-config.js && node scripts/generate-analytics-config.js && vite build`；三者缺一不可且顺序固定。
+
+### 技术推导脉络 (Logic Evolution)
+
+1. **数据分工**：GA 只做流量/概览（page_view）；PostHog 做行为（灵感垃圾桶次数·时刻·时长、图片点击）。一次只问一题确认需求后定案。
+2. **PostHog 加载**：先用 jsdelivr 的 `posthog.min.js` + `onload` 里 `posthog.init` → 异步导致 `typeof window.posthog` 为 `undefined`、PostHog 一直 "Waiting for events"。改为 **官方 stub 内联 + `posthog.init(key, { api_host })`**，由 PostHog 自家拉取 `/static/array.js`，问题解决。
+3. **胶片集裂图**：代码请求 `/photo/1.jpg`，仓库仅有 README；且用户本地为 `1.JPG`，Git 未跟踪/Windows 大小写不敏感，部署后 Linux 下 404。结论：文件名统一小写 `.jpg`；图片必须 `git add public/photo/` 并 push；仅改扩展名时用 **两步 `git mv`**（如 `1.JPG`→`1x.jpg`→`1.jpg`）才能让 GitHub 记录小写。
+4. **Vercel 配置未加载**：构建日志只有 `generate-supabase-config.js`，无 `generate-analytics-config.js` → 当时仓库里 `package.json` 的 build 未包含 analytics 步骤；且 `scripts/generate-analytics-config.js` 未提交。解决：提交完整 `package.json` 与 `scripts/`，Vercel 环境变量填 `GA_MEASUREMENT_ID`、`POSTHOG_KEY`、`POSTHOG_HOST`（Environment 勾选 Production），必要时 "Clear cache and redeploy"。
+
+### 负面约束与避坑指南 (Negative Constraints)
+
+| 禁止/避免 | 原因 |
+|-----------|------|
+| 用 jsdelivr 等 CDN 异步加载 PostHog 再在 onload 里 init | `window.posthog` 在脚本加载前为 undefined，事件不发送，PostHog 一直 "Waiting for events"。必须用官方 stub 内联，使 posthog 立即可用。 |
+| 在代码里写死 `.JPG` 或混合大小写图片名 | 部署环境（Vercel/Linux）区分大小写，`/photo/1.JPG` 与 `1.jpg` 不同，会导致 404 裂图。统一小写 `.jpg`。 |
+| 仅靠资源管理器重命名扩展名（JPG→jpg）就 commit | Windows 下 Git 常不把"仅大小写变更"视为修改，推上去仍是 .JPG。必须用两步 `git mv` 或项目内 `scripts/rename-photo-to-lowercase.ps1`。 |
+| 只改 `package.json` 的 build 不提交 `scripts/generate-analytics-config.js` | Vercel 执行 `node scripts/generate-analytics-config.js` 会因文件不存在而 build 失败（exit 1）。 |
+| 在 PowerShell 脚本里用中文输出 | 易产生 UTF-8/GBK 乱码（如 "瀹屾垚銆傝鎵ц"）。已改为英文提示。 |
+| 将 `public/analytics-config.js` 加入 Git | 含密钥，已在 .gitignore；线上由构建时环境变量生成。 |
+| 假设 "未跟踪文件" 在项目根时还去改父级目录 | 若 `git status` 出现 `gatsby-website/` 为 untracked，说明当前在父目录，应先 `cd gatsby-website` 再操作。 |
+
+### 待办与现状 (Status & Todo)
+
+- **当前状态**：GA 线上已有数据；PostHog 已改为官方 snippet 加载（`public/analytics-loader.js`），需确认该修改已 **commit 并 push**，且 Vercel 完成部署。
+- **下一步逻辑起点**：  
+  1）确认 `public/analytics-loader.js` 的"官方 snippet"版本已部署到线上；  
+  2）在线上站打开控制台执行 `typeof window.posthog` 应为 `"object"`；  
+  3）在站内产生行为（翻页、灵感垃圾桶吞噬、胶片集点击）后，在 PostHog 的 Activity/Events 中应出现 `$pageview`、`idea_bin_used`、`image_clicked`；若仍 "Waiting for events"，再查 Network 是否有对 PostHog 域名的请求及响应状态。
+
+---
+
+*合并自 project-and-diary.mdc、AGENT-HANDOFF.md、project-memory.md，供 Cursor 作为长期记忆使用。*

@@ -128,11 +128,73 @@
             color: rgba(170, 204, 255, 0.4);
             text-shadow: 0 0 12px rgba(170, 204, 255, 0.2);
         }
+
+        /* 固定显示某颗星的内容 + 删除 */
+        #star-card-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            z-index: 50;
+        }
+        #star-card-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #star-card {
+            max-width: 90vw;
+            width: 360px;
+            padding: 1.25rem 1.5rem;
+            background: rgba(12, 14, 28, 0.92);
+            border: 1px solid rgba(170, 204, 255, 0.25);
+            border-radius: 6px;
+            box-shadow: 0 0 30px rgba(170, 204, 255, 0.1);
+        }
+        #star-card-content {
+            font-family: "Georgia", "Source Han Serif SC", "Spectral", serif;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: rgba(255, 245, 235, 0.95);
+            margin-bottom: 0.5rem;
+        }
+        #star-card-time {
+            font-size: 0.8rem;
+            color: rgba(170, 204, 255, 0.55);
+            margin-bottom: 1rem;
+        }
+        #star-card-delete {
+            display: block;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            color: rgba(255, 180, 180, 0.95);
+            background: rgba(80, 30, 30, 0.5);
+            border: 1px solid rgba(255, 120, 120, 0.35);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        #star-card-delete:hover {
+            background: rgba(100, 40, 40, 0.6);
+            border-color: rgba(255, 120, 120, 0.5);
+        }
     </style>
 </head>
 <body>
 
     <canvas id="galaxyCanvas"></canvas>
+
+    <div id="star-card-overlay">
+        <div id="star-card" role="dialog" aria-label="灵感内容">
+            <p id="star-card-content"></p>
+            <p id="star-card-time"></p>
+            <button type="button" id="star-card-delete">删除</button>
+        </div>
+    </div>
 
     <div id="search-overlay">
         <div class="search-box">
@@ -159,9 +221,10 @@ const searchInput = document.getElementById('search-input');
 let particles = [];
 let mouse = { x: -1000, y: -1000, prevX: -1000, prevY: -1000 };
 let mouseVel = { x: 0, y: 0 };
-let tick = 0; // 在函数外部定义，用于驱动呼吸动画
+let tick = 0;
 let isSearching = false;
 let searchTerm = "";
+let pinnedStar = null; // 当前固定显示内容的星，点空白或 ESC 取消
 
 // 背景星群
 const backgroundStars = [];
@@ -227,6 +290,18 @@ function resize() {
 window.addEventListener('resize', resize);
 resize();
 
+// 每颗星随机一种渐变 [中心色, 边缘色]
+const STAR_GRADIENTS = [
+    ['#ffffff', '#aaccff'],   // 白 → 淡蓝
+    ['#ffffff', '#6eb5ff'],   // 白 → 蓝
+    ['#fff5f5', '#ffb3d9'],   // 白粉 → 粉
+    ['#ffb3d9', '#b388ff'],   // 粉 → 紫
+    ['#fff9c4', '#ffb74d'],   // 淡黄 → 橙
+    ['#b3e5fc', '#448aff'],   // 淡青 → 蓝
+    ['#e1bee7', '#7e57c2'],   // 薰衣草 → 紫
+    ['#c5e1a5', '#7cb342'],   // 淡绿 → 绿
+];
+
 // 粒子类
 class StarDust {
     constructor(data) {
@@ -239,29 +314,17 @@ class StarDust {
         this.vx = (Math.random() - 0.5) * 0.3;
         this.vy = (Math.random() - 0.5) * 0.3;
 
-        this.baseSize = Math.random() * 0.8 + 1; // 范围 1～1.8，更统一、无过小星点
+        this.baseSize = Math.random() * 0.6 + 0.9; // 固定星大小
         this.angle = Math.random() * Math.PI * 2;
         this.pulseSpeed = 0.02 + Math.random() * 0.05;
         this.active = false;
         this.isTarget = false; // 天选之子：核心圈内离鼠标最近的那颗
+        this.gradient = STAR_GRADIENTS[Math.floor(Math.random() * STAR_GRADIENTS.length)];
     }
 
     update() {
         if (isSearching) {
-            if (this.content.includes(searchTerm)) {
-                let dx = canvas.width / 2 - this.x;
-                let dy = canvas.height / 2 - this.y;
-                this.x += dx * 0.02;
-                this.y += dy * 0.02;
-            }
-            this.vx *= 0.94;
-            this.vy *= 0.94;
-            this.x += this.vx;
-            this.y += this.vy;
-            this.angle += this.pulseSpeed;
-            const margin = 2;
-            this.x = Math.max(margin, Math.min(canvas.width - margin, this.x));
-            this.y = Math.max(margin, Math.min(canvas.height - margin, this.y));
+            // 查找时星星固定不移动
             return;
         }
 
@@ -309,43 +372,48 @@ class StarDust {
         let g = c || ctx;
         g.save();
 
-        let pulse = Math.sin(this.angle) * 0.5 + 1;
         const distToMouse = Math.sqrt((mouse.x - this.x) ** 2 + (mouse.y - this.y) ** 2);
         const nearMouse = distToMouse < 40;
-        const showText = (this.isTarget && !isSearching) || (isSearching && this.content.includes(searchTerm) && nearMouse);
+        const showText = (this.isTarget && !isSearching) || (isSearching && this.content.includes(searchTerm));
         if (showText) {
             g.shadowBlur = 15;
-            g.shadowColor = "rgba(255, 230, 150, 0.8)";
+            g.shadowColor = "rgba(255, 230, 250, 0.8)";
             g.fillStyle = "#ffffff";
             g.font = "italic 18px serif";
             g.fillText(this.content, this.x, this.y);
 
-            g.strokeStyle = "rgba(212, 175, 55, 0.2)";
+            g.strokeStyle = "rgba(170, 204, 255, 0.25)";
             g.beginPath();
             g.moveTo(this.x, this.y);
             g.lineTo(this.x - this.vx * 5, this.y - this.vy * 5);
             g.stroke();
 
             g.font = "10px serif";
-            g.fillStyle = "rgba(212, 175, 55, 0.5)";
+            g.fillStyle = "rgba(170, 204, 255, 0.6)";
             g.fillText(this.timestamp, this.x, this.y + 20);
         } else {
-            let brightness = Math.max(0.2, 1 - distToMouse / 500);
-
+            let brightness = Math.max(0.35, 1 - distToMouse / 500);
             g.globalAlpha = brightness;
-            g.fillStyle = "#d4af37";
-            g.beginPath();
-            g.arc(this.x, this.y, this.baseSize * pulse, 0, Math.PI * 2);
-            g.fill();
 
-            if (this.baseSize > 1.0) {
-                g.shadowBlur = 5;
-                g.shadowColor = "#d4af37";
-                g.strokeStyle = "rgba(212, 175, 55, 0.3)";
-                g.beginPath();
-                g.arc(this.x, this.y, this.baseSize * pulse, 0, Math.PI * 2);
-                g.stroke();
+            var rOut = this.baseSize * 2.2;
+            var rIn = this.baseSize * 0.55;
+            var grad = g.createRadialGradient(this.x, this.y, 0, this.x, this.y, rOut);
+            grad.addColorStop(0, this.gradient[0]);
+            grad.addColorStop(0.5, this.gradient[1]);
+            grad.addColorStop(1, this.gradient[1]);
+            g.fillStyle = grad;
+
+            g.beginPath();
+            for (var i = 0; i < 8; i++) {
+                var angle = (i / 8) * Math.PI * 2 - Math.PI / 2;
+                var r = i % 2 === 0 ? rOut : rIn;
+                var px = this.x + Math.cos(angle) * r;
+                var py = this.y + Math.sin(angle) * r;
+                if (i === 0) g.moveTo(px, py);
+                else g.lineTo(px, py);
             }
+            g.closePath();
+            g.fill();
         }
         g.restore();
     }
@@ -430,29 +498,103 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
+// 固定显示：点击星显示浮层，点空白或 ESC 关闭
+const starCardOverlay = document.getElementById('star-card-overlay');
+const starCardContent = document.getElementById('star-card-content');
+const starCardTime = document.getElementById('star-card-time');
+const starCardDelete = document.getElementById('star-card-delete');
+
+function unpinStar() {
+    pinnedStar = null;
+    starCardOverlay.classList.remove('visible');
+}
+
+function showStarCard(star) {
+    pinnedStar = star;
+    starCardContent.textContent = star.content;
+    starCardTime.textContent = star.timestamp || '';
+    starCardOverlay.classList.add('visible');
+}
+
+function deleteStarFromStorage(id, onDone) {
+    var api = window.ideaBinApi;
+    if (api && api.delete) {
+        api.delete(id).then(onDone).catch(function () { onDone(); });
+    } else {
+        try {
+            var raw = localStorage.getItem('LOST_INSPIRATIONS') || '[]';
+            var list = JSON.parse(raw);
+            var next = list.filter(function (item) { return item.id !== id; });
+            localStorage.setItem('LOST_INSPIRATIONS', JSON.stringify(next));
+        } catch (e) {}
+        onDone();
+    }
+}
+
+starCardOverlay.addEventListener('click', function (e) {
+    if (e.target.id === 'star-card-overlay') unpinStar();
+});
+
+starCardDelete.addEventListener('click', function () {
+    if (!pinnedStar) return;
+    if (!confirm('确定删除这条灵感吗？')) return;
+    var id = pinnedStar.id;
+    var idx = particles.indexOf(pinnedStar);
+    deleteStarFromStorage(id, function () {
+        if (idx !== -1) particles.splice(idx, 1);
+        unpinStar();
+    });
+});
+
+window.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        if (starCardOverlay.classList.contains('visible')) {
+            unpinStar();
+            return;
+        }
+        isSearching = false;
+        searchTerm = "";
+        searchOverlay.classList.remove('active');
+        searchInput.value = "";
+    }
+});
+
+// 点击画布：若点到某颗星则固定显示
+canvas.addEventListener('click', function (e) {
+    if (searchOverlay.classList.contains('active')) return;
+    var x = e.clientX;
+    var y = e.clientY;
+    var hitRadius = 28;
+    var closest = null;
+    var closestD = Infinity;
+    particles.forEach(function (p) {
+        var d = Math.sqrt((x - p.x) * (x - p.x) + (y - p.y) * (y - p.y));
+        if (d < hitRadius && d < closestD) {
+            closestD = d;
+            closest = p;
+        }
+    });
+    if (closest) showStarCard(closest);
+});
+
 // 交互监听
-window.addEventListener('mousemove', e => {
+window.addEventListener('mousemove', function (e) {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
 });
 
-window.addEventListener('keydown', e => {
+window.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
         if (!searchOverlay.classList.contains('active')) {
             searchInput.value = "";
             searchOverlay.classList.add('active');
             searchInput.focus();
         } else {
-            searchTerm = searchInput.value;
+            searchTerm = (searchInput.value || "").trim();
             searchOverlay.classList.remove('active');
+            searchInput.blur();
             isSearching = true;
         }
-    }
-    if (e.key === 'Escape') {
-        isSearching = false;
-        searchTerm = "";
-        searchOverlay.classList.remove('active');
-        searchInput.value = "";
     }
 });
 

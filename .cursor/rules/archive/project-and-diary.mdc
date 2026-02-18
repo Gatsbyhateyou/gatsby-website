@@ -1,0 +1,26 @@
+---
+description: 项目结构与日记页约定（顺序、插入位置、禁止项）
+alwaysApply: true
+---
+
+# 项目与日记规则
+
+## 项目事实
+
+- 个人站「刘锦麟」；workspace 名 `gatsby-website`，实为 **Vite 静态站**（非 Gatsby）。构建：`npm run build`（先执行 `scripts/generate-supabase-config.js`、`scripts/generate-analytics-config.js`，再 `vite build`）。
+- 入口：根目录 `index.html`、`diary.html`、`gallery.html`；全局 `styles.css`、`script.js`；产出在 `public/`。
+- 日记在 `diary.html`：手写 HTML，单条为 `.diary-entry.diary-entry--expandable` → `__row`（`__date`、`__title--toggle`）→ `__body`（若干 `<p>`）。新增时复制任一条的 DOM 结构即可。
+
+## 日记顺序（必须遵守）
+
+- **最早日期在最上方，越往下日期越晚**（时间正序）。当前：02-14 → 02-15 → 02-16。
+- **新增日记一律插在 `diary-section` 内最下面**（最后一个 `.diary-entry` 之后）。`diary-section` 开头已有 HTML 注释说明此约定。
+
+## 禁止
+
+- 禁止把新日记插在列表**顶部**（会破坏「最早在上」）。
+- 禁止假设「最新日记置顶」；本项目为**最早在上、最晚在下**，与常见博客相反。未获用户明确要求时，不得改动既有顺序或约定。
+
+## 新增日记时
+
+在 `diary-section` **最下方**追加一条 `.diary-entry`，日期/标题/正文按用户或约定填写，版式复制现有条目。其他需求（改版、新页、脚本/样式）不改变日记顺序约定，除非用户明确要求。
