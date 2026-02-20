@@ -81,11 +81,6 @@
 
   initTheme();
 
-  // 移除名字上可能残留的 inline text-shadow，保持极简
-  [].forEach.call(document.querySelectorAll('.name, .name-char'), function (el) {
-    el.style.textShadow = '';
-  });
-
   themeToggle?.addEventListener('click', toggleTheme);
 
   // 移动端导航：汉堡按钮展开/收起
@@ -138,7 +133,7 @@
     if (!masonry) return;
 
     masonry.innerHTML = '';
-    GALLERY_PHOTOS.map(function (filename) {
+    GALLERY_PHOTOS.forEach(function (filename) {
       var item = document.createElement('div');
       item.className = 'masonry-item';
       var img = document.createElement('img');
@@ -147,7 +142,6 @@
       img.loading = 'lazy';
       item.appendChild(img);
       masonry.appendChild(item);
-      return item;
     });
 
     var items = document.querySelectorAll('.masonry-item');
@@ -281,6 +275,8 @@
       localStorage.setItem(VAULT_KEY, JSON.stringify(vault));
     }
 
+    var ideaBinOpenTime = null;
+
     function throwIntoBlackHole() {
       var text = input.value.trim();
       if (!text) return;
@@ -311,8 +307,6 @@
         input.value = '';
       }
     }
-
-    var ideaBinOpenTime = null;
 
     function openBin() {
       ideaBinOpenTime = Date.now();
