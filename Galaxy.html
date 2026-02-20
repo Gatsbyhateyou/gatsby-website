@@ -234,10 +234,34 @@
                 font-size: 0.9rem;
             }
         }
+
+        .galaxy-back-link {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 200;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: "Georgia", "Source Han Serif SC", serif;
+            font-size: 0.9rem;
+            color: rgba(212, 175, 55, 0.85);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        .galaxy-back-link:hover {
+            color: rgba(240, 236, 143, 1);
+        }
+        .galaxy-back-link__arrow {
+            font-size: 0.7rem;
+            line-height: 1.2;
+            opacity: 0.85;
+        }
     </style>
 </head>
 <body>
-
+    <a href="/" class="galaxy-back-link"><span class="galaxy-back-link__text">返回</span><span class="galaxy-back-link__arrow" aria-hidden="true">↑</span></a>
     <canvas id="galaxyCanvas"></canvas>
 
     <div id="star-card-overlay">

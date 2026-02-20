@@ -4,117 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>(function(){var w=Math.min(window.innerWidth||9999,screen.width||9999);document.documentElement.classList.toggle('mobile-nav',w<=768);})();</script>
-  <title>刘锦麟 · 个人主页</title>
-  <meta name="description" content="刘锦麟的个人主页，数字游民，专注极简设计与有温度的产品。展示项目、经历与摄影胶片集。">
-  <meta name="keywords" content="刘锦麟,个人主页,数字游民,极简设计,产品设计,摄影,胶片集,AI日记">
+  <title>Lin's lab</title>
+  <meta name="description" content="Lin's lab · 项目与实验入口。胶片集、AI 日记、星尘遗落。">
+  <meta name="keywords" content="Lin's lab,作品集,胶片集,AI日记,星尘遗落">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://gatsby-website-nine.vercel.app/">
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gatsby-website-nine.vercel.app/">
-  <meta property="og:title" content="刘锦麟 · 个人主页">
-  <meta property="og:description" content="刘锦麟的个人主页，数字游民，专注极简设计与有温度的产品。">
+  <meta property="og:title" content="Lin's lab">
+  <meta property="og:description" content="项目与实验入口。">
   <meta property="og:image" content="https://gatsby-website-nine.vercel.app/me1.jpg">
   <meta property="og:locale" content="zh_CN">
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="刘锦麟 · 个人主页">
-  <meta name="twitter:description" content="刘锦麟的个人主页，数字游民，专注极简设计与有温度的产品。">
+  <meta name="twitter:title" content="Lin's lab">
+  <meta name="twitter:description" content="项目与实验入口。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=3">
+  <link rel="stylesheet" href="/styles.css?v=4">
 </head>
 <body>
   <div class="bg-gradient"></div>
   <div class="halo" id="halo" aria-hidden="true"></div>
-  <div class="nav-wrap">
-    <button type="button" class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
-    <nav class="site-nav" aria-label="主导航">
-      <a href="/" class="site-nav__link site-nav__link--active">首页</a>
-      <a href="/gallery.html" class="site-nav__link">胶片集</a>
-      <a href="/diary.html" class="site-nav__link">AI 日记</a>
-      <a href="/Galaxy.html" class="site-nav__link">星尘遗落</a>
-    </nav>
-  </div>
   <div class="page-content">
     <button type="button" class="theme-toggle" aria-label="切换暗黑模式" title="切换主题">
       <span class="theme-icon sun" aria-hidden="true">☀</span>
       <span class="theme-icon moon" aria-hidden="true">☽</span>
     </button>
 
-    <main class="container">
-    <header class="hero glass-card">
-      <div class="name-spotlight-wrap">
-        <h1 class="name"><span class="name-char">刘</span><span class="name-char">锦</span><span class="name-char">麟</span></h1>
-      </div>
-      <p class="tagline fade-in-slow delay-2">一名热爱极简设计的数字游民，专注于构建有温度的产品。</p>
-      <div class="photo-row fade-in-slow delay-2" aria-label="照片展示">
-        <div class="photo-row-item"><img src="/me1.jpg" alt="照片加载中"></div>
-        <div class="photo-row-item"><img src="/me2.jpg" alt="照片加载中"></div>
-        <div class="photo-row-item"><img src="/me3.jpg" alt="照片加载中"></div>
-      </div>
-    </header>
+    <main class="container container--home">
+      <header class="linksb-hero glass-card">
+        <h1 class="linksb-title" id="linslab-title">Lin's lab</h1>
+        <p class="linksb-subtitle">项目与实验入口</p>
+      </header>
 
-    <div class="dashboard-grid">
-    <section class="projects glass-card fade-in delay-3">
-      <h2 class="section-title">项目</h2>
-      <ul class="project-list">
-        <li id="diary-section">
-          <a href="diary.html" class="project-link">AI 日记</a>
-          <span class="project-desc">一个基于 AI 的日记应用</span>
-        </li>
-        <li id="gallery-section">
-          <a href="gallery.html" class="project-link">胶片集</a>
-          <span class="project-desc">个人摄影集展示</span>
-        </li>
-        <li>
-          <a href="#" class="project-link">Motion.css</a>
-          <span class="project-desc">开源的 CSS 动画库</span>
-        </li>
-      </ul>
-    </section>
-
-    <section class="experience glass-card fade-in delay-4">
-      <h2 class="section-title">经历</h2>
-      <ul class="timeline">
-        <li class="timeline-item">
-          <span class="timeline-year">2024 — 至今</span>
-          <div class="timeline-content">
-            <span class="timeline-company">OpenAI</span>
-            <span class="timeline-position">产品设计师</span>
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="timeline-year">2022 — 2024</span>
-          <div class="timeline-content">
-            <span class="timeline-company">Apple</span>
-            <span class="timeline-position">交互工程师</span>
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="timeline-year">2020 — 2022</span>
-          <div class="timeline-content">
-            <span class="timeline-company">Stripe</span>
-            <span class="timeline-position">前端架构师</span>
-          </div>
-        </li>
-      </ul>
-    </section>
-    </div>
-
-    <footer class="social glass-card fade-in delay-5">
-      <h2 class="section-title">联系</h2>
-      <div class="contact-inline">
-        <span class="contact-label">联系我</span>
-        <button type="button" class="contact-email" data-email="3253888152@qq.com">3253888152@qq.com</button>
+      <div class="entry-grid">
+        <a href="/gallery.html" class="entry-card glass-card">
+          <span class="entry-card__name">胶片集</span>
+          <p class="entry-card__desc">个人摄影集展示</p>
+        </a>
+        <a href="/diary.html" class="entry-card glass-card">
+          <span class="entry-card__name">AI 日记</span>
+          <p class="entry-card__desc">基于 AI 的日记与记录</p>
+        </a>
+        <a href="/Galaxy.html" class="entry-card glass-card">
+          <span class="entry-card__name">星尘遗落</span>
+          <p class="entry-card__desc">灵感碎片与星尘可视化</p>
+        </a>
       </div>
-    </footer>
-  </main>
+    </main>
   </div>
 
-  <!-- 灵感垃圾桶：固定右下角；script.js 的 initIdeaBin 将「吞噬」/Enter 的内容写入 localStorage.LOST_INSPIRATIONS -->
   <button type="button" class="idea-bin-trigger" id="idea-bin-trigger" aria-label="灵感垃圾桶" title="灵感垃圾桶">
     <span class="idea-bin-trigger__icon" aria-hidden="true"></span>
   </button>

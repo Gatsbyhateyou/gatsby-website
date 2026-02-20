@@ -11,6 +11,27 @@
     window.addEventListener('resize', update);
   })();
 
+  // Lin's lab 标题：鼠标划过时当前字母上移
+  (function initLinslabTitleHover() {
+    var titleEl = document.getElementById('linslab-title');
+    if (!titleEl) return;
+    var text = titleEl.textContent || '';
+    titleEl.textContent = '';
+    var chars = [];
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.className = 'linslab-char';
+      span.textContent = text[i];
+      span.setAttribute('aria-hidden', 'true');
+      (function (s) {
+        s.addEventListener('mouseenter', function () { s.style.transform = 'translateY(-6px)'; });
+        s.addEventListener('mouseleave', function () { s.style.transform = 'translateY(0)'; });
+      })(span);
+      chars.push(span);
+      titleEl.appendChild(span);
+    }
+  })();
+
   // 名字悬停位移：悬停某字时按规则位移，移出后丝滑归位；曲线 cubic-bezier(0.34, 1.56, 0.64, 1)
   (function initNameHover() {
     var nameEl = document.querySelector('.name');
