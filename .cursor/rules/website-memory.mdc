@@ -13,8 +13,8 @@ alwaysApply: true
 
 ### 项目事实
 
-- 个人站「刘锦麟」；workspace 名 `gatsby-website`，实为 **Vite 静态站**（非 Gatsby）。构建：`npm run build`（先执行 `scripts/generate-supabase-config.js`、`scripts/generate-analytics-config.js`，再 `vite build`）。
-- 入口：根目录 `index.html`、`diary.html`、`gallery.html`；全局 `styles.css`、`script.js`；产出在 `public/`。
+- 个人站「刘锦麟」；workspace 名 `gatsby-website`，实为 **Vite 静态站**（非 Gatsby）。构建：`npm run build`（先执行 `scripts/copy-styles.js`、`scripts/generate-supabase-config.js`、`scripts/generate-analytics-config.js`，再 `vite build`）。
+- 入口：根目录 `index.html`、`diary.html`、`gallery.html`、`Galaxy.html`、`skills.html`；全局 `styles.css`、`script.js`；产出在 `dist/`（`public/` 在构建时拷贝到 `dist/` 根）。
 - 日记在 `diary.html`：手写 HTML，单条为 `.diary-entry.diary-entry--expandable` → `__row`（`__date`、`__title--toggle`）→ `__body`（若干 `<p>`）。新增时复制任一条的 DOM 结构即可。
 
 ### 日记顺序（必须遵守）
@@ -37,9 +37,9 @@ alwaysApply: true
 
 ### 核心项目事实 (Core Facts)
 
-- **项目实质**：静态多页站，Vite 构建（`vite build`），非 Gatsby。根目录 `index.html` / `gallery.html` / `diary.html` / `Galaxy.html` 为入口；`public/` 为静态资源目录，构建时整体拷贝到 `dist/` 根。
+- **项目实质**：静态多页站，Vite 构建（`vite build`），非 Gatsby。根目录 `index.html` / `gallery.html` / `diary.html` / `Galaxy.html` / `skills.html` 为入口；`public/` 为静态资源目录，构建时整体拷贝到 `dist/` 根。
 - **技术栈**：HTML + 原生 JS（无框架）、Vite 7、Supabase（仅 Data API + 表，Auth 未接）。
-- **站点身份**：刘锦麟个人主页；页：首页、胶片集、AI 日记、星尘遗落（Galaxy，镜像星海）。
+- **站点身份**：刘锦麟个人主页；页：首页、胶片集、AI 日记、星尘遗落（Galaxy，镜像星海）、Skill 手册（skills.html）。
 - **已实现模块**：
   - **灵感垃圾桶**：多页右下角入口，输入文字后「吞噬」或 Enter 写入；数据存 `localStorage.LOST_INSPIRATIONS` 或 Supabase 表 `inspirations`（优先 Supabase，失败回退 localStorage）。
   - **Supabase 集成**：表 `inspirations`（id uuid, content text, user_id uuid nullable, created_at）；RLS 开放匿名 insert/select。前端通过 `window.ideaBinApi`（`supabase-idea-bin.js`）调用 `save(content)` / `load()`；未配置或加载失败时 `ideaBinApi === null`，逻辑回退 localStorage。
@@ -90,7 +90,7 @@ alwaysApply: true
   - **灵感垃圾桶**：`script.js` 中 `initIdeaBin()`，`diary.html` 内联一套；打开记 `ideaBinOpenTime`，吞噬时 PostHog `idea_bin_used`（page、timestamp、duration_seconds）。
   - **胶片集**：`GALLERY_PHOTOS` 数组 + `GALLERY_PHOTO_DIR = '/photo'`，图片必须为 **小写** `1.jpg`…`10.jpg`；点击灯箱时 PostHog `image_clicked`（image_id、page）。
   - **Analytics**：`public/analytics-config.js`（gitignore，本地手填或 Vercel 构建时由 `scripts/generate-analytics-config.js` 从环境变量生成）→ `public/analytics-loader.js` 加载 GA gtag + PostHog。**PostHog 必须用官方 snippet（stub + `posthog.init`）**，保证 `window.posthog` 立即可用。
-- **构建命令**：`node scripts/generate-supabase-config.js && node scripts/generate-analytics-config.js && vite build`；三者缺一不可且顺序固定。
+- **构建命令**：`node scripts/copy-styles.js && node scripts/generate-supabase-config.js && node scripts/generate-analytics-config.js && vite build`（copy-styles → supabase 配置 → analytics 配置 → vite build）；顺序固定。
 
 ### 技术推导脉络 (Logic Evolution)
 
