@@ -112,6 +112,65 @@ p:first-child {
   z-index: 1;
 }
 
+/* 导航外层（移动端放汉堡按钮） */
+.nav-wrap {
+  position: relative;
+}
+
+/* 汉堡按钮：仅移动端显示 */
+.nav-toggle {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 201;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #fff;
+  color: #1d1d1f;
+  font-size: 1.25rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s, border-color 0.2s;
+}
+.nav-toggle:hover {
+  background: #f5f5f5;
+}
+[data-theme="dark"] .nav-toggle {
+  background: rgba(20, 20, 20, 0.9);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+[data-theme="dark"] .nav-toggle:hover {
+  background: rgba(40, 40, 40, 0.95);
+}
+
+/* 移动端由 JS 设置 html.mobile-nav（head 内联 + script.js），兼容 iOS / 夸克等 */
+html.mobile-nav .site-nav {
+  display: none !important;
+  top: 4.5rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  margin-top: 0;
+  transform: none;
+  width: auto;
+  flex-direction: column;
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+html.mobile-nav .site-nav.is-open {
+  display: flex !important;
+}
+html.mobile-nav .nav-toggle {
+  display: flex !important;
+}
+
 /* 悬浮导航栏：亮色=极简实色，暗色=玻璃+发光 */
 .site-nav {
   position: fixed;
@@ -271,11 +330,14 @@ p:first-child {
   transition: border-color 0.5s ease;
 }
 
-/* 子页返回键 - 左上角极简 */
+/* 子页返回键 - 左上角极简，两行：返回 + 箭头 */
 .back-link {
   position: fixed;
   top: 1.5rem;
   left: 1.5rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
   font-size: 0.95rem;
   color: var(--color-text-muted);
   text-decoration: none;
@@ -285,6 +347,12 @@ p:first-child {
 
 .back-link:hover {
   color: var(--color-text);
+}
+
+.back-link__arrow {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  opacity: 0.8;
 }
 
 /* 暗黑模式切换 - 右上角 */
@@ -396,6 +464,102 @@ p:first-child {
 
 .hero.glass-card {
   padding: 5rem 3rem 5rem;
+}
+
+/* linksb 首页：作品集入口型 */
+.container--home {
+  padding: 6rem 10vw 4rem;
+  max-width: 900px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.linksb-hero {
+  text-align: center;
+  padding: 2rem 2rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.linksb-title {
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+}
+
+.linslab-char {
+  display: inline-block;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: default;
+  background: linear-gradient(165deg, #1a1a1a 0%, #152238 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+[data-theme="dark"] .linslab-char {
+  background: linear-gradient(165deg, #a8d4ff 0%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.linksb-subtitle {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.entry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+
+/* 覆盖 .glass-card 的 contain: paint，避免网格项被裁切；min-width:0 防止撑破网格 */
+.entry-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 1.5rem 1.25rem;
+  margin-bottom: 0;
+  min-width: 0;
+  contain: none;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.entry-card:hover {
+  transform: translateY(-4px);
+}
+
+.entry-card__name {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.4rem;
+}
+
+.entry-card__desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (max-width: 700px) {
+  .entry-grid {
+    grid-template-columns: 1fr;
+  }
+  .container--home {
+    padding: 5rem 8vw 3rem;
+  }
 }
 
 /* 名字容器：灵魂释放，无框透底（与格言一致） */
@@ -773,8 +937,18 @@ p:first-child {
   font-style: normal;
   color: var(--color-text-muted);
 }
-
-/* 一言格言：灵魂释放，无容器透底 + 可拖拽投入黑洞 */
+#motto-container.motto-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+#motto-container {
+  position: relative;
+  z-index: 10;
+  cursor: grab;
+  transition: transform 0.2s;
+}
 #motto-container,
 .motto-card {
   background: none !important;
@@ -785,7 +959,6 @@ p:first-child {
   padding: 1.5rem 1.75rem 1.25rem;
   margin: 0;
   margin-top: 0.25rem;
-  cursor: grab;
   user-select: none;
   -webkit-user-select: none;
   touch-action: none;
@@ -1332,11 +1505,17 @@ p:first-child {
 }
 
 /* ---------- 灵感垃圾桶 Idea Bin：Black Gold 重力点 ---------- */
-.idea-bin-trigger {
+/* 灵感垃圾桶：绝对最高层级，固定右下角 */
+#idea-bin {
   position: fixed;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  z-index: 150;
+  bottom: 30px;
+  right: 30px;
+  z-index: 999999;
+  pointer-events: auto;
+}
+.idea-bin-trigger,
+#idea-bin-trigger,
+#idea-bin {
   width: 48px;
   height: 48px;
   padding: 0;
@@ -1346,7 +1525,6 @@ p:first-child {
   box-shadow: 0 0 20px rgba(212, 175, 55, 0.2),
               inset 0 0 20px rgba(0, 0, 0, 0.4);
   cursor: pointer;
-  pointer-events: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1408,7 +1586,7 @@ p:first-child {
 .idea-bin-overlay {
   position: fixed;
   inset: 0;
-  z-index: 500;
+  z-index: 99998;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1569,5 +1747,133 @@ p:first-child {
   to {
     transform: translate(-50%, -50%) translate(var(--dx, 0), var(--dy, 0));
     opacity: 0;
+  }
+}
+
+/* ========== 整站移动端适配（含 iOS：视口 + 设备宽度双保险）========== */
+@media (max-width: 768px), (max-device-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
+  .site-nav {
+    display: none !important;
+    top: 4.5rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    margin-top: 0;
+    transform: none;
+    width: auto;
+    flex-direction: column;
+    border-radius: 12px;
+    padding: 0.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+  .site-nav.is-open {
+    display: flex;
+  }
+  .site-nav__link {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    text-align: left;
+  }
+  .container {
+    padding: 7rem 5vw 5rem;
+  }
+  .container.subpage {
+    padding-top: 6rem;
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+  .hero.glass-card {
+    padding: 3rem 1.5rem 3rem;
+  }
+  .name {
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: clamp(2.2rem, 8vw, 3.5rem);
+  }
+  .glass-card {
+    padding: 1.5rem;
+  }
+  .back-link {
+    top: 1rem;
+    left: 3.5rem;
+    font-size: 0.9rem;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .theme-toggle {
+    top: 1rem;
+    right: 1rem;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem;
+  }
+  .diary-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .diary-motto-box {
+    top: 3.5rem;
+    right: 0.75rem;
+    max-width: calc(100vw - 2rem);
+    padding: 0.6rem 0.75rem;
+  }
+  .diary-motto-text {
+    font-size: 0.85rem;
+  }
+  .timeline-item {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0;
+  }
+  .timeline-year {
+    width: auto;
+  }
+  .lightbox__card {
+    max-width: 96vw;
+    max-height: 90vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 6rem 4vw 4rem;
+  }
+  .container.subpage {
+    padding-top: 5.5rem;
+    padding-left: 4vw;
+    padding-right: 4vw;
+  }
+  .site-nav__link {
+    padding: 0.45rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  .name {
+    font-size: clamp(1.9rem, 9vw, 2.8rem);
+  }
+  .tagline {
+    font-size: 0.95rem;
+  }
+  .diary-section {
+    padding: 1.25rem;
+  }
+  .diary-entry__row {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  .diary-entry__date {
+    width: 5rem;
+    min-width: 5rem;
+    font-size: 0.85rem;
+  }
+  .idea-bin-trigger {
+    right: 1rem;
+    bottom: 1.5rem;
+    width: 52px;
+    height: 52px;
   }
 }
