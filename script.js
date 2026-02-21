@@ -11,25 +11,51 @@
     window.addEventListener('resize', update);
   })();
 
-  // Lin's lab 标题：鼠标划过时当前字母上移
+  // Lin's Lab 标题：黑色 + 悬停上移；s 与 L 之间加弧形箭头 ↶（在上方）
   (function initLinslabTitleHover() {
     var titleEl = document.getElementById('linslab-title');
     if (!titleEl) return;
-    var text = titleEl.textContent || '';
+    var text = (titleEl.textContent || '').trim();
+    if (text.indexOf(' ') === -1) text = text.replace(/Lab/i, ' Lab'); // 确保 Lin's 与 Lab 之间有空格
     titleEl.textContent = '';
-    var chars = [];
     for (var i = 0; i < text.length; i++) {
+      if (text[i] === ' ' && i > 0 && text[i - 1] === 's') {
+        var arrow = document.createElement('span');
+        arrow.className = 'linslab-arrow';
+        arrow.textContent = '\u21B7';
+        arrow.setAttribute('aria-hidden', 'true');
+        titleEl.appendChild(arrow);
+      }
       var span = document.createElement('span');
       span.className = 'linslab-char';
       span.textContent = text[i];
       span.setAttribute('aria-hidden', 'true');
-      (function (s) {
-        s.addEventListener('mouseenter', function () { s.style.transform = 'translateY(-6px)'; });
-        s.addEventListener('mouseleave', function () { s.style.transform = 'translateY(0)'; });
-      })(span);
-      chars.push(span);
       titleEl.appendChild(span);
     }
+    for (var j = 0; j < titleEl.children.length; j++) {
+      var el = titleEl.children[j];
+      if (el.classList.contains('linslab-arrow')) continue;
+      (function (charEl) {
+        charEl.addEventListener('mouseenter', function () { charEl.classList.add('linslab-char--hover'); });
+        charEl.addEventListener('mouseleave', function () { charEl.classList.remove('linslab-char--hover'); });
+      })(el);
+    }
+  })();
+
+  // 副标题「项目与实验入口」：彩虹渐变 + 光带扫过（整行无悬停故无消失问题）
+  (function initSubtitleRainbowShine() {
+    var subEl = document.getElementById('linksb-subtitle');
+    if (!subEl) return;
+    var text = subEl.textContent || '';
+    subEl.textContent = '';
+    var inner = document.createElement('span');
+    inner.className = 'linksb-subtitle-inner';
+    inner.textContent = text;
+    subEl.appendChild(inner);
+    var shine = inner.cloneNode(true);
+    shine.className = 'linksb-subtitle-shine';
+    shine.setAttribute('aria-hidden', 'true');
+    subEl.appendChild(shine);
   })();
 
   // 名字悬停位移：悬停某字时按规则位移，移出后丝滑归位；曲线 cubic-bezier(0.34, 1.56, 0.64, 1)

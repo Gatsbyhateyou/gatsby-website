@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Skills 手册 · Lin's lab</title>
-  <meta name="description" content="Lin's lab · Cursor Agent Skills 手册，技能列表与调用路径。">
+  <title>Skills 手册 · Lin's Lab</title>
+  <meta name="description" content="Lin's Lab · Cursor Agent Skills 手册，技能列表与调用路径。">
   <link rel="canonical" href="https://gatsby-website-nine.vercel.app/skills.html">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -52,6 +52,41 @@
     .copy-btn { flex-shrink: 0; font-family: "JetBrains Mono", monospace; font-size: 0.65rem; padding: 0 0.7rem; background: transparent; border: 1px solid; border-radius: 5px; cursor: pointer; white-space: nowrap; transition: background 0.15s, opacity 0.15s; opacity: 0.7; }
     .copy-btn:hover { background: rgba(255,255,255,0.06); opacity: 1; }
     .copy-btn.copied { background: rgba(34,197,94,0.1); border-color: #22c55e !important; color: #22c55e !important; opacity: 1; }
+    .skill-group-1 .group-num, .skill-group-1 .group-name { color: #2dd4bf; }
+    .skill-group-1 .group-line { background: #2dd4bf; }
+    .skill-group-1 .card { border-left-color: #2dd4bf; }
+    .skill-group-1 .card:hover { box-shadow: 0 0 0 1px #2dd4bf40, 0 8px 24px rgba(0,0,0,0.4); }
+    .skill-group-1 .invoke { color: #2dd4bf; }
+    .skill-group-1 .copy-btn { color: #2dd4bf; border-color: rgba(45,212,191,0.25); }
+    .skill-group-1 .tag { background: rgba(45,212,191,0.08); border-color: rgba(45,212,191,0.25); color: #2dd4bf; }
+    .skill-group-2 .group-num, .skill-group-2 .group-name { color: #fbbf24; }
+    .skill-group-2 .group-line { background: #fbbf24; }
+    .skill-group-2 .card { border-left-color: #fbbf24; }
+    .skill-group-2 .card:hover { box-shadow: 0 0 0 1px #fbbf2440, 0 8px 24px rgba(0,0,0,0.4); }
+    .skill-group-2 .invoke { color: #fbbf24; }
+    .skill-group-2 .copy-btn { color: #fbbf24; border-color: rgba(251,191,36,0.25); }
+    .skill-group-2 .tag { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.25); color: #fbbf24; }
+    .skill-group-3 .group-num, .skill-group-3 .group-name { color: #60a5fa; }
+    .skill-group-3 .group-line { background: #60a5fa; }
+    .skill-group-3 .card { border-left-color: #60a5fa; }
+    .skill-group-3 .card:hover { box-shadow: 0 0 0 1px #60a5fa40, 0 8px 24px rgba(0,0,0,0.4); }
+    .skill-group-3 .invoke { color: #60a5fa; }
+    .skill-group-3 .copy-btn { color: #60a5fa; border-color: rgba(96,165,250,0.25); }
+    .skill-group-3 .tag { background: rgba(96,165,250,0.08); border-color: rgba(96,165,250,0.25); color: #60a5fa; }
+    .skill-group-4 .group-num, .skill-group-4 .group-name { color: #a78bfa; }
+    .skill-group-4 .group-line { background: #a78bfa; }
+    .skill-group-4 .card { border-left-color: #a78bfa; }
+    .skill-group-4 .card:hover { box-shadow: 0 0 0 1px #a78bfa40, 0 8px 24px rgba(0,0,0,0.4); }
+    .skill-group-4 .invoke { color: #a78bfa; }
+    .skill-group-4 .copy-btn { color: #a78bfa; border-color: rgba(167,139,250,0.25); }
+    .skill-group-4 .tag { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: #a78bfa; }
+    .skill-group-5 .group-num, .skill-group-5 .group-name { color: #94a3b8; }
+    .skill-group-5 .group-line { background: #94a3b8; }
+    .skill-group-5 .card { border-left-color: #94a3b8; }
+    .skill-group-5 .card:hover { box-shadow: 0 0 0 1px #94a3b840, 0 8px 24px rgba(0,0,0,0.4); }
+    .skill-group-5 .invoke { color: #94a3b8; }
+    .skill-group-5 .copy-btn { color: #94a3b8; border-color: rgba(148,163,184,0.25); }
+    .skill-group-5 .tag { background: rgba(148,163,184,0.08); border-color: rgba(148,163,184,0.25); color: #94a3b8; }
     .footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid #0d1824; font-size: 0.68rem; color: #1e2d40; font-family: "JetBrains Mono", monospace; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
     .handbook-back { display: inline-block; margin-bottom: 1.5rem; font-size: 0.8rem; color: #5a7090; text-decoration: none; transition: color 0.2s; }
     .handbook-back:hover { color: #2dd4bf; }
@@ -60,205 +95,215 @@
   </style>
 </head>
 <body>
-  <a href="/" class="handbook-back">返回 Lin's lab</a>
+  <a href="/" class="handbook-back">返回 Lin's Lab</a>
   <div class="hero">
     <p class="hero-label">Cursor Agent Skills</p>
     <h1>Skills 手册</h1>
   </div>
 
+  <div class="skill-group-1">
   <div class="group-header">
-    <span class="group-num" style="color:#2dd4bf">01</span>
-    <span class="group-name" style="color:#2dd4bf">思维 / 决策</span>
+    <span class="group-num">01</span>
+    <span class="group-name">思维 / 决策</span>
     <span class="group-count">3 skills</span>
-    <div class="group-line" style="background:#2dd4bf"></div>
+    <div class="group-line"></div>
   </div>
   <div class="grid">
-    <div class="card" style="border-left-color:#2dd4bf" onmouseenter="this.style.boxShadow='0 0 0 1px #2dd4bf40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">🎯</span><span class="card-name">priority-judge</span></div>
       <p class="card-desc">从混沌待办中判断优先级，确定现在该做什么。基于清晰度与 deadline 做决策，每次聚焦 1–2 件事。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#2dd4bf">.cursor/skills/priority-judge/SKILL.md</div>
-        <button class="copy-btn" style="color:#2dd4bf;border-color:rgba(45,212,191,0.25)" data-copy="@.cursor/skills/priority-judge/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/priority-judge/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/priority-judge/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#2dd4bf" onmouseenter="this.style.boxShadow='0 0 0 1px #2dd4bf40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">🤔</span><span class="card-name">thinking-partner</span></div>
       <p class="card-desc">陪用户从混沌中理清局面，锁定核心问题，拆解卡点，共创解法，落地行动。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#2dd4bf">.cursor/skills/thinking-partner/SKILL.md</div>
-        <button class="copy-btn" style="color:#2dd4bf;border-color:rgba(45,212,191,0.25)" data-copy="@.cursor/skills/thinking-partner/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/thinking-partner/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/thinking-partner/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#2dd4bf" onmouseenter="this.style.boxShadow='0 0 0 1px #2dd4bf40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">⛏️</span><span class="card-name">thought-mining</span></div>
       <p class="card-desc">通过对话把用户零散想法倒出来、记录并整理成文章。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#2dd4bf">.cursor/skills/thought-mining/SKILL.md</div>
-        <button class="copy-btn" style="color:#2dd4bf;border-color:rgba(45,212,191,0.25)" data-copy="@.cursor/skills/thought-mining/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/thought-mining/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/thought-mining/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="skill-group-2">
   <div class="group-header">
-    <span class="group-num" style="color:#fbbf24">02</span>
-    <span class="group-name" style="color:#fbbf24">写作</span>
+    <span class="group-num">02</span>
+    <span class="group-name">写作</span>
     <span class="group-count">2 skills</span>
-    <div class="group-line" style="background:#fbbf24"></div>
+    <div class="group-line"></div>
   </div>
   <div class="grid">
-    <div class="card" style="border-left-color:#fbbf24" onmouseenter="this.style.boxShadow='0 0 0 1px #fbbf2440,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">📋</span><span class="card-name">weekly-report</span></div>
       <p class="card-desc">帮用户梳理周报，按完整逻辑展示工作价值与边界。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#fbbf24">.cursor/skills/weekly-report/SKILL.md</div>
-        <button class="copy-btn" style="color:#fbbf24;border-color:rgba(251,191,36,0.25)" data-copy="@.cursor/skills/weekly-report/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/weekly-report/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/weekly-report/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#fbbf24" onmouseenter="this.style.boxShadow='0 0 0 1px #fbbf2440,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">📝</span><span class="card-name">writing-assistant</span></div>
       <p class="card-desc">根据观点清晰度选择写作路线，从选题到成稿。观点清晰走「框架→内容」，观点模糊走「挖掘→选题→框架→内容」。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#fbbf24">.cursor/skills/writing-assistant/SKILL.md</div>
-        <button class="copy-btn" style="color:#fbbf24;border-color:rgba(251,191,36,0.25)" data-copy="@.cursor/skills/writing-assistant/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/writing-assistant/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/writing-assistant/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="skill-group-3">
   <div class="group-header">
-    <span class="group-num" style="color:#60a5fa">03</span>
-    <span class="group-name" style="color:#60a5fa">产品 / 开发</span>
+    <span class="group-num">03</span>
+    <span class="group-name">产品 / 开发</span>
     <span class="group-count">10 skills</span>
-    <div class="group-line" style="background:#60a5fa"></div>
+    <div class="group-line"></div>
   </div>
   <div class="grid">
-    <div class="card" style="border-left-color:#60a5fa" onmouseenter="this.style.boxShadow='0 0 0 1px #60a5fa40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">✨</span><span class="card-name">frontend-design</span></div>
       <p class="card-desc">做有辨识度、可上线的前端界面，避免通用 AI 审美。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#60a5fa">.cursor/skills/frontend-design/SKILL.md</div>
-        <button class="copy-btn" style="color:#60a5fa;border-color:rgba(96,165,250,0.25)" data-copy="@.cursor/skills/frontend-design/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/frontend-design/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/frontend-design/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#60a5fa" onmouseenter="this.style.boxShadow='0 0 0 1px #60a5fa40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">📄</span><span class="card-name">prd-doc-writer</span></div>
       <p class="card-desc">以故事驱动、分阶段确认的方式撰写与迭代 PRD/需求文档，用 ASCII 线框图与 Mermaid 图减少歧义。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#60a5fa">.cursor/skills/prd-doc-writer/SKILL.md</div>
-        <button class="copy-btn" style="color:#60a5fa;border-color:rgba(96,165,250,0.25)" data-copy="@.cursor/skills/prd-doc-writer/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/prd-doc-writer/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/prd-doc-writer/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#60a5fa" onmouseenter="this.style.boxShadow='0 0 0 1px #60a5fa40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">🗂️</span><span class="card-name">project-map-builder</span></div>
       <p class="card-desc">为指定目录生成或增量更新 PROJECT_MAP.md 高信噪比目录说明。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#60a5fa">.cursor/skills/project-map-builder/SKILL.md</div>
-        <button class="copy-btn" style="color:#60a5fa;border-color:rgba(96,165,250,0.25)" data-copy="@.cursor/skills/project-map-builder/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/project-map-builder/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/project-map-builder/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#60a5fa" onmouseenter="this.style.boxShadow='0 0 0 1px #60a5fa40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">🔄</span><span class="card-name">req-change-workflow</span></div>
       <p class="card-desc">标准化需求/功能变更流程，避免改需求时混乱与代码崩溃。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#60a5fa">.cursor/skills/req-change-workflow/SKILL.md</div>
-        <button class="copy-btn" style="color:#60a5fa;border-color:rgba(96,165,250,0.25)" data-copy="@.cursor/skills/req-change-workflow/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/req-change-workflow/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/req-change-workflow/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#60a5fa" onmouseenter="this.style.boxShadow='0 0 0 1px #60a5fa40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">🎨</span><span class="card-name">ui-design</span></div>
       <p class="card-desc">UI 样式修改协作流程。通过截图定位→现状描述→方案选择→改代码→微调，减少偏差与无效猜测。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#60a5fa">.cursor/skills/ui-design/SKILL.md</div>
-        <button class="copy-btn" style="color:#60a5fa;border-color:rgba(96,165,250,0.25)" data-copy="@.cursor/skills/ui-design/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/ui-design/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/ui-design/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#60a5fa" onmouseenter="this.style.boxShadow='0 0 0 1px #60a5fa40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">🗺️</span><span class="card-name">version-planner</span></div>
       <p class="card-desc">将产品需求拆解成可执行的渐进式版本规划（V0.1 MVP → V1.0）。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#60a5fa">.cursor/skills/version-planner/SKILL.md</div>
-        <button class="copy-btn" style="color:#60a5fa;border-color:rgba(96,165,250,0.25)" data-copy="@.cursor/skills/version-planner/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/version-planner/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/version-planner/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#60a5fa" onmouseenter="this.style.boxShadow='0 0 0 1px #60a5fa40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">🌐</span><span class="card-name">web-design-guidelines</span></div>
       <p class="card-desc">按 Vercel Web Interface Guidelines 审查网页 UI 代码合规性。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#60a5fa">.cursor/skills/web-design-guidelines/SKILL.md</div>
-        <button class="copy-btn" style="color:#60a5fa;border-color:rgba(96,165,250,0.25)" data-copy="@.cursor/skills/web-design-guidelines/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/web-design-guidelines/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/web-design-guidelines/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#60a5fa" onmouseenter="this.style.boxShadow='0 0 0 1px #60a5fa40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">👾</span><span class="card-name">8-bit-pixel-art-patterns</span></div>
       <p class="card-desc">提供一套用多个绝对定位 div 拼出像素边框、像素阴影的代码模式。做 8-bit 风格 UI 组件时用。</p>
-      <div class="triggers"><span class="tag" style="background:rgba(96,165,250,0.08);border-color:rgba(96,165,250,0.25);color:#60a5fa">像素边框</span> <span class="tag" style="background:rgba(96,165,250,0.08);border-color:rgba(96,165,250,0.25);color:#60a5fa">像素风UI</span></div>
+      <div class="triggers"><span class="tag">像素边框</span> <span class="tag">像素风UI</span></div>
       <div class="invoke-row">
-        <div class="invoke" style="color:#60a5fa">.agents/skills/8-bit-pixel-art-patterns/SKILL.md</div>
-        <button class="copy-btn" style="color:#60a5fa;border-color:rgba(96,165,250,0.25)" data-copy="@.agents/skills/8-bit-pixel-art-patterns/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.agents/skills/8-bit-pixel-art-patterns/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.agents/skills/8-bit-pixel-art-patterns/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#60a5fa" onmouseenter="this.style.boxShadow='0 0 0 1px #60a5fa40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">🎮</span><span class="card-name">game-ui-design</span></div>
       <p class="card-desc">按游戏 UI 大师级规范设计界面——清晰度、沉浸感、控制器优先、动效即信息。</p>
-      <div class="triggers"><span class="tag" style="background:rgba(96,165,250,0.08);border-color:rgba(96,165,250,0.25);color:#60a5fa">游戏UI</span> <span class="tag" style="background:rgba(96,165,250,0.08);border-color:rgba(96,165,250,0.25);color:#60a5fa">HUD设计</span></div>
+      <div class="triggers"><span class="tag">游戏UI</span> <span class="tag">HUD设计</span></div>
       <div class="invoke-row">
-        <div class="invoke" style="color:#60a5fa">.agents/skills/game-ui-design/SKILL.md</div>
-        <button class="copy-btn" style="color:#60a5fa;border-color:rgba(96,165,250,0.25)" data-copy="@.agents/skills/game-ui-design/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.agents/skills/game-ui-design/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.agents/skills/game-ui-design/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#60a5fa" onmouseenter="this.style.boxShadow='0 0 0 1px #60a5fa40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">🕹️</span><span class="card-name">retro-css-architecture</span></div>
       <p class="card-desc">规范 8-bit 风格 CSS 的写法：Press Start 2P 像素字体、image-rendering: pixelated、CSS 变量组织。</p>
-      <div class="triggers"><span class="tag" style="background:rgba(96,165,250,0.08);border-color:rgba(96,165,250,0.25);color:#60a5fa">像素字体</span> <span class="tag" style="background:rgba(96,165,250,0.08);border-color:rgba(96,165,250,0.25);color:#60a5fa">retro CSS</span></div>
+      <div class="triggers"><span class="tag">像素字体</span> <span class="tag">retro CSS</span></div>
       <div class="invoke-row">
-        <div class="invoke" style="color:#60a5fa">.agents/skills/retro-css-architecture/SKILL.md</div>
-        <button class="copy-btn" style="color:#60a5fa;border-color:rgba(96,165,250,0.25)" data-copy="@.agents/skills/retro-css-architecture/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.agents/skills/retro-css-architecture/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.agents/skills/retro-css-architecture/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="skill-group-4">
   <div class="group-header">
-    <span class="group-num" style="color:#a78bfa">04</span>
-    <span class="group-name" style="color:#a78bfa">内容 / 教学</span>
+    <span class="group-num">04</span>
+    <span class="group-name">内容 / 教学</span>
     <span class="group-count">2 skills</span>
-    <div class="group-line" style="background:#a78bfa"></div>
+    <div class="group-line"></div>
   </div>
   <div class="grid">
-    <div class="card" style="border-left-color:#a78bfa" onmouseenter="this.style.boxShadow='0 0 0 1px #a78bfa40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">🖼️</span><span class="card-name">image-assistant</span></div>
       <p class="card-desc">把文章/模块内容转为统一风格、少字高可读的 16:9 信息图提示词。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#a78bfa">.cursor/skills/image-assistant/SKILL.md</div>
-        <button class="copy-btn" style="color:#a78bfa;border-color:rgba(167,139,250,0.25)" data-copy="@.cursor/skills/image-assistant/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/image-assistant/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/image-assistant/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
-    <div class="card" style="border-left-color:#a78bfa" onmouseenter="this.style.boxShadow='0 0 0 1px #a78bfa40,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">📚</span><span class="card-name">lesson-builder</span></div>
       <p class="card-desc">通过讨论驱动完成课程大纲与课件。先框架后细节。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#a78bfa">.cursor/skills/lesson-builder/SKILL.md</div>
-        <button class="copy-btn" style="color:#a78bfa;border-color:rgba(167,139,250,0.25)" data-copy="@.cursor/skills/lesson-builder/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/lesson-builder/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/lesson-builder/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="skill-group-5">
   <div class="group-header">
-    <span class="group-num" style="color:#94a3b8">05</span>
-    <span class="group-name" style="color:#94a3b8">工具</span>
+    <span class="group-num">05</span>
+    <span class="group-name">工具</span>
     <span class="group-count">1 skills</span>
-    <div class="group-line" style="background:#94a3b8"></div>
+    <div class="group-line"></div>
   </div>
   <div class="grid">
-    <div class="card" style="border-left-color:#94a3b8" onmouseenter="this.style.boxShadow='0 0 0 1px #94a3b840,0 8px 24px rgba(0,0,0,0.4)'" onmouseleave="this.style.boxShadow=''">
+    <div class="card">
       <div class="card-header"><span class="card-icon">🔍</span><span class="card-name">find-skills</span></div>
       <p class="card-desc">在开放 Agent 技能生态（skills.sh）中搜索、推荐并安装技能。</p>
       <div class="invoke-row">
-        <div class="invoke" style="color:#94a3b8">.cursor/skills/find-skills/SKILL.md</div>
-        <button class="copy-btn" style="color:#94a3b8;border-color:rgba(148,163,184,0.25)" data-copy="@.cursor/skills/find-skills/SKILL.md" onclick="copySkill(this)">复制</button>
+        <div class="invoke">.cursor/skills/find-skills/SKILL.md</div>
+        <button class="copy-btn" data-copy="@.cursor/skills/find-skills/SKILL.md" onclick="copySkill(this)">复制</button>
       </div>
     </div>
   </div>
+  </div>
 
-  <div class="footer"><span>Skills 手册 · Lin's lab</span></div>
+  <div class="footer"><span>Skills 手册 · Lin's Lab</span></div>
 
   <script>
     function copySkill(btn) {

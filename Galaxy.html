@@ -55,8 +55,8 @@
             justify-content: center;
             align-items: center;
             background: radial-gradient(ellipse 120% 100% at 50% 50%, rgba(20, 25, 50, 0.85) 0%, rgba(5, 5, 15, 0.95) 50%, rgba(0, 0, 5, 0.98) 100%);
-            backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -279,10 +279,8 @@
     </div>
 </div>
 
-<script>window.__GA_MEASUREMENT_ID__=window.__GA_MEASUREMENT_ID__||'';window.__POSTHOG_KEY__=window.__POSTHOG_KEY__||'';window.__POSTHOG_HOST__=window.__POSTHOG_HOST__||'';</script>
-<script src="/analytics-config.js"></script>
-<script src="/analytics-loader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/analytics-bootstrap.js"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script src="/supabase-config.js"></script>
 <script src="/supabase-idea-bin.js"></script>
 <script>
