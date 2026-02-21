@@ -12,6 +12,7 @@ export default {
         diary: resolve(__dirname, 'diary.html'),
         galaxy: resolve(__dirname, 'Galaxy.html'),
         skills: resolve(__dirname, 'skills.html'),
+        styleGallery: resolve(__dirname, 'style-gallery.html'),
       },
     },
   },

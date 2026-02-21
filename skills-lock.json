@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "skills": {
+    "editorial-designer": {
+      "source": "heyman333/atelier-ui",
+      "sourceType": "github",
+      "computedHash": "f51f65bf1fa07064a491bcb55bf4a19de269e60968e7e1df2eb7fc6af2cec221"
+    },
+    "glassmorphism": {
+      "source": "ainergiz/design-inspirations",
+      "sourceType": "github",
+      "computedHash": "96b57506515153cbca213dc6a38588e1698591283de67c733c9caa29eec7fe12"
+    },
+    "interface-design": {
+      "source": "dammyjay93/interface-design",
+      "sourceType": "github",
+      "computedHash": "4d5fe1dacfebc0c1b3837b061405150ed2e4971c096543afc46c23161c5a4f7a"
+    },
+    "kpi-dashboard-design": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "computedHash": "ae1aa7914167e9232481e3606cc0cdd1127ac555c5c49bfd96d002e289278953"
+    },
+    "minimalist-surgical-development": {
+      "source": "faulkdev/github-copilot-superpowers",
+      "sourceType": "github",
+      "computedHash": "70777036942ebbf2738763d8071f41aad6d34268cf67bb500cc46a4b41bddd1b"
+    },
+    "neobrutalist-web-designer": {
+      "source": "erichowens/some_claude_skills",
+      "sourceType": "github",
+      "computedHash": "90ad57c14ae85d5c73d949bd96f8e4629a85c8da1bbe617d295081a492125fe1"
+    },
+    "threejs-materials": {
+      "source": "cloudai-x/threejs-skills",
+      "sourceType": "github",
+      "computedHash": "4d181db0b35213b772bf20eff5fe6f72f1c84bdc03294db96d1f712dd9047443"
+    },
+    "web-typography": {
+      "source": "wondelai/skills",
+      "sourceType": "github",
+      "computedHash": "344f08b4def7100b418682125d7b60fe99e83b9cb8797485721d9456b4e358aa"
+    }
+  }
+}

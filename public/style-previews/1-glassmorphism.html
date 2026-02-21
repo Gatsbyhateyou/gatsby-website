@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · Glassmorphism 玻璃拟态</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #312e81 100%);
+      color: #fff;
+      padding-top: 4rem;
+    }
+    /* 固定顶栏 · 毛玻璃 */
+    .preview__nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 0.75rem 2rem;
+      background: rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .preview__nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .preview__nav-title { font-size: 1rem; font-weight: 600; }
+    .preview__nav-links { display: flex; gap: 1rem; }
+    .preview__nav-links a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.9rem; }
+    .preview__nav-links a:hover { color: #fff; }
+
+    .preview { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .preview__title { font-size: 1.75rem; margin-bottom: 0.5rem; font-weight: 600; }
+    .preview__subtitle { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; font-size: 1rem; }
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    /* 按钮 · 毛玻璃 */
+    .preview__btn {
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .preview__btn:hover { background: rgba(0, 0, 0, 0.3); }
+    .preview__btn--primary {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .preview__btn--primary:hover { background: rgba(255, 255, 255, 0.25); }
+    /* 卡片 · 毛玻璃 */
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .preview__card {
+      padding: 1.25rem;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .preview__card h3 { font-size: 1rem; margin-bottom: 0.5rem; font-weight: 600; }
+    .preview__card p { font-size: 0.875rem; color: rgba(255,255,255,0.8); line-height: 1.5; }
+    /* 底部悬浮指示 · 毛玻璃胶囊 */
+    .preview__pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.9);
+    }
+    .preview__pill-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+  </style>
+</head>
+<body>
+  <nav class="preview__nav">
+    <div class="preview__nav-inner">
+      <span class="preview__nav-title">Glassmorphism 示例</span>
+      <div class="preview__nav-links">
+        <a href="index.html">返回列表</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="preview">
+    <h1 class="preview__title">玻璃拟态 Glassmorphism</h1>
+    <p class="preview__subtitle">半透明背景 + 背景模糊 + 细边框，用于悬浮控件、导航栏与卡片。</p>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn preview__btn--primary">主要按钮</button>
+      <button type="button" class="preview__btn">次要按钮</button>
+      <button type="button" class="preview__btn">链接样式</button>
+    </div>
+    <div class="preview__cards">
+      <div class="preview__card">
+        <h3>卡片一</h3>
+        <p>毛玻璃容器：bg-black/20、backdrop-blur-md、border-white/10。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片二</h3>
+        <p>同一套 token 保持整体通透、层级清晰。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片三</h3>
+        <p>适用于遮罩、工具提示与浮动操作按钮。</p>
+      </div>
+    </div>
+    <div class="preview__pill" aria-hidden="true">
+      <span class="preview__pill-dot"></span>
+      <span class="preview__pill-dot"></span>
+      <span class="preview__pill-dot"></span>
+      <span>胶囊指示器</span>
+    </div>
+  </div>
+</body>
+</html>

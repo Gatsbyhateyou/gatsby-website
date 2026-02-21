@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · 基础结构</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; padding: 2rem; min-height: 100vh; }
+    .preview { max-width: 900px; margin: 0 auto; }
+    .preview__title { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .preview__subtitle { color: #666; margin-bottom: 1.5rem; font-size: 1rem; }
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview__btn { padding: 0.5rem 1.25rem; font-size: 0.9rem; border-radius: 8px; border: 1px solid #ccc; background: #fff; cursor: pointer; }
+    .preview__btn--primary { background: #333; color: #fff; border-color: #333; }
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .preview__card { border: 1px solid #eee; border-radius: 8px; padding: 1.25rem; background: #fafafa; }
+    .preview__card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+    .preview__card p { font-size: 0.875rem; color: #555; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <h1 class="preview__title">展示标题</h1>
+    <p class="preview__subtitle">这是一段副标题文案，用于占位和展示排版效果。</p>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn preview__btn--primary">主要按钮</button>
+      <button type="button" class="preview__btn">次要按钮</button>
+      <button type="button" class="preview__btn">链接样式</button>
+    </div>
+    <div class="preview__cards">
+      <div class="preview__card">
+        <h3>卡片一</h3>
+        <p>简短说明文字，展示卡片内容区域。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片二</h3>
+        <p>另一段说明，保持结构一致便于对比风格。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片三</h3>
+        <p>第三张卡片，用于填满一行或换行。</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

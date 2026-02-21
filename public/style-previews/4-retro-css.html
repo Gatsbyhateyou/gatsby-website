@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · 复古 CSS 架构</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      min-height: 100vh;
+      background: #0f0f0f;
+      color: #e0e0e0;
+      padding: 2rem;
+      font-size: 10px;
+      line-height: 1.5;
+      letter-spacing: 0.5px;
+    }
+    .preview { max-width: 900px; margin: 0 auto; }
+    .preview__title { font-size: 14px; margin-bottom: 12px; }
+    .preview__subtitle { color: #888; margin-bottom: 24px; font-size: 8px; }
+    .preview__actions { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    .preview__btn {
+      padding: 12px 24px;
+      font-family: inherit;
+      font-size: 8px;
+      border-radius: 0;
+      border-top: 6px solid #333;
+      border-bottom: 6px solid #333;
+      background: #222;
+      color: #0f0;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .preview__btn:active { transform: translateY(2px); }
+    .preview__btn--primary { color: #0ff; border-color: #055; }
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+    .preview__card {
+      padding: 16px;
+      border-radius: 0;
+      background: #1a1a1a;
+      border-top: 6px solid #333;
+      border-bottom: 6px solid #333;
+      border-left: none;
+      border-right: none;
+    }
+    .preview__card h3 { font-size: 8px; margin-bottom: 8px; }
+    .preview__card p { font-size: 8px; color: #999; line-height: 1.5; }
+    .preview__back { color: #666; font-size: 8px; text-decoration: none; margin-bottom: 16px; display: inline-block; }
+    .preview__back:hover { color: #0f0; }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <a href="index.html" class="preview__back">← 返回列表</a>
+    <h1 class="preview__title">RETRO CSS ARCHITECTURE</h1>
+    <p class="preview__subtitle">Press Start 2P · retro.css · 固定像素 · rounded-none · dark 语义色</p>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn preview__btn--primary">START GAME</button>
+      <button type="button" class="preview__btn">OPTIONS</button>
+      <button type="button" class="preview__btn">QUIT</button>
+    </div>
+    <div class="preview__cards">
+      <div class="preview__card">
+        <h3>retro.css</h3>
+        <p>Pixel font + image-rendering pixelated.</p>
+      </div>
+      <div class="preview__card">
+        <h3>border-y-6</h3>
+        <p>固定像素尺寸 1.5 / 3 / 6px。</p>
+      </div>
+      <div class="preview__card">
+        <h3>dark: 变体</h3>
+        <p>语义色 + Tailwind 优先。</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

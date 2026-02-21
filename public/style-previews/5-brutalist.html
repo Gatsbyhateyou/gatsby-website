@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · 新粗野主义 Neobrutalism</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #F5F0E6; color: #000; padding: 2rem; }
+    .preview { max-width: 900px; margin: 0 auto; }
+    .preview__title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .preview__subtitle { color: #333; margin-bottom: 1.5rem; }
+    .preview__actions { display: flex; gap: 12px; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview__btn {
+      padding: 0.75rem 1.5rem; font-weight: 700; text-transform: uppercase; border: 3px solid #000;
+      background: #fff; color: #000; cursor: pointer; box-shadow: 4px 4px 0 #000; transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .preview__btn:hover { box-shadow: 6px 6px 0 #000; transform: translate(-2px, -2px); }
+    .preview__btn--primary { background: #FFEB3B; }
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .preview__card {
+      padding: 1.25rem; background: #fff; border: 3px solid #000; box-shadow: 6px 6px 0 #000;
+    }
+    .preview__card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase; }
+    .preview__card p { font-size: 0.875rem; color: #333; line-height: 1.5; }
+    .preview__back { color: #000; font-weight: 600; text-decoration: none; margin-bottom: 1rem; display: inline-block; }
+    .preview__back:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <a href="index.html" class="preview__back">← 返回列表</a>
+    <h1 class="preview__title">Neobrutalism</h1>
+    <p class="preview__subtitle">硬阴影 · 粗黑边框 · 高对比纯色 · 无渐变</p>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn preview__btn--primary">主要按钮</button>
+      <button type="button" class="preview__btn">次要按钮</button>
+    </div>
+    <div class="preview__cards">
+      <div class="preview__card"><h3>卡片一</h3><p>box-shadow: 6px 6px 0 #000</p></div>
+      <div class="preview__card"><h3>卡片二</h3><p>border: 3px solid #000</p></div>
+      <div class="preview__card"><h3>卡片三</h3><p>纯色、无模糊</p></div>
+    </div>
+  </div>
+</body>
+</html>

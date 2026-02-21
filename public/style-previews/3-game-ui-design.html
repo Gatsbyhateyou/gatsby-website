@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · 游戏 UI</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      background: #0d1117;
+      color: #e6edf3;
+      padding: 2rem;
+    }
+    .preview { max-width: 900px; margin: 0 auto; }
+    .preview__title { font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 600; }
+    .preview__subtitle { color: #8b949e; margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .preview__hud {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .preview__bar-wrap { flex: 1; min-width: 140px; }
+    .preview__bar-label { font-size: 0.75rem; color: #8b949e; margin-bottom: 4px; }
+    .preview__bar { height: 8px; background: #21262d; border-radius: 4px; overflow: hidden; }
+    .preview__bar-fill { height: 100%; border-radius: 4px; }
+    .preview__bar-fill--hp { width: 70%; background: #ff6b6b; }
+    .preview__bar-fill--mp { width: 45%; background: #4dabf7; }
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview__btn {
+      padding: 0.6rem 1.25rem;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      border: 1px solid #30363d;
+      background: #21262d;
+      color: #e6edf3;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .preview__btn:hover { background: #30363d; border-color: #484f58; }
+    .preview__btn--primary { background: #238636; border-color: #238636; }
+    .preview__btn--primary:hover { background: #2ea043; }
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .preview__card {
+      padding: 1.25rem;
+      border-radius: 8px;
+      background: #161b22;
+      border: 1px solid #30363d;
+    }
+    .preview__card h3 { font-size: 1rem; margin-bottom: 0.5rem; font-weight: 600; }
+    .preview__card p { font-size: 0.875rem; color: #8b949e; line-height: 1.5; }
+    .preview__back { color: #8b949e; font-size: 0.9rem; text-decoration: none; margin-bottom: 1rem; display: inline-block; }
+    .preview__back:hover { color: #e6edf3; }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <a href="index.html" class="preview__back">← 返回列表</a>
+    <h1 class="preview__title">游戏 UI 设计</h1>
+    <p class="preview__subtitle">信息在紧张状态下可读 · 每块区域有存在理由 · 手柄/键盘/触控友好</p>
+    <div class="preview__hud">
+      <div class="preview__bar-wrap">
+        <div class="preview__bar-label">HP</div>
+        <div class="preview__bar"><div class="preview__bar-fill preview__bar-fill--hp"></div></div>
+      </div>
+      <div class="preview__bar-wrap">
+        <div class="preview__bar-label">MP</div>
+        <div class="preview__bar"><div class="preview__bar-fill preview__bar-fill--mp"></div></div>
+      </div>
+    </div>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn preview__btn--primary">确认</button>
+      <button type="button" class="preview__btn">取消</button>
+      <button type="button" class="preview__btn">设置</button>
+    </div>
+    <div class="preview__cards">
+      <div class="preview__card">
+        <h3>任务追踪</h3>
+        <p>关键信息一眼可见，动效传达状态。</p>
+      </div>
+      <div class="preview__card">
+        <h3>安全区</h3>
+        <p>预留边距，适配不同屏幕与手柄。</p>
+      </div>
+      <div class="preview__card">
+        <h3>无障碍</h3>
+        <p>对比度与焦点顺序符合规范。</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

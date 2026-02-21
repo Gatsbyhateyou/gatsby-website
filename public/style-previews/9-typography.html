@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · 网页排版 Web Typography</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Georgia, serif; font-size: 1.125rem; line-height: 1.6; color: #222; padding: 2rem; background: #fff; }
+    .preview { max-width: 65ch; margin: 0 auto; }
+    .preview__title { font-family: system-ui, sans-serif; font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 0.5rem; color: #111; }
+    .preview__subtitle { font-size: 1rem; color: #555; margin-bottom: 1.5rem; }
+    .preview__prose { margin-bottom: 2rem; }
+    .preview__prose p { margin-bottom: 1em; }
+    .preview__back { font-family: system-ui, sans-serif; color: #666; text-decoration: none; margin-bottom: 1.5rem; display: inline-block; font-size: 0.9rem; }
+    .preview__back:hover { color: #111; }
+    .preview__meta { font-size: 0.875rem; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <a href="index.html" class="preview__back">← 返回列表</a>
+    <h1 class="preview__title">Web Typography</h1>
+    <p class="preview__subtitle">65ch · 1.6 line-height · 层级与配对</p>
+    <div class="preview__prose">
+      <p>Typography is the voice of your content. Body 16–18px, line length 45–75 characters, line height 1.5–1.7. Headlines need weight and presence; body needs comfort for sustained reading.</p>
+      <p>Pair typefaces with clear contrast: serif for headlines, sans for UI; or one family with weight variation. Test at actual sizes.</p>
+    </div>
+    <p class="preview__meta">max-width: 65ch · font-display: swap</p>
+  </div>
+</body>
+</html>

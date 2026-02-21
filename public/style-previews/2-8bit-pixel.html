@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · 8-bit 像素风</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      min-height: 100vh;
+      background: #1a1a2e;
+      color: #eee;
+      padding: 2rem;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+    .preview { max-width: 900px; margin: 0 auto; }
+    .preview__title { font-size: 14px; margin-bottom: 12px; }
+    .preview__subtitle { color: #aaa; margin-bottom: 24px; font-size: 8px; }
+    .preview__actions { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    .preview__btn {
+      padding: 12px 24px;
+      font-family: inherit;
+      font-size: 8px;
+      border-radius: 0;
+      border: none;
+      background: #4a4a6a;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 #2a2a4a;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .preview__btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #2a2a4a; }
+    .preview__btn--primary { background: #6a4a8a; box-shadow: 3px 3px 0 #4a2a6a; }
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+    .preview__card {
+      padding: 16px;
+      border-radius: 0;
+      background: #252540;
+      border: 3px solid #4a4a6a;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+    }
+    .preview__card h3 { font-size: 8px; margin-bottom: 8px; }
+    .preview__card p { font-size: 8px; color: #bbb; line-height: 1.6; }
+    .preview__back { color: #8a8aaa; font-size: 8px; text-decoration: none; margin-bottom: 16px; display: inline-block; }
+    .preview__back:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <a href="index.html" class="preview__back">← 返回列表</a>
+    <h1 class="preview__title">8-BIT PIXEL ART</h1>
+    <p class="preview__subtitle">rounded-none · Press Start 2P · 固定像素边框与阴影</p>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn preview__btn--primary">主要按钮</button>
+      <button type="button" class="preview__btn">次要按钮</button>
+      <button type="button" class="preview__btn">链接样式</button>
+    </div>
+    <div class="preview__cards">
+      <div class="preview__card">
+        <h3>卡片一</h3>
+        <p>像素化边框与阴影，固定 1.5/3px。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片二</h3>
+        <p>无圆角，绝对定位模拟像素边。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片三</h3>
+        <p>image-rendering: pixelated。</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

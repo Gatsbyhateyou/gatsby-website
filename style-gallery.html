@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UI 风格提示词 · Lin's lab</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css?v=1" />
+  <style>
+    .style-gallery { padding: 2rem 1.5rem 4rem; max-width: 1400px; margin: 0 auto; }
+    .style-gallery__title { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 0.5rem; }
+    .style-gallery__subtitle { color: var(--color-text-muted, #666); margin-bottom: 2rem; font-size: 0.95rem; }
+    .style-gallery__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .style-card { background: var(--card-bg, rgba(0,0,0,.03)); border: var(--card-border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .style-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+    .style-card__preview { aspect-ratio: 16/10; background: #e5e5e5; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; padding: 1rem; text-align: center; position: relative; overflow: hidden; }
+    .style-card__preview a { display: block; position: absolute; inset: 0; z-index: 2; }
+    .style-card__preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease, transform 0.4s ease; z-index: 0; }
+    .style-card__preview img[data-loaded] { opacity: 1; }
+    .style-card:hover .style-card__preview img[data-loaded] { transform: scale(1.05); }
+    .style-card__preview .style-card__placeholder { position: relative; z-index: 1; color: #555; transition: opacity 0.25s ease; pointer-events: none; }
+    .style-card__preview .style-card__placeholder.hidden { opacity: 0; }
+    .style-card__body { padding: 1rem; flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
+    .style-card__name { font-weight: 600; font-size: 1rem; }
+    .style-card__copy { margin-top: auto; padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; border: 1px solid var(--color-border); border-radius: 8px; background: transparent; color: inherit; transition: background .2s, border-color .2s; }
+    .style-card__copy:hover { background: var(--color-border); }
+    .style-card__copy.copied { border-color: #22c55e; color: #22c55e; }
+    .style-gallery__back { display: inline-block; margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--color-text-muted); text-decoration: none; }
+    .style-gallery__back:hover { color: var(--color-text); }
+  </style>
+</head>
+<body class="style-gallery-page">
+  <div class="bg-gradient"></div>
+  <div class="page-content">
+    <main class="style-gallery">
+      <a href="/" class="style-gallery__back">← 返回 Lin's lab</a>
+      <h1 class="style-gallery__title">UI 风格提示词</h1>
+      <p class="style-gallery__subtitle">选一个风格，点击「复制 prompt」后粘贴给 AI，即可按该风格生成界面。</p>
+
+      <div class="style-gallery__grid" id="style-gallery-grid">
+        <!-- 风格块由 JS 渲染 -->
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      var styles = [
+        { id: 'glassmorphism', name: '玻璃拟态 Glassmorphism', prompt: '请用玻璃拟态（glassmorphism）风格做界面：毛玻璃效果（半透明背景如 bg-black/20 或 bg-white/10 + backdrop-blur-md）、细边框（border-white/10 等）、用于悬浮控件/遮罩/导航栏/工具提示时层级清晰，整体通透、轻盈的现代 UI。注意文字对比度，低端设备可适当减小 blur。' },
+        { id: '8bit-pixel', name: '8-bit 像素风', prompt: '请按 8-bit 像素艺术图案做界面：用绝对定位的 div 做像素化边框与阴影（rounded-none、固定 1.5/3px、角点+边+侧边条），像素化阴影用 bg-foreground/20 的条块；支持 dark 模式（foreground/ring）；仅非 ghost/link/icon 变体显示边框。参考 components/ui/8bit/button 的实现。' },
+        { id: 'game-ui-design', name: '游戏 UI', prompt: '请按游戏 UI 设计做界面：结合任天堂式清晰、Dead Space/Metroid 式沉浸 HUD、电竞可读性。信息在激烈操作下仍可一眼读懂、每块区域都有存在理由、动效用于传达信息而非装饰；手柄优先再键盘再触控、保留安全区、无障碍是功能不是补丁。在 target 设备上测试。' },
+        { id: 'retro-css', name: '复古 CSS 架构', prompt: '请用复古 CSS 架构做 8-bit 风格：引入 retro.css，字体用 Press Start 2P；图片用 image-rendering: pixelated/crisp-edges；固定像素尺寸（1.5/3/6px）、rounded-none、语义色+dark: 变体；Tailwind 优先，组件级用 border-y-6、active:translate-y-1 等。' },
+        { id: 'brutalist', name: '新粗野主义 Neobrutalism', prompt: '请用新粗野主义做界面：硬阴影（box-shadow: 4px 4px 0 #000，无模糊）、粗黑边框（3–4px solid #000）、高对比纯色（红/黄/蓝/粉等），无渐变无透明。标题用粗体 display 字体，按钮/卡片 hover 时阴影变大+translate。禁止软阴影、细边框、低饱和色。' },
+        { id: 'flat-design', name: '界面设计 Interface Design', prompt: '请按界面设计工艺做仪表盘/后台/工具类界面：先明确用户是谁、要完成什么、整体气质（温暖/冷静/密集/克制）；表面层级用轻微明度差区分，边框低存在感，间距与 token 一致。避免通用模板感，每个选择能解释「为什么」。可参考 Vercel/Linear/Stripe 的层次与克制。' },
+        { id: 'dashboard', name: 'KPI 仪表盘', prompt: '请按 KPI 仪表盘设计：战略/战术/运营层级清晰，每屏 5–7 个核心指标，带趋势与对比；布局用 Executive Summary（4–6 个 headline KPI）+ 图表区 + 告警。颜色语义一致（红=差/绿=好），留白、可下钻，避免 3D 图表与虚荣指标。' },
+        { id: 'editorial', name: '杂志/编辑风 Editorial', prompt: '请用杂志/时尚编辑风做界面：大标题、大量留白、有意不对称；主色黑白灰/米色，仅一个强调色且克制使用。图片优先、可满屏，文字可叠图。按钮与组件扁平、无厚重边框。动效仅透明度/轻微位移，无弹跳。整体像现代时尚杂志的一页。' },
+        { id: 'typography', name: '网页排版 Web Typography', prompt: '请按 On Web Typography 原则做排版：正文 16–18px、行高 1.5–1.7、行宽 45–75 字（max-width: 65ch）；标题与正文层次用字号+字重区分。选字体时区分「瞬间型」（标题/按钮）与「长读型」（正文），配对时保持明显对比（如 serif 标题 + sans 正文）。注意 font-display 与加载性能。' }
+      ];
+
+      var grid = document.getElementById('style-gallery-grid');
+      if (!grid) return;
+
+      var baseUrl = window.location.href.replace(/[#?].*$/, '').replace(/[^/]+$/, '');
+      if (baseUrl.indexOf('http') !== 0 && baseUrl.indexOf('file') === 0) {
+        baseUrl = baseUrl.replace(/[^/]+$/, '') + 'public/';
+      } else if (baseUrl.indexOf('http') === 0) {
+        baseUrl = window.location.origin + '/';
+      }
+      var screenshotBase = baseUrl + 'style-gallery-screenshots/';
+
+      for (var p = 0; p < styles.length; p++) {
+        var preload = new Image();
+        preload.src = screenshotBase + (p + 1) + '-' + styles[p].id + '.png';
+      }
+
+      styles.forEach(function (s, i) {
+        var card = document.createElement('div');
+        card.className = 'style-card';
+        var imgName = (i + 1) + '-' + s.id;
+        var imgUrl = screenshotBase + imgName + '.png';
+        var previewDiv = document.createElement('div');
+        previewDiv.className = 'style-card__preview';
+        previewDiv.setAttribute('aria-hidden', 'true');
+
+        var img = document.createElement('img');
+        img.alt = s.name;
+        img.decoding = 'async';
+        var span = document.createElement('span');
+        span.className = 'style-card__placeholder';
+        span.innerHTML = '预览图占位<br><small>' + s.name + '</small>';
+
+        var link = document.createElement('a');
+        link.href = imgUrl;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.setAttribute('aria-label', '查看大图：' + s.name);
+
+        img.onload = function () {
+          img.setAttribute('data-loaded', '');
+          span.classList.add('hidden');
+          link.href = img.src;
+        };
+        img.onerror = function () {
+          if (img.src.indexOf('.png') !== -1) {
+            img.src = screenshotBase + imgName + '.jpg';
+          } else {
+            link.remove();
+          }
+        };
+
+        img.src = imgUrl;
+        previewDiv.appendChild(img);
+        previewDiv.appendChild(span);
+        previewDiv.appendChild(link);
+        card.appendChild(previewDiv);
+
+        var body = document.createElement('div');
+        body.className = 'style-card__body';
+        body.innerHTML = '<span class="style-card__name">' + s.name + '</span>' +
+          '<button type="button" class="style-card__copy" data-index="' + i + '">复制 prompt</button>';
+        card.appendChild(body);
+        grid.appendChild(card);
+      });
+
+      grid.addEventListener('click', function (e) {
+        var btn = e.target.closest('.style-card__copy');
+        if (!btn) return;
+        var i = parseInt(btn.getAttribute('data-index'), 10);
+        if (isNaN(i) || !styles[i]) return;
+        var prompt = styles[i].prompt;
+        navigator.clipboard.writeText(prompt).then(function () {
+          var t = btn.textContent;
+          btn.textContent = '已复制';
+          btn.classList.add('copied');
+          setTimeout(function () {
+            btn.textContent = t;
+            btn.classList.remove('copied');
+          }, 1500);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

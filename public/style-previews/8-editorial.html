@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · 杂志/编辑风 Editorial</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #f5f0eb; color: #1a1a1a; padding: 2rem; }
+    .preview { max-width: 900px; margin: 0 auto; }
+    .preview__title { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 300; letter-spacing: -0.03em; margin-bottom: 0.25rem; line-height: 0.95; }
+    .preview__subtitle { color: #555; margin-bottom: 3rem; font-size: 0.95rem; }
+    .preview__actions { display: flex; gap: 1.5rem; margin-bottom: 3rem; }
+    .preview__btn { padding: 0.6rem 0; font-size: 0.9rem; border: none; background: none; color: #1a1a1a; cursor: pointer; border-bottom: 1px solid #1a1a1a; }
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2rem; }
+    .preview__card { padding: 0; }
+    .preview__card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .preview__card p { font-size: 0.875rem; color: #666; line-height: 1.6; }
+    .preview__back { color: #666; text-decoration: none; margin-bottom: 2rem; display: inline-block; }
+    .preview__back:hover { color: #1a1a1a; }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <a href="index.html" class="preview__back">← 返回列表</a>
+    <h1 class="preview__title">Editorial</h1>
+    <p class="preview__subtitle">大标题 · 留白 · 黑白灰/米色 · 单强调色</p>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn">主要</button>
+      <button type="button" class="preview__btn">次要</button>
+    </div>
+    <div class="preview__cards">
+      <div class="preview__card"><h3>Less interface, more atmosphere</h3><p>像时尚杂志的一页，克制、自信。</p></div>
+      <div class="preview__card"><h3>Typography 为主</h3><p>大标题、强对比、无装饰字体。</p></div>
+      <div class="preview__card"><h3>留白即功能</h3><p>呼吸感、不塞满。</p></div>
+    </div>
+  </div>
+</body>
+</html>
