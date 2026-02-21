@@ -1,10 +1,20 @@
 {
   "version": 1,
   "skills": {
+    "aceternity-ui": {
+      "source": "secondsky/claude-skills",
+      "sourceType": "github",
+      "computedHash": "95e02ef102bc79c776fe76ecf20193392d85a1f10991583cfa033a61b205e3dd"
+    },
     "editorial-designer": {
       "source": "heyman333/atelier-ui",
       "sourceType": "github",
       "computedHash": "f51f65bf1fa07064a491bcb55bf4a19de269e60968e7e1df2eb7fc6af2cec221"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "computedHash": "25872a21881a950edc3db1f3329664d60405d539660ce05b3265db2de06a7dfd"
     },
     "glassmorphism": {
       "source": "ainergiz/design-inspirations",
@@ -31,10 +41,35 @@
       "sourceType": "github",
       "computedHash": "90ad57c14ae85d5c73d949bd96f8e4629a85c8da1bbe617d295081a492125fe1"
     },
+    "organic-search-features": {
+      "source": "dmend3z/tribo-skills",
+      "sourceType": "github",
+      "computedHash": "4820b4e06022a8d9e592c13eaf1ac3e0341a8b893f794b1ac9ef3734e3197e69"
+    },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "1a2f4694384cb90d19d75354975dfb654d5c4ad230041667cb4b5b898474d7df"
+    },
+    "tailwind-design-system": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "computedHash": "c88178d861802fa836be54e377e82bb67899b6c378807679a1feecd21bf63cb8"
+    },
+    "tailwindcss-responsive-darkmode": {
+      "source": "josiahsiegel/claude-plugin-marketplace",
+      "sourceType": "github",
+      "computedHash": "d79ac55dc7b3022be0737e7b30f7207ffea82a0ef8e8359ac8c65a7e0bea57a4"
+    },
     "threejs-materials": {
       "source": "cloudai-x/threejs-skills",
       "sourceType": "github",
       "computedHash": "4d181db0b35213b772bf20eff5fe6f72f1c84bdc03294db96d1f712dd9047443"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "d8e7d3afe37dcc8a97b99ffb5afdb4d0919ae0092ea8b68f44eb201f035e33ac"
     },
     "web-typography": {
       "source": "wondelai/skills",

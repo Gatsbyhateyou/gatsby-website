@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · 新拟态 Neumorphism</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; min-height: 100vh; background: #e0e0e0; color: #333; padding: 2rem; }
+    .preview { max-width: 900px; margin: 0 auto; }
+    .preview__back { color: #666; text-decoration: none; margin-bottom: 1.5rem; display: inline-block; font-size: 0.9rem; }
+    .preview__back:hover { color: #111; }
+    .preview__title { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; color: #333; }
+    .preview__subtitle { color: #666; margin-bottom: 1.5rem; font-size: 1rem; }
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview__btn { padding: 0.6rem 1.25rem; font-size: 0.9rem; border: none; background: #e0e0e0; color: #333; cursor: pointer; border-radius: 16px; box-shadow: 6px 6px 12px #bebebe, -6px -6px 12px #fff; }
+    .preview__btn:hover { box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #fff; }
+    .preview__btn:active { box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #fff; }
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .preview__card { padding: 1.25rem; border-radius: 20px; background: #e0e0e0; border: none; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff; }
+    .preview__card h3 { font-size: 1rem; margin-bottom: 0.5rem; font-weight: 600; }
+    .preview__card p { font-size: 0.875rem; color: #555; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
+    <h1 class="preview__title">新拟态 Neumorphism</h1>
+    <p class="preview__subtitle">同色系双阴影，凸起/凹陷，无硬边框、大圆角。</p>
+    <div class="preview__actions"><button type="button" class="preview__btn">凸起按钮</button></div>
+    <div class="preview__cards">
+      <div class="preview__card"><h3>卡片一</h3><p>亮侧 + 暗侧阴影，像从背景浮起。</p></div>
+      <div class="preview__card"><h3>卡片二</h3><p>柔和、可触摸感，注意对比度。</p></div>
+      <div class="preview__card"><h3>卡片三</h3><p>Soft UI，避免大面积导致层次不清。</p></div>
+    </div>
+  </div>
+</body>
+</html>

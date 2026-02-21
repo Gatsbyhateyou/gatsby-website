@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · 暗黑/深色主题 Dark Mode</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      min-height: 100vh;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 2rem;
+    }
+    .preview { max-width: 900px; margin: 0 auto; }
+    .preview__back { color: #94a3b8; text-decoration: none; margin-bottom: 1.5rem; display: inline-block; font-size: 0.9rem; }
+    .preview__back:hover { color: #f1f5f9; }
+    .preview__title { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; color: #f8fafc; }
+    .preview__subtitle { color: #94a3b8; margin-bottom: 1.5rem; font-size: 1rem; }
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview__btn {
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      background: #1e293b;
+      color: #e2e8f0;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .preview__btn:hover { background: #334155; border-color: #475569; }
+    .preview__btn--primary { background: #3b82f6; border-color: #3b82f6; color: #fff; }
+    .preview__btn--primary:hover { background: #2563eb; }
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .preview__card {
+      padding: 1.25rem;
+      border-radius: 12px;
+      background: #1e293b;
+      border: 1px solid #334155;
+    }
+    .preview__card h3 { font-size: 1rem; margin-bottom: 0.5rem; font-weight: 600; color: #f1f5f9; }
+    .preview__card p { font-size: 0.875rem; color: #94a3b8; line-height: 1.5; }
+    .preview__meta { font-size: 0.85rem; color: #64748b; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
+    <h1 class="preview__title">暗黑 / 深色主题 Dark Mode</h1>
+    <p class="preview__subtitle">语义化 token、对比度与 focus 环；可选亮/暗/跟随系统。</p>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn preview__btn--primary">主要按钮</button>
+      <button type="button" class="preview__btn">次要按钮</button>
+    </div>
+    <div class="preview__cards">
+      <div class="preview__card">
+        <h3>卡片一</h3>
+        <p>bg-gray-900 / text-gray-100，保证 WCAG 对比度。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片二</h3>
+        <p>dark: 变体与 localStorage 持久化。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片三</h3>
+        <p>三档切换：亮 / 暗 / 跟随系统。</p>
+      </div>
+    </div>
+    <p class="preview__meta">prefers-color-scheme 或 .dark 类 · focus-visible:ring</p>
+  </div>
+</body>
+</html>

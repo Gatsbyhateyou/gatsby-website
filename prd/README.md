@@ -14,6 +14,7 @@
 |------|------|
 | **PRD-001.md** | 当前版本产品需求文档（Lin's lab，基于线上站点形态） |
 | **PRD-001-compare.md** | 早期交接/记忆摘要与 PRD-001 的并列对比 |
+| **PRD-002-ui-style-prompt-gallery.md** | UI 风格提示词画廊：17 种风格、CSS 小样与预览页、关键词/草稿/skill-creator/接入脚本流程 |
 
 ## 后续
 

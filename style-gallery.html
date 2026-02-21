@@ -13,13 +13,56 @@
     .style-gallery__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
     .style-card { background: var(--card-bg, rgba(0,0,0,.03)); border: var(--card-border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s ease, box-shadow 0.25s ease; }
     .style-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
-    .style-card__preview { aspect-ratio: 16/10; background: #e5e5e5; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; padding: 1rem; text-align: center; position: relative; overflow: hidden; }
-    .style-card__preview a { display: block; position: absolute; inset: 0; z-index: 2; }
-    .style-card__preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease, transform 0.4s ease; z-index: 0; }
-    .style-card__preview img[data-loaded] { opacity: 1; }
-    .style-card:hover .style-card__preview img[data-loaded] { transform: scale(1.05); }
-    .style-card__preview .style-card__placeholder { position: relative; z-index: 1; color: #555; transition: opacity 0.25s ease; pointer-events: none; }
-    .style-card__preview .style-card__placeholder.hidden { opacity: 0; }
+    .style-card__preview { aspect-ratio: 16/10; position: relative; overflow: hidden; border-bottom: 1px solid var(--color-border, rgba(0,0,0,.06)); display: block; text-decoration: none; color: inherit; cursor: pointer; transition: opacity 0.2s; }
+    .style-card__preview:hover { opacity: 0.92; }
+    .style-card__preview-inner { position: absolute; inset: 0; }
+    /* CSS 小样：玻璃拟态 */
+    .style-card__preview--glass .style-card__preview-inner { background: linear-gradient(135deg, #1e3a5f 0%, #312e81 100%); }
+    .style-card__preview--glass .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60%; height: 50%; background: rgba(255,255,255,0.12); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    /* 8-bit 像素 */
+    .style-card__preview--pixel .style-card__preview-inner { background: #1a1a2e; }
+    .style-card__preview--pixel .style-card__preview-inner::before { content: ''; position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%); width: 80px; height: 28px; background: #4a4a6a; border: 3px solid #2d2d44; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); }
+    /* 游戏 UI */
+    .style-card__preview--game .style-card__preview-inner { background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%); }
+    .style-card__preview--game .style-card__preview-inner::before { content: ''; position: absolute; right: 12%; top: 25%; width: 4px; height: 40%; background: linear-gradient(180deg, #3b82f6, #22c55e); border-radius: 2px; opacity: 0.9; }
+    .style-card__preview--game .style-card__preview-inner::after { content: ''; position: absolute; left: 15%; bottom: 25%; width: 35%; height: 12%; background: rgba(59,130,246,0.3); border: 1px solid rgba(59,130,246,0.5); border-radius: 4px; }
+    /* 粗野主义 */
+    .style-card__preview--brutalist .style-card__preview-inner { background: #fef08a; }
+    .style-card__preview--brutalist .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 30%; background: #f87171; border: 4px solid #000; box-shadow: 6px 6px 0 #000; }
+    /* 干净 / 界面设计 / 设计系统 / Web 规范 */
+    .style-card__preview--clean .style-card__preview-inner { background: #f5f5f5; }
+    .style-card__preview--clean .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 55%; height: 35%; background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+    /* 仪表盘 */
+    .style-card__preview--dashboard .style-card__preview-inner { background: #fafafa; }
+    .style-card__preview--dashboard .style-card__preview-inner::before { content: ''; position: absolute; left: 12%; bottom: 28%; width: 22%; height: 35%; background: #e0e7ff; border-radius: 4px; }
+    .style-card__preview--dashboard .style-card__preview-inner::after { content: ''; position: absolute; left: 38%; bottom: 28%; width: 22%; height: 50%; background: #c7d2fe; border-radius: 4px; }
+    /* 杂志/编辑风 */
+    .style-card__preview--editorial .style-card__preview-inner { background: #fafaf9; }
+    .style-card__preview--editorial .style-card__preview-inner::before { content: ''; position: absolute; top: 28%; left: 12%; right: 12%; height: 8px; background: #1a1a1a; }
+    .style-card__preview--editorial .style-card__preview-inner::after { content: ''; position: absolute; top: 48%; left: 12%; right: 40%; height: 4px; background: #d4d4d4; }
+    /* 排版 */
+    .style-card__preview--type .style-card__preview-inner { background: #fff; }
+    .style-card__preview--type .style-card__preview-inner::before { content: ''; position: absolute; top: 35%; left: 15%; right: 15%; height: 6px; background: #111; border-radius: 0; }
+    .style-card__preview--type .style-card__preview-inner::after { content: ''; position: absolute; top: 52%; left: 15%; right: 25%; height: 3px; background: #666; }
+    /* 暗黑 */
+    .style-card__preview--dark .style-card__preview-inner { background: #0f172a; }
+    .style-card__preview--dark .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 28%; background: #1e293b; border: 1px solid #334155; border-radius: 8px; }
+    /* 极简 */
+    .style-card__preview--minimal .style-card__preview-inner { background: #fff; }
+    .style-card__preview--minimal .style-card__preview-inner::before { content: ''; position: absolute; bottom: 35%; left: 50%; transform: translateX(-50%); width: 40%; height: 2px; background: #111; }
+    /* 终端 */
+    .style-card__preview--terminal .style-card__preview-inner { background: #0d1117; }
+    .style-card__preview--terminal .style-card__preview-inner::before { content: '$'; position: absolute; left: 15%; top: 42%; font-family: ui-monospace, monospace; font-size: 0.75rem; color: #7ee787; letter-spacing: 0.05em; }
+    .style-card__preview--terminal .style-card__preview-inner::after { content: ''; position: absolute; left: 22%; top: 48%; right: 15%; height: 2px; background: #30363d; }
+    /* 拟物化 */
+    .style-card__preview--skeuomorphic .style-card__preview-inner { background: linear-gradient(145deg, #c9a86c 0%, #8b6914 100%); }
+    .style-card__preview--skeuomorphic .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45%; height: 32%; background: rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), 2px 4px 8px rgba(0,0,0,0.25); }
+    /* 新拟态 */
+    .style-card__preview--neumorphism .style-card__preview-inner { background: #e0e0e0; }
+    .style-card__preview--neumorphism .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 32%; background: #e0e0e0; border-radius: 16px; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff; }
+    /* 有机/自然 */
+    .style-card__preview--organic .style-card__preview-inner { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%); }
+    .style-card__preview--organic .style-card__preview-inner::before { content: ''; position: absolute; bottom: 25%; left: 20%; right: 20%; height: 24%; background: rgba(129,199,132,0.4); border-radius: 50% 50% 45% 55% / 60% 40% 60% 40%; }
     .style-card__body { padding: 1rem; flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
     .style-card__name { font-weight: 600; font-size: 1rem; }
     .style-card__copy { margin-top: auto; padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; border: 1px solid var(--color-border); border-radius: 8px; background: transparent; color: inherit; transition: background .2s, border-color .2s; }
@@ -46,15 +89,23 @@
   <script>
     (function () {
       var styles = [
-        { id: 'glassmorphism', name: '玻璃拟态 Glassmorphism', prompt: '请用玻璃拟态（glassmorphism）风格做界面：毛玻璃效果（半透明背景如 bg-black/20 或 bg-white/10 + backdrop-blur-md）、细边框（border-white/10 等）、用于悬浮控件/遮罩/导航栏/工具提示时层级清晰，整体通透、轻盈的现代 UI。注意文字对比度，低端设备可适当减小 blur。' },
-        { id: '8bit-pixel', name: '8-bit 像素风', prompt: '请按 8-bit 像素艺术图案做界面：用绝对定位的 div 做像素化边框与阴影（rounded-none、固定 1.5/3px、角点+边+侧边条），像素化阴影用 bg-foreground/20 的条块；支持 dark 模式（foreground/ring）；仅非 ghost/link/icon 变体显示边框。参考 components/ui/8bit/button 的实现。' },
-        { id: 'game-ui-design', name: '游戏 UI', prompt: '请按游戏 UI 设计做界面：结合任天堂式清晰、Dead Space/Metroid 式沉浸 HUD、电竞可读性。信息在激烈操作下仍可一眼读懂、每块区域都有存在理由、动效用于传达信息而非装饰；手柄优先再键盘再触控、保留安全区、无障碍是功能不是补丁。在 target 设备上测试。' },
-        { id: 'retro-css', name: '复古 CSS 架构', prompt: '请用复古 CSS 架构做 8-bit 风格：引入 retro.css，字体用 Press Start 2P；图片用 image-rendering: pixelated/crisp-edges；固定像素尺寸（1.5/3/6px）、rounded-none、语义色+dark: 变体；Tailwind 优先，组件级用 border-y-6、active:translate-y-1 等。' },
-        { id: 'brutalist', name: '新粗野主义 Neobrutalism', prompt: '请用新粗野主义做界面：硬阴影（box-shadow: 4px 4px 0 #000，无模糊）、粗黑边框（3–4px solid #000）、高对比纯色（红/黄/蓝/粉等），无渐变无透明。标题用粗体 display 字体，按钮/卡片 hover 时阴影变大+translate。禁止软阴影、细边框、低饱和色。' },
-        { id: 'flat-design', name: '界面设计 Interface Design', prompt: '请按界面设计工艺做仪表盘/后台/工具类界面：先明确用户是谁、要完成什么、整体气质（温暖/冷静/密集/克制）；表面层级用轻微明度差区分，边框低存在感，间距与 token 一致。避免通用模板感，每个选择能解释「为什么」。可参考 Vercel/Linear/Stripe 的层次与克制。' },
-        { id: 'dashboard', name: 'KPI 仪表盘', prompt: '请按 KPI 仪表盘设计：战略/战术/运营层级清晰，每屏 5–7 个核心指标，带趋势与对比；布局用 Executive Summary（4–6 个 headline KPI）+ 图表区 + 告警。颜色语义一致（红=差/绿=好），留白、可下钻，避免 3D 图表与虚荣指标。' },
-        { id: 'editorial', name: '杂志/编辑风 Editorial', prompt: '请用杂志/时尚编辑风做界面：大标题、大量留白、有意不对称；主色黑白灰/米色，仅一个强调色且克制使用。图片优先、可满屏，文字可叠图。按钮与组件扁平、无厚重边框。动效仅透明度/轻微位移，无弹跳。整体像现代时尚杂志的一页。' },
-        { id: 'typography', name: '网页排版 Web Typography', prompt: '请按 On Web Typography 原则做排版：正文 16–18px、行高 1.5–1.7、行宽 45–75 字（max-width: 65ch）；标题与正文层次用字号+字重区分。选字体时区分「瞬间型」（标题/按钮）与「长读型」（正文），配对时保持明显对比（如 serif 标题 + sans 正文）。注意 font-display 与加载性能。' }
+        { id: 'glassmorphism', name: '玻璃拟态 Glassmorphism', preview: 'glass', prompt: '请用玻璃拟态（glassmorphism）风格做界面：毛玻璃效果（半透明背景如 bg-black/20 或 bg-white/10 + backdrop-blur-md）、细边框（border-white/10 等）、用于悬浮控件/遮罩/导航栏/工具提示时层级清晰，整体通透、轻盈的现代 UI。注意文字对比度，低端设备可适当减小 blur。' },
+        { id: '8bit-pixel', name: '8-bit 像素风', preview: 'pixel', prompt: '请按 8-bit 像素艺术图案做界面：用绝对定位的 div 做像素化边框与阴影（rounded-none、固定 1.5/3px、角点+边+侧边条），像素化阴影用 bg-foreground/20 的条块；支持 dark 模式（foreground/ring）；仅非 ghost/link/icon 变体显示边框。参考 components/ui/8bit/button 的实现。' },
+        { id: 'game-ui-design', name: '游戏 UI', preview: 'game', prompt: '请按游戏 UI 设计做界面：结合任天堂式清晰、Dead Space/Metroid 式沉浸 HUD、电竞可读性。信息在激烈操作下仍可一眼读懂、每块区域都有存在理由、动效用于传达信息而非装饰；手柄优先再键盘再触控、保留安全区、无障碍是功能不是补丁。在 target 设备上测试。' },
+        { id: 'retro-css', name: '复古 CSS 架构', preview: 'pixel', prompt: '请用复古 CSS 架构做 8-bit 风格：引入 retro.css，字体用 Press Start 2P；图片用 image-rendering: pixelated/crisp-edges；固定像素尺寸（1.5/3/6px）、rounded-none、语义色+dark: 变体；Tailwind 优先，组件级用 border-y-6、active:translate-y-1 等。' },
+        { id: 'brutalist', name: '新粗野主义 Neobrutalism', preview: 'brutalist', prompt: '请用新粗野主义做界面：硬阴影（box-shadow: 4px 4px 0 #000，无模糊）、粗黑边框（3–4px solid #000）、高对比纯色（红/黄/蓝/粉等），无渐变无透明。标题用粗体 display 字体，按钮/卡片 hover 时阴影变大+translate。禁止软阴影、细边框、低饱和色。' },
+        { id: 'flat-design', name: '界面设计 Interface Design', preview: 'clean', prompt: '请按界面设计工艺做仪表盘/后台/工具类界面：先明确用户是谁、要完成什么、整体气质（温暖/冷静/密集/克制）；表面层级用轻微明度差区分，边框低存在感，间距与 token 一致。避免通用模板感，每个选择能解释「为什么」。可参考 Vercel/Linear/Stripe 的层次与克制。' },
+        { id: 'dashboard', name: 'KPI 仪表盘', preview: 'dashboard', prompt: '请按 KPI 仪表盘设计：战略/战术/运营层级清晰，每屏 5–7 个核心指标，带趋势与对比；布局用 Executive Summary（4–6 个 headline KPI）+ 图表区 + 告警。颜色语义一致（红=差/绿=好），留白、可下钻，避免 3D 图表与虚荣指标。' },
+        { id: 'editorial', name: '杂志/编辑风 Editorial', preview: 'editorial', prompt: '请用杂志/时尚编辑风做界面：大标题、大量留白、有意不对称；主色黑白灰/米色，仅一个强调色且克制使用。图片优先、可满屏，文字可叠图。按钮与组件扁平、无厚重边框。动效仅透明度/轻微位移，无弹跳。整体像现代时尚杂志的一页。' },
+        { id: 'typography', name: '网页排版 Web Typography', preview: 'type', prompt: '请按 On Web Typography 原则做排版：正文 16–18px、行高 1.5–1.7、行宽 45–75 字（max-width: 65ch）；标题与正文层次用字号+字重区分。选字体时区分「瞬间型」（标题/按钮）与「长读型」（正文），配对时保持明显对比（如 serif 标题 + sans 正文）。注意 font-display 与加载性能。' },
+        { id: 'dark-mode', name: '暗黑 / 深色主题 Dark Mode', preview: 'dark', prompt: '请用暗黑/深色主题做界面：支持 prefers-color-scheme 或 .dark 类切换；背景与文字用语义化 token（如 bg-gray-900 / text-gray-100、dark: 变体）；保证对比度（WCAG），交互元素有 focus 环；可选三档（亮/暗/跟随系统）与 localStorage 持久化。' },
+        { id: 'tailwind-design-system', name: 'Tailwind 设计系统', preview: 'clean', prompt: '请按 Tailwind 设计系统做界面：用 @theme 定义语义色与圆角等 token，组件用 CVA 做 variant/size；移动优先断点、支持 dark 变体；焦点与禁用状态完整，避免硬编码颜色。可参考 shadcn/ui 的层次与语义命名。' },
+        { id: 'web-design-guidelines', name: 'Vercel / 现代 Web 规范', preview: 'clean', prompt: '请按 Vercel Web Interface Guidelines 做界面：无障碍（ARIA、对比度、焦点可见）、语义化结构、布局清晰、交互可预测；符合现代 Web 最佳实践，适合「审查 UI / 检查无障碍 / 设计审计」场景。' },
+        { id: 'minimal', name: '极简 Minimal', preview: 'minimal', prompt: '请用极简风格做界面：大量留白、最少必要元素、黑白灰或单一强调色；无装饰性边框与阴影，仅保留必要信息与操作。字体与间距统一、可预测，整体安静、高可读、无视觉噪音。' },
+        { id: 'terminal', name: '终端 / CLI 风 Terminal', preview: 'terminal', prompt: '请用终端/CLI 风格做界面：等宽字体、深色背景（如 #0d1117）、高对比文字（绿/黄/灰/白）；区块与按钮简洁、类命令行，可选细边框与「提示符」式装饰。整体像开发工具或终端仪表盘，信息密度适中、可读性强。' },
+        { id: 'skeuomorphic', name: '拟物化 Skeuomorphic', preview: 'skeuomorphic', prompt: '请用拟物化（skeuomorphic）风格做界面：用视觉隐喻模拟真实材质——皮革、木纹、金属、玻璃等；明确的高光与暗部、立体阴影与质感，图标与控件像可触摸的实体。避免纯扁平与大面积纯色，保持层次与「实物感」。适合仪表盘控件、音乐/创意类工具、或需要温暖质感的界面。' },
+        { id: 'neumorphism', name: '新拟态 Neumorphism', preview: 'neumorphism', prompt: '请用新拟态（neumorphism / soft UI）风格做界面：背景与控件同色系（如浅灰 #e0e0e0），用双阴影（一侧亮、一侧暗）营造凸起或凹陷，无硬边框、大圆角；整体柔和、像从背景浮起或压入。注意对比度与可读性，避免大面积使用导致层次不清。' },
+        { id: 'organic', name: '有机 / 自然视觉 Organic', preview: 'organic', prompt: '请用有机/自然视觉风格做界面：流动的曲线与有机形态（非严格网格）、柔和色彩与自然感渐变、留白与呼吸感；可配合柔和动效。整体像自然生长、非机械排版；避免硬边与直角主导，保持温暖、流动的气质。适合品牌页、落地页或强调自然/生命感的产品。' }
       ];
 
       var grid = document.getElementById('style-gallery-grid');
@@ -66,53 +117,27 @@
       } else if (baseUrl.indexOf('http') === 0) {
         baseUrl = window.location.origin + '/';
       }
-      var screenshotBase = baseUrl + 'style-gallery-screenshots/';
-
-      for (var p = 0; p < styles.length; p++) {
-        var preload = new Image();
-        preload.src = screenshotBase + (p + 1) + '-' + styles[p].id + '.png';
-      }
+      var previewBase = baseUrl + 'style-previews/';
 
       styles.forEach(function (s, i) {
         var card = document.createElement('div');
         card.className = 'style-card';
-        var imgName = (i + 1) + '-' + s.id;
-        var imgUrl = screenshotBase + imgName + '.png';
-        var previewDiv = document.createElement('div');
-        previewDiv.className = 'style-card__preview';
-        previewDiv.setAttribute('aria-hidden', 'true');
+        var previewPage = (i + 1) + '-' + s.id + '.html';
+        var previewUrl = previewBase + previewPage;
 
-        var img = document.createElement('img');
-        img.alt = s.name;
-        img.decoding = 'async';
-        var span = document.createElement('span');
-        span.className = 'style-card__placeholder';
-        span.innerHTML = '预览图占位<br><small>' + s.name + '</small>';
+        var previewLink = document.createElement('a');
+        previewLink.className = 'style-card__preview style-card__preview--' + (s.preview || 'clean');
+        previewLink.href = previewUrl;
+        previewLink.target = '_blank';
+        previewLink.rel = 'noopener';
+        previewLink.setAttribute('aria-label', '在新标签页打开预览页：' + s.name);
 
-        var link = document.createElement('a');
-        link.href = imgUrl;
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.setAttribute('aria-label', '查看大图：' + s.name);
+        var inner = document.createElement('div');
+        inner.className = 'style-card__preview-inner';
+        inner.setAttribute('aria-hidden', 'true');
 
-        img.onload = function () {
-          img.setAttribute('data-loaded', '');
-          span.classList.add('hidden');
-          link.href = img.src;
-        };
-        img.onerror = function () {
-          if (img.src.indexOf('.png') !== -1) {
-            img.src = screenshotBase + imgName + '.jpg';
-          } else {
-            link.remove();
-          }
-        };
-
-        img.src = imgUrl;
-        previewDiv.appendChild(img);
-        previewDiv.appendChild(span);
-        previewDiv.appendChild(link);
-        card.appendChild(previewDiv);
+        previewLink.appendChild(inner);
+        card.appendChild(previewLink);
 
         var body = document.createElement('div');
         body.className = 'style-card__body';

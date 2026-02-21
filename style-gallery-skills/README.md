@@ -31,7 +31,7 @@
    - 我会**读取该 skill 的全文**，按里面的设计原则、规范、示例来设计并写出 HTML/CSS，产出对应风格的预览页。
 
 3. **展示页放哪**  
-   - 生成的单页可以放在 `public/style-previews/` 下，命名与风格对应，方便你截图后放进 `public/style-gallery-screenshots/`。
+   - 生成的单页放在 `public/style-previews/` 下，命名与风格对应；画廊会链接到该页，点击卡片即可打开，无需截图。
 
 ## 从草稿整理过来（我能用的格式）
 

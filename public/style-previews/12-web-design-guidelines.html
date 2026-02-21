@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · Vercel / 现代 Web 规范</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      background: #fff;
+      color: #111;
+      padding: 2rem;
+      line-height: 1.5;
+    }
+    .preview { max-width: 900px; margin: 0 auto; }
+    .preview__back { color: #666; text-decoration: none; margin-bottom: 1.5rem; display: inline-block; font-size: 0.9rem; }
+    .preview__back:hover { color: #111; }
+    .preview__back:focus-visible { outline: 2px solid #0070f3; outline-offset: 2px; }
+    .preview__title { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .preview__subtitle { color: #666; margin-bottom: 1.5rem; font-size: 1rem; }
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview__btn {
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      background: #fff;
+      color: #111;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .preview__btn:hover { border-color: #999; background: #f5f5f5; }
+    .preview__btn:focus-visible { outline: 2px solid #0070f3; outline-offset: 2px; }
+    .preview__btn--primary { background: #0070f3; border-color: #0070f3; color: #fff; }
+    .preview__btn--primary:hover { background: #0060df; }
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .preview__card {
+      padding: 1.25rem;
+      border-radius: 8px;
+      border: 1px solid #eee;
+      background: #fafafa;
+    }
+    .preview__card h3 { font-size: 1rem; margin-bottom: 0.5rem; font-weight: 600; }
+    .preview__card p { font-size: 0.875rem; color: #555; line-height: 1.5; }
+    .preview__meta { font-size: 0.85rem; color: #888; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
+    <h1 class="preview__title">Vercel / 现代 Web 规范</h1>
+    <p class="preview__subtitle">无障碍、对比度、焦点可见、语义化；布局清晰、交互可预测。</p>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn preview__btn--primary">主要操作</button>
+      <button type="button" class="preview__btn">次要</button>
+    </div>
+    <div class="preview__cards">
+      <div class="preview__card">
+        <h3>ARIA 与对比度</h3>
+        <p>语义化结构、焦点环、符合 WCAG。</p>
+      </div>
+      <div class="preview__card">
+        <h3>布局与层次</h3>
+        <p>清晰、可预测，适合审查与审计。</p>
+      </div>
+      <div class="preview__card">
+        <h3>Web Interface Guidelines</h3>
+        <p>Vercel Labs 规范检查。</p>
+      </div>
+    </div>
+    <p class="preview__meta">review my UI · check accessibility · audit design</p>
+  </div>
+</body>
+</html>

@@ -488,25 +488,6 @@ html.mobile-nav .nav-toggle {
   margin: 0 0 0.35rem;
 }
 
-.linslab-char {
-  display: inline-block;
-  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: default;
-  background: linear-gradient(165deg, #1a1a1a 0%, #152238 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
-[data-theme="dark"] .linslab-char {
-  background: linear-gradient(165deg, #a8d4ff 0%, #ffffff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
 .linksb-subtitle {
   font-size: 1rem;
   color: var(--color-text-muted);
@@ -937,109 +918,6 @@ html.mobile-nav .nav-toggle {
   font-style: normal;
   color: var(--color-text-muted);
 }
-#motto-container.motto-corner {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 10;
-}
-#motto-container {
-  position: relative;
-  z-index: 10;
-  cursor: grab;
-  transition: transform 0.2s;
-}
-#motto-container,
-.motto-card {
-  background: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  flex-shrink: 0;
-  max-width: min(360px, 100%);
-  padding: 1.5rem 1.75rem 1.25rem;
-  margin: 0;
-  margin-top: 0.25rem;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: none;
-  pointer-events: auto;
-}
-
-#motto-container.is-dragging {
-  cursor: grabbing;
-  position: fixed !important;
-  z-index: 100 !important;
-  opacity: 0.8;
-  pointer-events: auto;
-}
-
-#motto-container.motto-rebirth {
-  opacity: 0;
-  transform: translate3d(0, 0, 0) scale(1);
-  transition: opacity 0.4s ease;
-}
-
-#motto-container.motto-rebirth.motto-rebirth-visible {
-  opacity: 1;
-}
-
-.idea-bin-motto-placeholder {
-  flex-shrink: 0;
-  max-width: min(360px, 100%);
-  pointer-events: none;
-}
-
-#motto-text {
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.75;
-  letter-spacing: 0.12em;
-  color: var(--color-text);
-  min-height: 1.75em;
-  text-shadow: 0 0 24px rgba(0, 0, 0, 0.35),
-               0 1px 2px rgba(0, 0, 0, 0.2);
-  transition: color 0.35s ease, text-shadow 0.35s ease;
-}
-
-[data-theme="dark"] #motto-text {
-  color: var(--accent-color);
-  text-shadow: 0 0 28px rgba(0, 0, 0, 0.5),
-               0 0 12px rgba(0, 0, 0, 0.25),
-               0 1px 3px rgba(0, 0, 0, 0.4);
-}
-
-.motto-cursor {
-  display: inline-block;
-  font-weight: 300;
-  color: inherit;
-  animation: motto-cursor-blink 0.8s step-end infinite;
-}
-
-.motto-cursor.motto-cursor--hidden {
-  display: none;
-}
-
-@keyframes motto-cursor-blink {
-  50% { opacity: 0; }
-}
-
-#motto-author {
-  display: block;
-  margin-top: 0.6rem;
-  font-size: 0.88rem;
-  letter-spacing: 0.08em;
-  color: var(--color-text-muted);
-  min-height: 1.4em;
-  text-shadow: 0 0 20px rgba(0, 0, 0, 0.3),
-               0 1px 1px rgba(0, 0, 0, 0.15);
-}
-
-[data-theme="dark"] #motto-author {
-  color: rgba(255, 255, 255, 0.65);
-  text-shadow: 0 0 24px rgba(0, 0, 0, 0.45),
-               0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
 .container.subpage {
   padding-top: 6rem;
 }

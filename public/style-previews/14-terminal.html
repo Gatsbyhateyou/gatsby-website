@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · 终端/CLI 风 Terminal</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+      min-height: 100vh;
+      background: #0d1117;
+      color: #c9d1d9;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    .preview { max-width: 900px; margin: 0 auto; }
+    .preview__back { color: #8b949e; text-decoration: none; margin-bottom: 1.5rem; display: inline-block; font-size: 0.85rem; }
+    .preview__back:hover { color: #c9d1d9; }
+    .preview__prompt { color: #7ee787; margin-bottom: 0.5rem; }
+    .preview__title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #58a6ff; }
+    .preview__subtitle { color: #8b949e; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview__btn {
+      padding: 0.4rem 1rem;
+      font-family: inherit;
+      font-size: 0.85rem;
+      border: 1px solid #30363d;
+      background: #21262d;
+      color: #7ee787;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .preview__btn:hover { background: #30363d; border-color: #484f58; }
+    .preview__btn--primary { color: #58a6ff; border-color: #388bfd; background: rgba(56,139,253,0.1); }
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .preview__card {
+      padding: 1rem;
+      border: 1px solid #30363d;
+      background: #161b22;
+      border-radius: 4px;
+    }
+    .preview__card h3 { font-size: 0.9rem; margin-bottom: 0.4rem; font-weight: 600; color: #e6edf3; }
+    .preview__card p { font-size: 0.8rem; color: #8b949e; line-height: 1.5; }
+    .preview__meta { font-size: 0.8rem; color: #6e7681; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
+    <p class="preview__prompt" aria-hidden="true">$ style-preview terminal</p>
+    <h1 class="preview__title">终端 / CLI 风 Terminal</h1>
+    <p class="preview__subtitle">等宽字体、深色背景、高对比；类命令行区块与按钮。</p>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn preview__btn--primary">Run</button>
+      <button type="button" class="preview__btn">Cancel</button>
+    </div>
+    <div class="preview__cards">
+      <div class="preview__card">
+        <h3>Block 1</h3>
+        <p>#0d1117 bg · green/yellow/gray text.</p>
+      </div>
+      <div class="preview__card">
+        <h3>Block 2</h3>
+        <p>Monospace, 细边框，提示符式装饰。</p>
+      </div>
+      <div class="preview__card">
+        <h3>Block 3</h3>
+        <p>开发工具 / 终端仪表盘风格。</p>
+      </div>
+    </div>
+    <p class="preview__meta">信息密度适中 · 可读性强</p>
+  </div>
+</body>
+</html>

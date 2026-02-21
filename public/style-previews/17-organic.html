@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · 有机/自然视觉 Organic</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
+      color: #1b5e20;
+      padding: 2rem;
+    }
+    .preview { max-width: 900px; margin: 0 auto; }
+    .preview__back { color: #2e7d32; text-decoration: none; margin-bottom: 1.5rem; display: inline-block; font-size: 0.9rem; }
+    .preview__back:hover { color: #1b5e20; }
+    .preview__title { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; color: #1b5e20; }
+    .preview__subtitle { color: #388e3c; margin-bottom: 1.5rem; font-size: 1rem; }
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview__btn {
+      padding: 0.6rem 1.25rem;
+      font-size: 0.9rem;
+      border: none;
+      background: rgba(129,199,132,0.6);
+      color: #1b5e20;
+      cursor: pointer;
+      border-radius: 999px;
+    }
+    .preview__btn:hover { background: rgba(129,199,132,0.8); }
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .preview__card {
+      padding: 1.25rem;
+      border-radius: 24px 24px 20px 28px;
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(129,199,132,0.4);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .preview__card h3 { font-size: 1rem; margin-bottom: 0.5rem; font-weight: 600; }
+    .preview__card p { font-size: 0.875rem; color: #2e7d32; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
+    <h1 class="preview__title">有机 / 自然视觉 Organic</h1>
+    <p class="preview__subtitle">流动曲线、有机形态、柔和色彩与呼吸感。</p>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn">主要</button>
+    </div>
+    <div class="preview__cards">
+      <div class="preview__card">
+        <h3>卡片一</h3>
+        <p>非严格网格，像自然生长。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片二</h3>
+        <p>柔和渐变与留白，温暖流动。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片三</h3>
+        <p>适合品牌页、自然/生命感产品。</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

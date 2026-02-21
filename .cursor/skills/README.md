@@ -21,6 +21,8 @@
 | find-skills | 在 skills.sh 生态中搜索/安装技能 | 找技能、有没有做X的技能、npx skills、想扩展 Agent 能力 |
 | web-design-guidelines | 按 Vercel Web Interface Guidelines 审查 UI | 检查UI、审查设计、检查无障碍、web design guidelines |
 | frontend-design | 有辨识度的前端界面设计（避免 AI 味） | 做前端、做页面、美化界面、frontend design、做落地页 |
+| skill-creator | 创建/更新 Agent Skill 的指南（Anthropic） | 创建 skill、写新技能、更新 SKILL.md、skill 格式 |
+| cleanup-unused | 版本大更新后清理未引用文件与死代码/注释块 | 清理、跑一遍清理检查、删掉没用的、清理死代码 |
 
 ## 来源
 
