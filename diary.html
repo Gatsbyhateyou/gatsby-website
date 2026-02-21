@@ -117,7 +117,26 @@
               </div>
             </div>
             <div class="diary-entry__body">
-              <p>今天在 skill 库里查了不少 skill，把用法摸了一遍，算是又搞懂一块。另外做了一个新网站，先记一笔，后面再慢慢写。</p>
+              <p>今天在 skill 库里查了不少 skill，把用法摸了一遍，算是又搞懂一块。另外做了一个新网页，其实就是用来存技能、查技能的 hub，方便自己查技能、看它们怎么用，先记一笔。</p>
+            </div>
+          </div>
+          <div class="diary-entry diary-entry--expandable">
+            <div class="diary-entry__row">
+              <span class="diary-entry__date">2025-02-21</span>
+              <div class="diary-entry__head">
+                <span class="diary-entry__title diary-entry__title--toggle" role="button" tabindex="0">学习爆棚日与 PRD 第二版落地</span>
+              </div>
+            </div>
+            <div class="diary-entry__body">
+              <p>哇，今天的学习生活真的非常丰富，学了太多东西。最重要的一点是：第二版 PRD 更新完了，并且已经部署到 Vercel，也就是说我们那个 UI 界面的东西已经算正式落地了，之后就是慢慢填充、再迭代就好。这是今天最关键的一笔。</p>
+              <p><strong>今天学到和知道的东西（按对话整理）：</strong></p>
+              <p><strong>1. 首页标题与副标题的「坑」与改法</strong>：标题用彩虹渐变 + 光带扫过时，鼠标悬停某字母上移会「消失」——根因是 Chrome/Safari 的已知问题：子元素用 <code>transform</code> 会破坏父级的 <code>background-clip: text</code>。解决办法要么不用 transform、改用 <code>margin-top</code> 做上移，要么把彩虹/光带和需要动效的拆成不同层。最后我们改成：标题「Lin's ↷ Lab」恢复黑色、只保留悬停单字上移（无渐变所以可以用 transform）；副标题「项目与实验入口」做彩虹 + 光带扫过，整行不按字悬停，所以不会消失。中间 s 和 L 之间加了弧形箭头 ↷ 和空格，视觉上是「Lin's ↷ Lab」。</p>
+              <p><strong>2. 内联样式报错（75 条）</strong>：Skills 手册页被 Edge Tools 报了 75 条「不要用内联样式」。原因是很多 <code>style="..."</code> 和 <code>onmouseenter/onmouseleave</code> 直接写在 HTML 上。我们把按分组的颜色、边框、悬停阴影都挪到 CSS 里，用 <code>.skill-group-1</code>～<code>.skill-group-5</code> 控制，悬停用 <code>.card:hover</code> 实现。这样既消掉报错，也知道了「样式尽量写进 CSS、用类名控制」的规范。</p>
+              <p><strong>3. 本地开发时的 404 和 MIME 报错</strong>：用 Live Server 打开时 <code>analytics-config.js</code>、<code>analytics-loader.js</code> 会 404，有时服务器还返回 HTML，浏览器就报「MIME type 不是 script」。我们做了 <code>analytics-bootstrap.js</code>：用 fetch 拉取这两个文件，只有响应成功且是 JS 才执行，否则静默降级；并且当 host 是 localhost/127.0.0.1 时直接不请求，避免控制台刷 404。Supabase 从 jsdelivr 换成 unpkg 也是为了减轻浏览器「追踪拦截」的提示。</p>
+              <p><strong>4. PRD 与部署</strong>：按当前站点状态写了新版本 PRD（<code>prd/PRD-003.md</code>），把首页标题/副标题设计、Skill 手册无内联样式、统计脚本容错等都记进去了。然后 git add、commit、push 到 main，Vercel 自动从 GitHub 拉取并部署，所以「第二版」算正式上线了。</p>
+              <p><strong>5. 其他小修</strong>：diary 页的 <code>overflow: visible</code> 从内联挪到 CSS；Galaxy 页的 <code>-webkit-backdrop-filter</code> 和 <code>backdrop-filter</code> 顺序按 lint 要求调好了。</p>
+              <p><strong>6. 熟练使用 find-skills、skill-creator 与 UI 风格提示词</strong>：今天也把 find-skills（在 skills.sh 上搜技能、安装）、skill-creator（本地新建/写 SKILL.md）、以及 UI 风格提示词（风格画廊、一键复制 prompt）这一套用熟了，后面做界面或扩展能力会顺手很多。</p>
+              <p>另外在考虑到底要不要去接触 OpenClaw 这个东西，感觉好像会有一点点用。我的想法是，先从 OpenClaw 慢慢摸索，摸清楚了再去搭建工作流，这样可能会少很多不必要的麻烦。哎，也不知道，还在考虑吧。</p>
             </div>
           </div>
         </section>
