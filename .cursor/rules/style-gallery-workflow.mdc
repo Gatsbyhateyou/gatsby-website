@@ -1,0 +1,12 @@
+---
+description: 风格画廊任务时必读工作流
+globs: style-gallery.html,public/style-previews/**/*.html
+alwaysApply: false
+---
+
+# 风格画廊工作流
+
+执行新建/优化风格任务时，**必须先读取** `style-gallery-skills/style-gallery-workflow.md`，按其中流程执行：
+
+- 新建：预览页 → 提示词 → 画廊小框
+- 优化：同上顺序，先改预览页再同步提示词与小框

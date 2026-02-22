@@ -46,6 +46,17 @@
             };
           });
         });
+    },
+    /** 删除一条灵感，按 id 删除；成功或失败都由调用方 catch */
+    delete: function (id) {
+      return client
+        .from(TABLE)
+        .delete()
+        .eq('id', id)
+        .then(function (res) {
+          if (res.error) throw res.error;
+          return;
+        });
     }
   };
 

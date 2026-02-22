@@ -4,42 +4,184 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>风格展示 · 新粗野主义 Neobrutalism</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, sans-serif; background: #F5F0E6; color: #000; padding: 2rem; }
-    .preview { max-width: 900px; margin: 0 auto; }
-    .preview__title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-    .preview__subtitle { color: #333; margin-bottom: 1.5rem; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      background: #F5F0E6;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: #000;
+      padding-top: 4rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* 散落色块装饰 */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      border: 3px solid #000;
+      box-shadow: 5px 5px 0 #000;
+    }
+    body::before {
+      width: 80px; height: 80px;
+      top: 12%; right: 8%;
+      background: #FFEB3B;
+    }
+    body::after {
+      width: 60px; height: 60px;
+      bottom: 20%; left: 5%;
+      background: #FF6B9D;
+    }
+    .preview__block { position: fixed; width: 48px; height: 48px; background: #7DD3FC; border: 3px solid #000; box-shadow: 4px 4px 0 #000; top: 45%; right: 4%; z-index: 0; pointer-events: none; }
+    .preview__block--2 { width: 56px; height: 56px; top: 65%; left: 6%; background: #BBF7D0; box-shadow: 5px 5px 0 #000; }
+    /* 顶栏 */
+    .preview__nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 0.75rem 2rem;
+      background: #fff;
+      border-bottom: 3px solid #000;
+      box-shadow: 0 4px 0 #000;
+    }
+    .preview__nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .preview__nav-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; }
+    .preview__nav-links { display: flex; gap: 1.5rem; }
+    .preview__nav-links a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      padding: 0.35rem 0.6rem;
+      border: 2px solid transparent;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+    .preview__nav-links a:hover {
+      border-color: #000;
+      box-shadow: 3px 3px 0 #000;
+      transform: translate(-2px, -2px);
+    }
+    .preview { max-width: 900px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+    .preview__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 0.5rem;
+    }
+    .preview__subtitle {
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
     .preview__actions { display: flex; gap: 12px; margin-bottom: 2rem; flex-wrap: wrap; }
     .preview__btn {
-      padding: 0.75rem 1.5rem; font-weight: 700; text-transform: uppercase; border: 3px solid #000;
-      background: #fff; color: #000; cursor: pointer; box-shadow: 4px 4px 0 #000; transition: transform 0.1s, box-shadow 0.1s;
+      padding: 0.75rem 1.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      border: 3px solid #000;
+      background: #fff;
+      color: #000;
+      cursor: pointer;
+      box-shadow: 5px 5px 0 #000;
+      transition: transform 0.1s, box-shadow 0.1s;
     }
-    .preview__btn:hover { box-shadow: 6px 6px 0 #000; transform: translate(-2px, -2px); }
+    .preview__btn:hover {
+      box-shadow: 7px 7px 0 #000;
+      transform: translate(-2px, -2px);
+    }
+    .preview__btn:active {
+      box-shadow: 2px 2px 0 #000;
+      transform: translate(2px, 2px);
+    }
     .preview__btn--primary { background: #FFEB3B; }
-    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
-    .preview__card {
-      padding: 1.25rem; background: #fff; border: 3px solid #000; box-shadow: 6px 6px 0 #000;
+    .preview__btn--secondary { background: #7DD3FC; }
+    .preview__cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
     }
-    .preview__card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase; }
-    .preview__card p { font-size: 0.875rem; color: #333; line-height: 1.5; }
-    .preview__back { color: #000; font-weight: 600; text-decoration: none; margin-bottom: 1rem; display: inline-block; }
-    .preview__back:hover { text-decoration: underline; }
+    .preview__card {
+      padding: 1.5rem;
+      background: #fff;
+      border: 3px solid #000;
+      box-shadow: 6px 6px 0 #000;
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+    .preview__card:hover {
+      box-shadow: 8px 8px 0 #000;
+      transform: translate(-2px, -2px);
+    }
+    .preview__card--accent { border-left: 6px solid #FF6B9D; }
+    .preview__card--accent-2 { border-left: 6px solid #7DD3FC; }
+    .preview__card--accent-3 { border-left: 6px solid #BBF7D0; }
+    .preview__card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    .preview__card p { font-size: 0.9rem; color: #333; line-height: 1.55; }
+    .preview__back {
+      color: #000;
+      font-weight: 700;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      padding: 0.35rem 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .preview__back:hover {
+      border-bottom-color: #000;
+      box-shadow: 0 2px 0 #000;
+    }
   </style>
 </head>
 <body>
+  <div class="preview__block"></div>
+  <div class="preview__block preview__block--2"></div>
+  <nav class="preview__nav">
+    <div class="preview__nav-inner">
+      <span class="preview__nav-title">Neobrutalism</span>
+      <div class="preview__nav-links">
+        <a href="#">Works</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </nav>
   <div class="preview">
     <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
     <h1 class="preview__title">Neobrutalism</h1>
-    <p class="preview__subtitle">硬阴影 · 粗黑边框 · 高对比纯色 · 无渐变</p>
+    <p class="preview__subtitle">硬阴影 · 粗黑边框 · 高对比纯色 · 无渐变 · 几何结构</p>
     <div class="preview__actions">
       <button type="button" class="preview__btn preview__btn--primary">主要按钮</button>
-      <button type="button" class="preview__btn">次要按钮</button>
+      <button type="button" class="preview__btn preview__btn--secondary">次要按钮</button>
+      <button type="button" class="preview__btn">白底黑边</button>
     </div>
     <div class="preview__cards">
-      <div class="preview__card"><h3>卡片一</h3><p>box-shadow: 6px 6px 0 #000</p></div>
-      <div class="preview__card"><h3>卡片二</h3><p>border: 3px solid #000</p></div>
-      <div class="preview__card"><h3>卡片三</h3><p>纯色、无模糊</p></div>
+      <div class="preview__card preview__card--accent"><h3>硬阴影</h3><p>box-shadow: 6px 6px 0 #000，无模糊、100% 不透明度。hover 时阴影变大 + translate。</p></div>
+      <div class="preview__card preview__card--accent-2"><h3>粗黑边框</h3><p>border: 3–4px solid #000。主色块可用高饱和纯色：黄、粉、蓝、绿。</p></div>
+      <div class="preview__card preview__card--accent-3"><h3>几何结构</h3><p>可见网格、矩形、圆块。无渐变、无透明、无软阴影。标题用粗体 display 字体。</p></div>
     </div>
   </div>
 </body>

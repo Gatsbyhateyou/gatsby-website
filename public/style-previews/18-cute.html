@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>风格展示 · 可爱风 Cute/Kawaii</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Nunito', 'Hiragino Sans', 'PingFang SC', system-ui, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(165deg, #fff5f7 0%, #fef7ed 25%, #f0fdf9 60%, #f5f0ff 100%);
+      color: #6b4c5a;
+      padding: 2rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,182,193,0.4) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    body::before { top: 10%; left: 5%; }
+    body::after { bottom: 15%; right: 8%; width: 60px; height: 60px; background: radial-gradient(circle, rgba(176,224,230,0.5) 0%, transparent 70%); }
+
+    .preview { max-width: 560px; margin: 0 auto; position: relative; z-index: 1; }
+    .preview__back {
+      color: #c48b9f;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform 0.2s ease, color 0.2s;
+    }
+    .preview__back:hover { color: #b76d85; transform: translateX(-4px); }
+    .preview__title {
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #8b5a6b;
+      letter-spacing: -0.02em;
+    }
+    .preview__title::after {
+      content: ' ✿';
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+    .preview__subtitle {
+      color: #9a7a88;
+      margin-bottom: 1.75rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview__btn {
+      padding: 0.65rem 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #ffb6c1 0%, #ffc8dd 100%);
+      color: #6b4c5a;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(255,182,193,0.5);
+      transition: transform 0.2s ease, box-shadow 0.2s;
+    }
+    .preview__btn:hover {
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255,182,193,0.55);
+    }
+    .preview__btn:active { transform: scale(0.98); }
+
+    .preview__cards { display: flex; flex-direction: column; gap: 1.25rem; }
+    .preview__card {
+      padding: 1.35rem 1.5rem;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,182,193,0.35);
+      box-shadow: 0 6px 24px rgba(139,90,107,0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s;
+    }
+    .preview__card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 12px 32px rgba(139,90,107,0.12);
+    }
+    .preview__card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #8b5a6b;
+    }
+    .preview__card h3::before {
+      content: '♡ ';
+      font-size: 0.9em;
+      opacity: 0.7;
+    }
+    .preview__card p {
+      font-size: 0.9rem;
+      color: #9a7a88;
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
+    <h1 class="preview__title">可爱风 Cute/Kawaii</h1>
+    <p class="preview__subtitle">柔和 Pastel 色、大圆角、软阴影、俏皮元素。温暖、治愈、萌系。</p>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn">主要</button>
+    </div>
+    <div class="preview__cards">
+      <div class="preview__card">
+        <h3>卡片一</h3>
+        <p>粉、薄荷、薰衣草、奶油色，大圆角与软阴影。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片二</h3>
+        <p>可加心形、星星、气泡等俏皮装饰。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片三</h3>
+        <p>适合手作、文具、宠物、生活方式类产品。</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

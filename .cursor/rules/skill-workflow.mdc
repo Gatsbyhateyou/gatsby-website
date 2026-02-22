@@ -1,0 +1,22 @@
+---
+description: 创建/查找技能时必须调用的工作流
+alwaysApply: true
+---
+
+# 技能工作流约定
+
+## 创建新技能时
+
+**必须先调用 skill-creator 技能**，再创建或编写 SKILL.md。
+
+- 读取 `.cursor/skills/skill-creator/SKILL.md`，按其中流程执行
+- 不直接手写 SKILL.md，避免质量与结构不一致
+- 若有 `init_skill.py` 等脚本，按 skill-creator 指引调用
+
+## 查找/搜索技能时
+
+**必须调用 find-skills 技能**，在 skills.sh 生态中搜索。
+
+- 读取 `.cursor/skills/find-skills/SKILL.md`，按其中流程执行
+- 使用 `npx skills find [查询词]` 搜索
+- 用户问「有没有做 X 的技能」「找技能」「查 skills」等时，一律走 find-skills 流程

@@ -28,12 +28,15 @@ function parseArgs() {
   return out;
 }
 
-function extractPromptFromSkill(mdPath) {
+function extractFromSkill(mdPath) {
   const abs = path.isAbsolute(mdPath) ? mdPath : path.join(ROOT, mdPath);
   const content = fs.readFileSync(abs, 'utf8');
-  const match = content.match(/##\s*Prompt（供画廊复制）\s*\n+([\s\S]*?)(?=\n##\s|$)/);
-  if (!match) throw new Error('SKILL.md 中未找到「## Prompt（供画廊复制）」段落');
-  return match[1].trim().replace(/\n+/g, ' ');
+  const promptMatch = content.match(/##\s*Prompt（供画廊复制）\s*\n+([\s\S]*?)(?=\n##\s|$)/);
+  if (!promptMatch) throw new Error('SKILL.md 中未找到「## Prompt（供画廊复制）」段落');
+  const prompt = promptMatch[1].trim().replace(/\n+/g, ' ');
+  const nameMatch = content.match(/^#\s+(.+?)(?:\s+UI)?\s*$/m);
+  const nameFromFile = nameMatch ? nameMatch[1].trim() : null;
+  return { prompt, nameFromFile };
 }
 
 function escapeForJsString(s) {
@@ -102,7 +105,9 @@ function main() {
   const opts = parseArgs();
   if (opts.promptFile) {
     try {
-      opts.prompt = extractPromptFromSkill(opts.promptFile);
+      const extracted = extractFromSkill(opts.promptFile);
+      opts.prompt = extracted.prompt;
+      if (extracted.nameFromFile && !opts.name) opts.name = extracted.nameFromFile;
     } catch (e) {
       console.error(e.message);
       process.exit(1);
@@ -110,6 +115,7 @@ function main() {
   }
   if (!opts.id || !opts.name || !opts.preview || !opts.prompt) {
     console.error('用法: node scripts/add-style-to-gallery.js --id <id> --name <展示名> --preview <预览类型> --prompt <prompt>');
+    console.error('  若用 --prompt-file，可从 SKILL.md 第一行 # 标题提取展示名，可省略 --name');
     console.error('  或: --prompt-file style-gallery-skills/<id>/SKILL.md 替代 --prompt');
     console.error('可选: --keyword <关键词> 用于 KEYWORDS.md');
     process.exit(1);

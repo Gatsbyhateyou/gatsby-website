@@ -4,62 +4,288 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>风格展示 · 游戏 UI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
       min-height: 100vh;
-      background: #0d1117;
+      background: linear-gradient(180deg, #0a0e14 0%, #0f1419 30%, #0d1117 70%, #080c10 100%);
       color: #e6edf3;
       padding: 2rem;
+      position: relative;
+      overflow-x: hidden;
     }
-    .preview { max-width: 900px; margin: 0 auto; }
-    .preview__title { font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 600; }
-    .preview__subtitle { color: #8b949e; margin-bottom: 1.5rem; font-size: 0.95rem; }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(59,130,246,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 80% at 100% 100%, rgba(34,197,94,0.04) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      box-shadow: inset 0 0 120px rgba(0,0,0,0.4);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4;
+      overflow: hidden;
+    }
+    .scanlines::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 2px,
+        rgba(0,0,0,0.12) 2px,
+        rgba(0,0,0,0.12) 4px
+      );
+      opacity: 0.5;
+      animation: scanline-drift 8s linear infinite;
+    }
+    @keyframes scanline-drift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(8px); }
+    }
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .hud-corners {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hud-corners span {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      border-color: rgba(88,166,255,0.6);
+      border-style: solid;
+      border-width: 0;
+      box-shadow: 0 0 12px rgba(88,166,255,0.2);
+    }
+    .hud-corners span:nth-child(1) { top: 1rem; left: 1rem; border-top-width: 2px; border-left-width: 2px; }
+    .hud-corners span:nth-child(2) { top: 1rem; right: 1rem; border-top-width: 2px; border-right-width: 2px; }
+    .hud-corners span:nth-child(3) { bottom: 1rem; left: 1rem; border-bottom-width: 2px; border-left-width: 2px; }
+    .hud-corners span:nth-child(4) { bottom: 1rem; right: 1rem; border-bottom-width: 2px; border-right-width: 2px; }
+
+    .preview { max-width: 900px; margin: 0 auto; position: relative; z-index: 3; }
+    .preview__back {
+      color: #8b949e;
+      font-size: 0.9rem;
+      text-decoration: none;
+      margin-bottom: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    .preview__back:hover { color: #58a6ff; }
+    .preview__title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.05em;
+      color: #fff;
+    }
+    .preview__title::after {
+      content: ' ▸';
+      color: #58a6ff;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+    .preview__subtitle {
+      color: #8b949e;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
     .preview__hud {
       display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
+      gap: 2rem;
+      margin-bottom: 1.75rem;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(135deg, rgba(22,27,34,0.95) 0%, rgba(13,17,23,0.9) 100%);
+      border: 1px solid rgba(88,166,255,0.15);
+      border-left: 3px solid #f85149;
+      border-radius: 8px;
+      box-shadow: inset 0 0 30px rgba(88,166,255,0.03), 0 0 24px rgba(0,0,0,0.3);
       flex-wrap: wrap;
     }
-    .preview__bar-wrap { flex: 1; min-width: 140px; }
-    .preview__bar-label { font-size: 0.75rem; color: #8b949e; margin-bottom: 4px; }
-    .preview__bar { height: 8px; background: #21262d; border-radius: 4px; overflow: hidden; }
-    .preview__bar-fill { height: 100%; border-radius: 4px; }
-    .preview__bar-fill--hp { width: 70%; background: #ff6b6b; }
-    .preview__bar-fill--mp { width: 45%; background: #4dabf7; }
-    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview__bar-wrap { flex: 1; min-width: 120px; }
+    .preview__bar-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      color: #8b949e;
+      margin-bottom: 6px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .preview__bar {
+      height: 10px;
+      background: #21262d;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(48,54,61,0.6);
+    }
+    .preview__bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    .preview__bar-fill--hp {
+      width: 72%;
+      background: linear-gradient(90deg, #f85149 0%, #ff6b6b 50%, #ff8585 100%);
+      box-shadow: 0 0 16px rgba(248,81,73,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
+      animation: hp-pulse 2.5s ease-in-out infinite;
+    }
+    .preview__bar-fill--mp {
+      width: 48%;
+      background: linear-gradient(90deg, #58a6ff 0%, #79c0ff 50%, #a5d5ff 100%);
+      box-shadow: 0 0 16px rgba(88,166,255,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    @keyframes hp-pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 16px rgba(248,81,73,0.5), inset 0 1px 0 rgba(255,255,255,0.15); }
+      50% { opacity: 0.92; box-shadow: 0 0 20px rgba(248,81,73,0.6), inset 0 1px 0 rgba(255,255,255,0.15); }
+    }
+
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 1.75rem; flex-wrap: wrap; }
     .preview__btn {
-      padding: 0.6rem 1.25rem;
+      padding: 0.65rem 1.35rem;
       font-size: 0.9rem;
+      font-weight: 500;
       border-radius: 6px;
       border: 1px solid #30363d;
       background: #21262d;
       color: #e6edf3;
       cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
+      transition: all 0.2s ease;
     }
-    .preview__btn:hover { background: #30363d; border-color: #484f58; }
-    .preview__btn--primary { background: #238636; border-color: #238636; }
-    .preview__btn--primary:hover { background: #2ea043; }
-    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .preview__btn:hover {
+      background: #30363d;
+      border-color: #484f58;
+      transform: translateY(-1px);
+    }
+    .preview__btn--primary {
+      background: #238636;
+      border-color: #2ea043;
+      color: #fff;
+    }
+    .preview__btn--primary:hover {
+      background: #2ea043;
+      box-shadow: 0 0 16px rgba(46,160,67,0.3);
+    }
+
+    .preview__cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
     .preview__card {
       padding: 1.25rem;
       border-radius: 8px;
-      background: #161b22;
-      border: 1px solid #30363d;
+      background: linear-gradient(145deg, rgba(28,33,40,0.95) 0%, rgba(22,27,34,0.9) 100%);
+      border: 1px solid rgba(88,166,255,0.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .preview__card h3 { font-size: 1rem; margin-bottom: 0.5rem; font-weight: 600; }
-    .preview__card p { font-size: 0.875rem; color: #8b949e; line-height: 1.5; }
-    .preview__back { color: #8b949e; font-size: 0.9rem; text-decoration: none; margin-bottom: 1rem; display: inline-block; }
-    .preview__back:hover { color: #e6edf3; }
+    .preview__card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      border-radius: 8px 0 0 8px;
+    }
+    .preview__card:nth-child(1)::before { background: #58a6ff; }
+    .preview__card:nth-child(2)::before { background: #3fb950; }
+    .preview__card:nth-child(3)::before { background: #d29922; }
+    .preview__card:hover {
+      border-color: rgba(88,166,255,0.35);
+      box-shadow: 0 0 32px rgba(88,166,255,0.08), 0 0 24px rgba(0,0,0,0.2);
+    }
+    .preview__card h3 { font-size: 0.95rem; margin-bottom: 0.5rem; font-weight: 600; color: #fff; }
+    .preview__card p { font-size: 0.85rem; color: #8b949e; line-height: 1.5; }
+
+    .preview__radar {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      width: 80px;
+      height: 80px;
+      border: 2px solid rgba(88,166,255,0.5);
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, rgba(22,27,34,0.9) 0%, rgba(13,17,23,0.95) 100%);
+      box-shadow: 0 0 24px rgba(88,166,255,0.15), inset 0 0 20px rgba(88,166,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      color: rgba(88,166,255,0.8);
+      letter-spacing: 0.1em;
+      overflow: hidden;
+    }
+    .preview__radar::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 1px dashed rgba(88,166,255,0.25);
+      border-radius: 50%;
+    }
+    .preview__radar::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -1px;
+      width: 2px;
+      height: 38%;
+      background: linear-gradient(180deg, rgba(88,166,255,0.8), transparent);
+      transform-origin: 50% 0;
+      animation: radar-sweep 3s linear infinite;
+    }
+    @keyframes radar-sweep {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="hud-corners" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
   <div class="preview">
+    <div class="preview__radar" aria-hidden="true">RADAR</div>
     <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
     <h1 class="preview__title">游戏 UI 设计</h1>
-    <p class="preview__subtitle">信息在紧张状态下可读 · 每块区域有存在理由 · 手柄/键盘/触控友好</p>
+    <p class="preview__subtitle">任天堂式清晰 · Dead Space 沉浸 HUD · 电竞可读性 · 手柄优先 · 安全区与无障碍</p>
     <div class="preview__hud">
       <div class="preview__bar-wrap">
         <div class="preview__bar-label">HP</div>
@@ -78,15 +304,15 @@
     <div class="preview__cards">
       <div class="preview__card">
         <h3>任务追踪</h3>
-        <p>关键信息一眼可见，动效传达状态。</p>
+        <p>关键信息一眼可见，动效传达状态而非装饰。</p>
       </div>
       <div class="preview__card">
         <h3>安全区</h3>
-        <p>预留边距，适配不同屏幕与手柄。</p>
+        <p>预留边距，适配不同屏幕与手柄输入。</p>
       </div>
       <div class="preview__card">
         <h3>无障碍</h3>
-        <p>对比度与焦点顺序符合规范。</p>
+        <p>对比度与焦点顺序是核心功能，非补丁。</p>
       </div>
     </div>
   </div>

@@ -17,19 +17,118 @@
     .style-card__preview:hover { opacity: 0.92; }
     .style-card__preview-inner { position: absolute; inset: 0; }
     /* CSS 小样：玻璃拟态 */
-    .style-card__preview--glass .style-card__preview-inner { background: linear-gradient(135deg, #1e3a5f 0%, #312e81 100%); }
-    .style-card__preview--glass .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60%; height: 50%; background: rgba(255,255,255,0.12); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    .style-card__preview--glass .style-card__preview-inner {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 40%, #312e81 100%),
+        radial-gradient(circle at 85% 15%, rgba(99,102,241,0.25) 0%, transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(59,130,246,0.15) 0%, transparent 40%);
+    }
+    .style-card__preview--glass .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 10%; left: 8%; right: 8%; height: 16%; background: rgba(0,0,0,0.2);
+      border-radius: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .style-card__preview--glass .style-card__preview-inner::after {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 58%; height: 42%; background: rgba(0,0,0,0.25); border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
     /* 8-bit 像素 */
-    .style-card__preview--pixel .style-card__preview-inner { background: #1a1a2e; }
-    .style-card__preview--pixel .style-card__preview-inner::before { content: ''; position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%); width: 80px; height: 28px; background: #4a4a6a; border: 3px solid #2d2d44; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); }
+    .style-card__preview--pixel .style-card__preview-inner {
+      background: linear-gradient(165deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%),
+        linear-gradient(rgba(74,74,106,0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74,74,106,0.25) 1px, transparent 1px);
+      background-size: 100% 100%, 12px 12px, 12px 12px;
+    }
+    .style-card__preview--pixel .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 20%; left: 10%; right: 10%; bottom: 15%;
+      border: 2px solid #4a4a6a;
+      background: linear-gradient(180deg, #6a4a9a 0%, #4a6a9a 15%, #4a8a6a 30%, transparent 30%) no-repeat 0 0 / 100% 100%,
+        linear-gradient(#2a3a5a 0 0) 8% 38% / 22% 18% no-repeat,
+        linear-gradient(#3a2a4a 0 0) 40% 38% / 22% 18% no-repeat,
+        linear-gradient(#2a4a3a 0 0) 72% 38% / 22% 18% no-repeat,
+        rgba(26,26,46,0.9);
+      box-shadow: inset 0 0 0 1px #2a2a4a, 4px 4px 0 rgba(0,0,0,0.5);
+    }
+    .style-card__preview--pixel .style-card__preview-inner::after {
+      content: ''; position: absolute; top: 8%; right: 15%; width: 12px; height: 12px;
+      background: #4a6a9a; border: 2px solid #6a8aba;
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.4),
+        24px -16px 0 0 #8a4a6a,
+        -22px 18px 0 0 #4a8a6a,
+        26px 22px 0 0 #9a8a4a,
+        -26px -18px 0 0 #6a4a9a,
+        18px 26px 0 0 #4a8a9a;
+    }
     /* 游戏 UI */
-    .style-card__preview--game .style-card__preview-inner { background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%); }
-    .style-card__preview--game .style-card__preview-inner::before { content: ''; position: absolute; right: 12%; top: 25%; width: 4px; height: 40%; background: linear-gradient(180deg, #3b82f6, #22c55e); border-radius: 2px; opacity: 0.9; }
-    .style-card__preview--game .style-card__preview-inner::after { content: ''; position: absolute; left: 15%; bottom: 25%; width: 35%; height: 12%; background: rgba(59,130,246,0.3); border: 1px solid rgba(59,130,246,0.5); border-radius: 4px; }
-    /* 粗野主义 */
-    .style-card__preview--brutalist .style-card__preview-inner { background: #fef08a; }
-    .style-card__preview--brutalist .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 30%; background: #f87171; border: 4px solid #000; box-shadow: 6px 6px 0 #000; }
-    /* 干净 / 界面设计 / 设计系统 / Web 规范 */
+    .style-card__preview--game .style-card__preview-inner {
+      background: linear-gradient(180deg, #0a0e14 0%, #0f1419 40%, #0d1117 100%),
+        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(88,166,255,0.08) 0%, transparent 50%),
+        repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px),
+        linear-gradient(90deg, rgba(88,166,255,0.6) 0%, transparent 10px) 0 0 / 100% 2px no-repeat,
+        linear-gradient(0deg, rgba(88,166,255,0.6) 0%, transparent 10px) 0 0 / 2px 100% no-repeat;
+    }
+    .style-card__preview--game .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 14%; left: 10%; right: 10%; height: 24%;
+      background: linear-gradient(135deg, rgba(28,33,40,0.95) 0%, rgba(22,27,34,0.9) 100%);
+      border: 1px solid rgba(88,166,255,0.2); border-left: 3px solid #f85149;
+      border-radius: 6px;
+      box-shadow: inset 0 0 20px rgba(88,166,255,0.03), 0 0 16px rgba(0,0,0,0.2);
+    }
+    .style-card__preview--game .style-card__preview-inner::after {
+      content: ''; position: absolute; top: 8%; right: 8%; width: 24%; height: 24%;
+      border: 2px solid rgba(88,166,255,0.5); border-radius: 50%;
+      background: radial-gradient(circle, rgba(22,27,34,0.8) 0%, rgba(13,17,23,0.9) 100%);
+      box-shadow: 0 0 16px rgba(88,166,255,0.2), inset 0 0 12px rgba(88,166,255,0.05);
+    }
+    /* 复古 CSS 架构（与预览页一致：渐变 + 强绿/青光晕 + border-y-6 框 + 按钮条） */
+    .style-card__preview--retro-css .style-card__preview-inner {
+      background: repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.12) 4px),
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,255,0,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 85% 100%, rgba(0,255,255,0.08) 0%, transparent 50%),
+        linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 50%, #0a0a0a 100%);
+    }
+    .style-card__preview--retro-css .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 16%; left: 8%; right: 8%; bottom: 16%;
+      border-top: 6px solid #404; border-bottom: 6px solid #404;
+      border-left: 4px solid #333; border-right: 4px solid #333;
+      background: linear-gradient(180deg, #1f1f1f 0%, #1a1a1a 100%);
+      box-shadow: inset 0 0 20px rgba(0,255,0,0.03), 0 0 12px rgba(0,0,0,0.3);
+    }
+    .style-card__preview--retro-css .style-card__preview-inner::after {
+      content: ''; position: absolute; top: 22%; left: 14%; right: 14%; height: 16%;
+      background: #222; border-top: 5px solid #404; border-bottom: 5px solid #404;
+      box-shadow: 0 0 12px rgba(0,255,255,0.15), inset 0 0 8px rgba(0,0,0,0.2);
+    }
+    /* 粗野主义 Neobrutalism：网格背景 + 主面板 + 散落色块 */
+    .style-card__preview--brutalist .style-card__preview-inner {
+      background: #F5F0E6;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 12px 12px;
+    }
+    .style-card__preview--brutalist .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 50%; height: 32%; background: #FFEB3B; border: 3px solid #000; box-shadow: 5px 5px 0 #000;
+    }
+    .style-card__preview--brutalist .style-card__preview-inner::after {
+      content: ''; position: absolute; top: 12%; right: 10%; width: 20%; height: 20%;
+      background: #FF6B9D; border: 2px solid #000; box-shadow: 3px 3px 0 #000;
+    }
+    /* 界面设计 Interface Design：顶栏 + 侧栏 + 主面板 */
+    .style-card__preview--flat-design .style-card__preview-inner {
+      background: #fafafa;
+    }
+    .style-card__preview--flat-design .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 52%; height: 36%; background: #fff; border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .style-card__preview--flat-design .style-card__preview-inner::after {
+      content: ''; position: absolute; left: 10%; top: 22%; bottom: 22%; width: 18%;
+      background: #fff; border-right: 1px solid rgba(0,0,0,0.06);
+      border-radius: 4px 0 0 4px;
+    }
+    /* 干净 / 设计系统 / Web 规范 */
     .style-card__preview--clean .style-card__preview-inner { background: #f5f5f5; }
     .style-card__preview--clean .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 55%; height: 35%; background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
     /* 仪表盘 */
@@ -62,7 +161,40 @@
     .style-card__preview--neumorphism .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 32%; background: #e0e0e0; border-radius: 16px; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff; }
     /* 有机/自然 */
     .style-card__preview--organic .style-card__preview-inner { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%); }
+    /* 可爱/Kawaii */
+    .style-card__preview--cute .style-card__preview-inner { background: linear-gradient(135deg, #ffe4ec 0%, #fff0f5 50%, #e8f4f8 100%); }
+    .style-card__preview--cute .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48%; height: 32%; background: #ffb6c1; border-radius: 24px; box-shadow: 0 8px 24px rgba(255,182,193,0.5); }
+    .style-card__preview--cute .style-card__preview-inner::after { content: '♡'; position: absolute; right: 18%; top: 30%; font-size: 1.2rem; color: rgba(255,105,180,0.6); }
     .style-card__preview--organic .style-card__preview-inner::before { content: ''; position: absolute; bottom: 25%; left: 20%; right: 20%; height: 24%; background: rgba(129,199,132,0.4); border-radius: 50% 50% 45% 55% / 60% 40% 60% 40%; }
+    /* macOS */
+    .style-card__preview--macos .style-card__preview-inner { background: linear-gradient(180deg, #f5f5f7 0%, #e8e8ed 100%); }
+    .style-card__preview--macos .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 55%; height: 40%; background: rgba(255,255,255,0.5); border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+    /* Fluent */
+    .style-card__preview--fluent .style-card__preview-inner { background: linear-gradient(135deg, #f3f2f1 0%, #edebe9 100%); }
+    .style-card__preview--fluent .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 35%; background: rgba(255,255,255,0.6); border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8); }
+    /* Cyberpunk */
+    .style-card__preview--cyberpunk .style-card__preview-inner { background: #0a0a12; }
+    .style-card__preview--cyberpunk .style-card__preview-inner::before { content: ''; position: absolute; bottom: 25%; left: 15%; right: 15%; height: 3px; background: linear-gradient(90deg, transparent, #ff00ff, #00ffff, transparent); opacity: 0.8; box-shadow: 0 0 12px #ff00ff; }
+    .style-card__preview--cyberpunk .style-card__preview-inner::after { content: ''; position: absolute; top: 30%; left: 20%; width: 40%; height: 25%; border: 1px solid #00ffff; box-shadow: 0 0 8px rgba(0,255,255,0.5); }
+    /* Material */
+    .style-card__preview--material .style-card__preview-inner { background: linear-gradient(135deg, #e8def8 0%, #f3e8ff 50%, #fff7ed 100%); }
+    .style-card__preview--material .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 36%; background: #fff; border-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06); }
+    /* iOS */
+    .style-card__preview--ios .style-card__preview-inner { background: #f2f2f7; }
+    .style-card__preview--ios .style-card__preview-inner::before { content: ''; position: absolute; bottom: 20%; left: 12%; right: 12%; height: 28%; background: rgba(255,255,255,0.9); border-radius: 16px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+    .style-card__preview--ios .style-card__preview-inner::after { content: ''; position: absolute; top: 25%; left: 50%; transform: translateX(-50%); width: 35%; height: 6%; background: #c7c7cc; border-radius: 3px; }
+    /* Bento */
+    .style-card__preview--bento .style-card__preview-inner { background: #fafafa; }
+    .style-card__preview--bento .style-card__preview-inner::before { content: ''; position: absolute; top: 15%; left: 12%; width: 35%; height: 35%; background: #e0e7ff; border-radius: 12px; }
+    .style-card__preview--bento .style-card__preview-inner::after { content: ''; position: absolute; top: 15%; right: 12%; bottom: 15%; width: 45%; background: linear-gradient(180deg, #fce7f3 0%, #f3e8ff 100%); border-radius: 12px; }
+    /* Clean UI */
+    .style-card__preview--clean-ui .style-card__preview-inner { background: #fff; }
+    .style-card__preview--clean-ui .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60%; height: 38%; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; }
+    .style-card__preview--clean-ui .style-card__preview-inner::after { content: ''; position: absolute; top: 35%; left: 20%; width: 25%; height: 2px; background: #0f172a; }
+    /* Card Layout */
+    .style-card__preview--card-layout .style-card__preview-inner { background: #f1f5f9; }
+    .style-card__preview--card-layout .style-card__preview-inner::before { content: ''; position: absolute; top: 18%; left: 12%; width: 38%; height: 32%; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .style-card__preview--card-layout .style-card__preview-inner::after { content: ''; position: absolute; top: 54%; right: 12%; width: 38%; height: 32%; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     .style-card__body { padding: 1rem; flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
     .style-card__name { font-weight: 600; font-size: 1rem; }
     .style-card__copy { margin-top: auto; padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; border: 1px solid var(--color-border); border-radius: 8px; background: transparent; color: inherit; transition: background .2s, border-color .2s; }
@@ -89,12 +221,12 @@
   <script>
     (function () {
       var styles = [
-        { id: 'glassmorphism', name: '玻璃拟态 Glassmorphism', preview: 'glass', prompt: '请用玻璃拟态（glassmorphism）风格做界面：毛玻璃效果（半透明背景如 bg-black/20 或 bg-white/10 + backdrop-blur-md）、细边框（border-white/10 等）、用于悬浮控件/遮罩/导航栏/工具提示时层级清晰，整体通透、轻盈的现代 UI。注意文字对比度，低端设备可适当减小 blur。' },
-        { id: '8bit-pixel', name: '8-bit 像素风', preview: 'pixel', prompt: '请按 8-bit 像素艺术图案做界面：用绝对定位的 div 做像素化边框与阴影（rounded-none、固定 1.5/3px、角点+边+侧边条），像素化阴影用 bg-foreground/20 的条块；支持 dark 模式（foreground/ring）；仅非 ghost/link/icon 变体显示边框。参考 components/ui/8bit/button 的实现。' },
-        { id: 'game-ui-design', name: '游戏 UI', preview: 'game', prompt: '请按游戏 UI 设计做界面：结合任天堂式清晰、Dead Space/Metroid 式沉浸 HUD、电竞可读性。信息在激烈操作下仍可一眼读懂、每块区域都有存在理由、动效用于传达信息而非装饰；手柄优先再键盘再触控、保留安全区、无障碍是功能不是补丁。在 target 设备上测试。' },
-        { id: 'retro-css', name: '复古 CSS 架构', preview: 'pixel', prompt: '请用复古 CSS 架构做 8-bit 风格：引入 retro.css，字体用 Press Start 2P；图片用 image-rendering: pixelated/crisp-edges；固定像素尺寸（1.5/3/6px）、rounded-none、语义色+dark: 变体；Tailwind 优先，组件级用 border-y-6、active:translate-y-1 等。' },
-        { id: 'brutalist', name: '新粗野主义 Neobrutalism', preview: 'brutalist', prompt: '请用新粗野主义做界面：硬阴影（box-shadow: 4px 4px 0 #000，无模糊）、粗黑边框（3–4px solid #000）、高对比纯色（红/黄/蓝/粉等），无渐变无透明。标题用粗体 display 字体，按钮/卡片 hover 时阴影变大+translate。禁止软阴影、细边框、低饱和色。' },
-        { id: 'flat-design', name: '界面设计 Interface Design', preview: 'clean', prompt: '请按界面设计工艺做仪表盘/后台/工具类界面：先明确用户是谁、要完成什么、整体气质（温暖/冷静/密集/克制）；表面层级用轻微明度差区分，边框低存在感，间距与 token 一致。避免通用模板感，每个选择能解释「为什么」。可参考 Vercel/Linear/Stripe 的层次与克制。' },
+        { id: 'glassmorphism', name: '玻璃拟态 Glassmorphism', preview: 'glass', prompt: '请用玻璃拟态（glassmorphism）风格做界面：深色渐变背景（蓝紫系如 #1e3a5f→#312e81）+ 柔和光晕点缀；毛玻璃效果（rgba(0,0,0,0.2)、backdrop-blur 12–16px）、细白边框（rgba(255,255,255,0.12)）；导航栏/卡片/按钮/胶囊统一用半透明+模糊，border-radius 10–14px。hover 时边框变亮、卡片微抬升+阴影。Inter 或类似现代 sans。整体通透、轻盈、层级清晰；注意文字对比度，低端设备可减小 blur。' },
+        { id: '8bit-pixel', name: '8-bit 像素风', preview: 'pixel', prompt: '请按 8-bit 像素风做界面：Press Start 2P 或同类像素字体；深蓝紫渐变背景 + 24px 像素网格 + 散落彩色方块（蓝/紫/绿/黄/青，带 2–3px 边框与硬阴影）；主内容放在「游戏面板」内（3px 边框、内嵌描边、外硬阴影、顶部渐变装饰条）。卡片 rounded-none、3px 实线边框、box-shadow 硬偏移（5px 5px 0）、内高光线；按钮同风格、active 时阴影缩小。整体层次多、复古游戏 HUD 感。' },
+        { id: 'game-ui-design', name: '游戏 UI', preview: 'game', prompt: '请按游戏 UI 设计做界面：深色渐变背景（#0a0e14→#0d1117）+ 暗角 + 可选扫描线/噪点层；四角 HUD 边框（2px、蓝半透明、带轻微 glow）；HP/MP 条用语义色（红/蓝）、渐变填充、box-shadow 发光、HP 可微脉动；Orbitron 科技字体；卡片左侧色条（蓝/绿/黄）、边缘高光；雷达圆框带内圈虚线、中心扫描线旋转动画。整体全息/HUD 沉浸感；手柄优先、安全区、无障碍。' },
+        { id: 'retro-css', name: '复古 CSS 架构', preview: 'retro-css', prompt: '请用复古 CSS 架构做界面：retro.css 或 NES.css 风格；Press Start 2P 像素字体；深色背景（#0f0f0f）+ 可选 CRT 扫描线；按钮/卡片用 border-top/bottom 6px 厚边框（border-y-6）、border-left/right 细边框；绿色/青色语义色（#0f0、#0ff）；rounded-none；可选闪烁光标、绿光晕；图片 image-rendering: pixelated。Tailwind 优先，组件用 active:translate-y-1 等。整体 NES/Famicom 游戏菜单感。' },
+        { id: 'brutalist', name: '新粗野主义 Neobrutalism', preview: 'brutalist', prompt: '请用新粗野主义（Neobrutalism）做界面：硬阴影（box-shadow: 5–6px 5–6px 0 #000，无模糊、100% 不透明度）、粗黑边框（3–4px solid #000）、高对比纯色背景（黄 #FFEB3B、粉 #FF6B9D、蓝 #7DD3FC、绿 #BBF7D0、白 #fff），无渐变无透明。标题用 Space Grotesk 或 Bebas Neue 等粗体 display 字体，text-transform: uppercase。按钮/卡片 hover 时阴影变大（7–8px）+ translate(-2px, -2px)，active 时阴影缩小。可加可见网格（repeating-linear-gradient）、散落几何色块装饰。禁止软阴影、细边框、低饱和色、模糊效果。' },
+        { id: 'flat-design', name: '界面设计 Interface Design', preview: 'flat-design', prompt: '请按界面设计工艺做仪表盘/后台/工具类界面：先明确用户是谁、要完成什么、整体气质（温暖/冷静/克制）。背景 #fafafa，主区 #fff；边框 1px solid rgba(0,0,0,0.06)；box-shadow 0 1px 2px rgba(0,0,0,0.04)、hover 时 0 4px 12px rgba(0,0,0,0.06)。Inter 或类似 sans；字号 0.875–1.5rem、字重 500/600/700。顶栏 + 侧栏 + 主区；侧栏激活项用 border-left: 3px solid #3b82f6 或淡蓝背景；指标区 4–6 列，关键指标可用单一强调色（#3b82f6）；hover translateY(-1px)。参考 Vercel/Linear/Stripe：层次克制、留白充足、数据与操作并置；避免装饰、渐变、高饱和。' },
         { id: 'dashboard', name: 'KPI 仪表盘', preview: 'dashboard', prompt: '请按 KPI 仪表盘设计：战略/战术/运营层级清晰，每屏 5–7 个核心指标，带趋势与对比；布局用 Executive Summary（4–6 个 headline KPI）+ 图表区 + 告警。颜色语义一致（红=差/绿=好），留白、可下钻，避免 3D 图表与虚荣指标。' },
         { id: 'editorial', name: '杂志/编辑风 Editorial', preview: 'editorial', prompt: '请用杂志/时尚编辑风做界面：大标题、大量留白、有意不对称；主色黑白灰/米色，仅一个强调色且克制使用。图片优先、可满屏，文字可叠图。按钮与组件扁平、无厚重边框。动效仅透明度/轻微位移，无弹跳。整体像现代时尚杂志的一页。' },
         { id: 'typography', name: '网页排版 Web Typography', preview: 'type', prompt: '请按 On Web Typography 原则做排版：正文 16–18px、行高 1.5–1.7、行宽 45–75 字（max-width: 65ch）；标题与正文层次用字号+字重区分。选字体时区分「瞬间型」（标题/按钮）与「长读型」（正文），配对时保持明显对比（如 serif 标题 + sans 正文）。注意 font-display 与加载性能。' },
@@ -105,7 +237,16 @@
         { id: 'terminal', name: '终端 / CLI 风 Terminal', preview: 'terminal', prompt: '请用终端/CLI 风格做界面：等宽字体、深色背景（如 #0d1117）、高对比文字（绿/黄/灰/白）；区块与按钮简洁、类命令行，可选细边框与「提示符」式装饰。整体像开发工具或终端仪表盘，信息密度适中、可读性强。' },
         { id: 'skeuomorphic', name: '拟物化 Skeuomorphic', preview: 'skeuomorphic', prompt: '请用拟物化（skeuomorphic）风格做界面：用视觉隐喻模拟真实材质——皮革、木纹、金属、玻璃等；明确的高光与暗部、立体阴影与质感，图标与控件像可触摸的实体。避免纯扁平与大面积纯色，保持层次与「实物感」。适合仪表盘控件、音乐/创意类工具、或需要温暖质感的界面。' },
         { id: 'neumorphism', name: '新拟态 Neumorphism', preview: 'neumorphism', prompt: '请用新拟态（neumorphism / soft UI）风格做界面：背景与控件同色系（如浅灰 #e0e0e0），用双阴影（一侧亮、一侧暗）营造凸起或凹陷，无硬边框、大圆角；整体柔和、像从背景浮起或压入。注意对比度与可读性，避免大面积使用导致层次不清。' },
-        { id: 'organic', name: '有机 / 自然视觉 Organic', preview: 'organic', prompt: '请用有机/自然视觉风格做界面：流动的曲线与有机形态（非严格网格）、柔和色彩与自然感渐变、留白与呼吸感；可配合柔和动效。整体像自然生长、非机械排版；避免硬边与直角主导，保持温暖、流动的气质。适合品牌页、落地页或强调自然/生命感的产品。' }
+        { id: 'organic', name: '有机 / 自然视觉 Organic', preview: 'organic', prompt: '请用有机/自然视觉风格做界面：流动的曲线与有机形态（非严格网格）、柔和色彩与自然感渐变、留白与呼吸感；可配合柔和动效。整体像自然生长、非机械排版；避免硬边与直角主导，保持温暖、流动的气质。适合品牌页、落地页或强调自然/生命感的产品。' },
+        { id: 'cute', name: '可爱风 Cute/Kawaii', preview: 'cute', prompt: '请用可爱/Kawaii 风格做界面：柔和 Pastel 色（粉、薄荷、薰衣草、奶油、 Peach 等）、大圆角（border-radius 16px 以上）、软阴影（blur 明显、无硬边）、背景以浅色为主。可加俏皮元素（小圆点、心形、星星、气泡）。字体可选圆润款，按钮/卡片 hover 时有轻微弹跳或缩放。整体温暖、治愈、萌系；避免冷峻、硬朗、科技感强的视觉。' },
+        { id: 'macos', name: 'macOS 设计风格', preview: 'macos', prompt: '请用 macOS Big Sur / Monterey 设计风格做界面：毛玻璃与半透明（backdrop-blur、vibrancy）、大圆角（10–12px）、SF Pro 气质字体；浅色背景、活力强调色（系统蓝/绿/橙）。侧边栏与工具栏层级清晰，图标简洁。整体通透、克制、符合 Apple Human Interface Guidelines。' },
+        { id: 'fluent', name: 'Microsoft Fluent Design', preview: 'fluent', prompt: '请用 Microsoft Fluent Design 2 风格做界面：亚克力材质（半透明 + backdrop-blur）、深度与层次（elevation、reveal 效果）、柔和光影；圆角 4–8px。微动效（hover 高亮、press 反馈）。色彩可用中性灰 + 品牌强调色。整体现代、专业、企业级，符合 Fluent 设计语言。' },
+        { id: 'cyberpunk', name: '赛博朋克 Cyberpunk', preview: 'cyberpunk', prompt: '请用赛博朋克/夜城风格做界面：霓虹色密布（黄、粉、青）、高对比暗背景；科技感/等宽字体。可加雨雾氛围（雨丝、雾蒙蒙）、霓虹光晕浮动、广告牌发光字、扫描线/网格、底部反射光带。边框光效、HUD 式边角。整体拥挤、层次多、夜城感。参考赛博朋克 2077。避免柔和、萌系。' },
+        { id: 'material', name: 'Material Design 3', preview: 'material', prompt: '请用 Material Design 3 / Material You 风格做界面：动态色（从种子色生成调色板）、大圆角（16–28px）、明确层级（elevation、surface）；FAB、Bottom App Bar、卡片等组件。动效有物理感。整体清晰、可访问、符合 Material 3 规范。' },
+        { id: 'ios', name: 'iOS 设计风格', preview: 'ios', prompt: '请用 iOS / Apple 移动端设计风格做界面：大标题（large title）、毛玻璃导航与 tab 栏；圆角卡片、安全区、触控友好（最小 44pt）；SF Pro 气质、系统色。列表与分组、分段控件、操作表。整体符合 iOS Human Interface Guidelines，原生感强。' },
+        { id: 'bento', name: 'Bento 网格风格', preview: 'bento', prompt: '请用 Bento 网格布局风格做界面：不规则网格、不同大小的卡片块（像便当盒分格）；信息分组清晰、每块有明确用途。圆角统一、留白适中。整体像 Apple 产品页或 Notion 的块状布局，现代、清晰、信息密度可调。' },
+        { id: 'clean-ui', name: '干净界面', preview: 'clean-ui', prompt: '请用干净界面风格做界面：克制的配色（黑白灰 + 单一强调色）、清晰层次、少装饰；高可读、高对比、留白充足。避免花哨边框与阴影。整体干净、专业、像 Stripe / Linear / Vercel 的克制感。' },
+        { id: 'card-layout', name: '卡片式布局', preview: 'card-layout', prompt: '请用卡片式布局风格做界面：信息以卡片为单位，每张卡片有标题、摘要、可选图；网格或瀑布流排列。卡片统一圆角与阴影、hover 有反馈。适合内容聚合、商品展示。整体清晰、易扫读、模块化，像 Pinterest / Dribbble 的流式布局。' }
       ];
 
       var grid = document.getElementById('style-gallery-grid');
@@ -117,7 +258,11 @@
       } else if (baseUrl.indexOf('http') === 0) {
         baseUrl = window.location.origin + '/';
       }
-      var previewBase = baseUrl + 'style-previews/';
+      var previewPath = 'style-previews/';
+      if (window.location.port === '5500') {
+        previewPath = 'public/style-previews/';
+      }
+      var previewBase = baseUrl + previewPath;
 
       styles.forEach(function (s, i) {
         var card = document.createElement('div');

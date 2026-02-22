@@ -4,42 +4,171 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>风格展示 · 界面设计 Interface Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, sans-serif; background: #fafafa; color: #111; padding: 2rem; }
-    .preview { max-width: 900px; margin: 0 auto; }
-    .preview__title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .preview__subtitle { color: #666; margin-bottom: 1.5rem; font-size: 0.95rem; }
-    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      min-height: 100vh;
+      background: #fafafa;
+      color: #0f172a;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* 顶栏 */
+    .preview__nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 0 1.5rem;
+      height: 52px;
+      background: #fff;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .preview__nav-title { font-size: 0.95rem; font-weight: 600; color: #0f172a; }
+    .preview__nav-links { display: flex; gap: 1.5rem; }
+    .preview__nav-links a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .preview__nav-links a:hover { color: #0f172a; }
+    /* 侧栏 + 主区 */
+    .preview__layout { display: flex; min-height: 100vh; padding-top: 52px; }
+    .preview__sidebar {
+      width: 200px;
+      flex-shrink: 0;
+      padding: 1.25rem 0.75rem;
+      background: #fff;
+      border-right: 1px solid rgba(0,0,0,0.06);
+    }
+    .preview__sidebar-item {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      color: #64748b;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-bottom: 0.25rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .preview__sidebar-item:hover { background: #f1f5f9; color: #0f172a; }
+    .preview__sidebar-item--active { background: #f8fafc; color: #0f172a; font-weight: 500; border-left: 3px solid #3b82f6; padding-left: calc(0.75rem - 3px); }
+    .preview__main {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      max-width: 900px;
+    }
+    .preview__back {
+      color: #64748b;
+      text-decoration: none;
+      margin-bottom: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .preview__back:hover { color: #0f172a; }
+    .preview__title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.35rem; letter-spacing: -0.02em; }
+    .preview__subtitle { color: #64748b; font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.5; }
+    /* 指标区 */
+    .preview__metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .preview__metric {
+      padding: 1rem 1.25rem;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 8px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .preview__metric:hover { border-color: rgba(0,0,0,0.1); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .preview__metric-label { font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .preview__metric-value { font-size: 1.35rem; font-weight: 700; color: #0f172a; }
+    .preview__metric--accent .preview__metric-value { color: #3b82f6; }
+    /* 按钮 */
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
     .preview__btn {
-      padding: 0.5rem 1rem; font-size: 0.9rem; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08);
-      background: #fff; color: #111; cursor: pointer;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: #fff;
+      color: #0f172a;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
     }
-    .preview__btn--primary { background: #111; color: #fff; border-color: #111; }
-    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .preview__btn:hover { background: #f8fafc; border-color: rgba(0,0,0,0.12); }
+    .preview__btn--primary { background: #0f172a; color: #fff; border-color: #0f172a; }
+    .preview__btn--primary:hover { background: #1e293b; border-color: #1e293b; }
+    /* 卡片 */
+    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
     .preview__card {
-      padding: 1.25rem; background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      padding: 1.25rem 1.5rem;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
-    .preview__card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .preview__card p { font-size: 0.875rem; color: #555; line-height: 1.5; }
-    .preview__back { color: #666; text-decoration: none; margin-bottom: 1rem; display: inline-block; font-size: 0.9rem; }
-    .preview__back:hover { color: #111; }
+    .preview__card:hover {
+      border-color: rgba(0,0,0,0.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transform: translateY(-1px);
+    }
+    .preview__card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .preview__card p { font-size: 0.875rem; color: #64748b; line-height: 1.55; }
   </style>
 </head>
 <body>
-  <div class="preview">
-    <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
-    <h1 class="preview__title">界面设计</h1>
-    <p class="preview__subtitle">仪表盘 / 后台 / 工具 · 层次克制 · 意图驱动</p>
-    <div class="preview__actions">
-      <button type="button" class="preview__btn preview__btn--primary">主要</button>
-      <button type="button" class="preview__btn">次要</button>
+  <nav class="preview__nav">
+    <span class="preview__nav-title">界面设计 · Interface</span>
+    <div class="preview__nav-links">
+      <a href="#">概览</a>
+      <a href="#">设置</a>
+      <a href="#">文档</a>
     </div>
-    <div class="preview__cards">
-      <div class="preview__card"><h3>表面层级</h3><p>轻微明度差，边框低存在感。</p></div>
-      <div class="preview__card"><h3>间距与 token</h3><p>一致、可解释的选择。</p></div>
-      <div class="preview__card"><h3>避免模板感</h3><p>每个决定有「为什么」。</p></div>
-    </div>
+  </nav>
+  <div class="preview__layout">
+    <aside class="preview__sidebar">
+      <a href="#" class="preview__sidebar-item preview__sidebar-item--active">仪表盘</a>
+      <a href="#" class="preview__sidebar-item">项目</a>
+      <a href="#" class="preview__sidebar-item">任务</a>
+      <a href="#" class="preview__sidebar-item">成员</a>
+    </aside>
+    <main class="preview__main">
+      <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
+      <h1 class="preview__title">界面设计 Interface Design</h1>
+      <p class="preview__subtitle">仪表盘 / 后台 / 工具 · 层次克制 · 意图驱动 · Vercel / Linear / Stripe 气质</p>
+      <div class="preview__metrics">
+        <div class="preview__metric"><span class="preview__metric-label">活跃项目</span><div class="preview__metric-value">12</div></div>
+        <div class="preview__metric preview__metric--accent"><span class="preview__metric-label">进行中</span><div class="preview__metric-value">8</div></div>
+        <div class="preview__metric"><span class="preview__metric-label">已完成</span><div class="preview__metric-value">156</div></div>
+        <div class="preview__metric"><span class="preview__metric-label">成员</span><div class="preview__metric-value">24</div></div>
+      </div>
+      <div class="preview__actions">
+        <button type="button" class="preview__btn preview__btn--primary">新建项目</button>
+        <button type="button" class="preview__btn">导入</button>
+      </div>
+      <div class="preview__cards">
+        <div class="preview__card"><h3>表面层级</h3><p>轻微明度差区分层级，边框低存在感（1px rgba(0,0,0,0.06)），间距与 token 一致。</p></div>
+        <div class="preview__card"><h3>意图驱动</h3><p>先明确用户是谁、要完成什么、整体气质（温暖/冷静/密集/克制）；每个选择能解释「为什么」。</p></div>
+        <div class="preview__card"><h3>避免模板感</h3><p>参考 Vercel / Linear / Stripe 的层次与克制；避免通用模板感，数据与操作并置。</p></div>
+      </div>
+    </main>
   </div>
 </body>
 </html>

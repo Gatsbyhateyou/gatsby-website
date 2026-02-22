@@ -23,6 +23,15 @@
 | skeuomorphic       | skeuomorphic | 拟物化（skill-creator 本地新建） |
 | neumorphism        | neumorphism | 新拟态（skill-creator 本地新建） |
 | organic            | organic | 有机/自然视觉（skill-creator 本地新建，原命中 SEO） |
+| cute                   | cute | 可爱风（skill-creator 本地新建，关键词无 UI 风格命中） |
+| macos                  | macos | 备注 |
+| fluent                 | fluent | 备注 |
+| cyber                  | cyberpunk | 备注 |
+| material               | material | 备注 |
+| ios design             | ios | 备注 |
+| bento                  | bento | 备注 |
+| clean ui               | clean-ui | 备注 |
+| card layout            | card-layout | 备注 |
 
 ## 草稿拉过但未当风格采用
 
@@ -43,7 +52,7 @@
 
 拉新风格时可优先考虑这些关键词，拉完对照上表避免与已做重复：
 
-- minimalism, clean ui, macos, fluent, cyber, material, ios design, bento, card layout
+- minimalism
 
 ---
 
