@@ -1148,6 +1148,31 @@ html.mobile-nav .nav-toggle {
   margin-bottom: 0;
 }
 
+/* 日记正文中的外链：强调色 + 下划线 + 外链图标 */
+.diary-entry__body .diary-entry__link {
+  color: #2563eb;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.35);
+  transition: color 0.2s, border-color 0.2s;
+}
+.diary-entry__body .diary-entry__link:hover {
+  color: #1d4ed8;
+  border-bottom-color: #1d4ed8;
+}
+.diary-entry__body .diary-entry__link::after {
+  content: " ↗";
+  font-size: 0.85em;
+  opacity: 0.8;
+}
+[data-theme="dark"] .diary-entry__body .diary-entry__link {
+  color: #93c5fd;
+  border-bottom-color: rgba(147, 197, 253, 0.4);
+}
+[data-theme="dark"] .diary-entry__body .diary-entry__link:hover {
+  color: #bfdbfe;
+  border-bottom-color: #bfdbfe;
+}
+
 @media (max-width: 600px) {
   .diary-section {
     padding: 1.5rem;

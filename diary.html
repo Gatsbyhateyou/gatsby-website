@@ -139,6 +139,19 @@
               <p>另外在考虑到底要不要去接触 OpenClaw 这个东西，感觉好像会有一点点用。我的想法是，先从 OpenClaw 慢慢摸索，摸清楚了再去搭建工作流，这样可能会少很多不必要的麻烦。哎，也不知道，还在考虑吧。</p>
             </div>
           </div>
+          <div class="diary-entry diary-entry--expandable">
+            <div class="diary-entry__row">
+              <span class="diary-entry__date">2025-02-22</span>
+              <div class="diary-entry__head">
+                <span class="diary-entry__title diary-entry__title--toggle" role="button" tabindex="0">Style Gallery 收尾、自动化两难与 WaytoAGI 万字文</span>
+              </div>
+            </div>
+            <div class="diary-entry__body">
+              <p>今天把 style gallery 这块收尾了。在一次次优化不同风格（从玻璃拟态、8-bit 像素到 iOS、Bento、干净界面、卡片式布局等）的过程中，终于把「新建或优化一个 UI 风格」的完整 workflow 固定下来了：先 web search 按五类整理要点，再优化预览页（层次、居中、hover 必做），然后同步改 prompt 和画廊小框，最后三轮截图读图反思。写进 <code>style-gallery-workflow.md</code> 之后，以后要么按这个流程一个个做，要么就得靠别的方式自动化。</p>
+              <p>说到自动化，我踩到一个很实在的坑：如果一次性让 Cursor 对很多个风格都按 workflow 执行，它会敷衍了事——流程是走了，但并没有认真做，效果大打折扣。所以要么就人工「一次只优化一个风格、复制指令、新开对话」，要么就上真正的全自动：用外部 API（Claude 或 OpenAI）加脚本循环调用、改文件、跑截图。后者 Cursor 给了两个方案，但都不能免费达成目的，要么要 API Key 和写脚本，要么依赖 Cursor 是否支持从命令行传入 prompt 循环执行。算是认清了一个现实：想省心又免费地批量跑质量，目前还做不到。</p>
+              <p>晚上在 WaytoAGI 上看到一篇关于 Vibe Coding 的万字长文，收获很大。里面提到，在动手构建一个产品之前，最好先准备好六份文档：<code>PRD.md</code>、<code>APP_FLOW.md</code>、<code>TECH_STACK.md</code>、<code>FRONTEND_GUIDELINES.md</code>、<code>BACKEND_STRUCTURE.md</code>、<code>IMPLEMENTATION_PLAN.md</code>，把需求、流程、技术选型、前后端约定和实现计划都写清楚，再让 Agent 按文档干活，这样少走弯路。还有一点特别实用：每次 Agent 犯错误之后，把错误和修正方式记进 rule 里，让下次不再犯。全是干货，打算反复看几遍。文章链接：<a href="https://waytoagi.feishu.cn/wiki/Kziow8AXaiAG6CkOljWcuyuxnkg" target="_blank" rel="noopener" class="diary-entry__link">WaytoAGI · Vibe Coding 万字文</a>。</p>
+            </div>
+          </div>
         </section>
       </div>
     </main>
