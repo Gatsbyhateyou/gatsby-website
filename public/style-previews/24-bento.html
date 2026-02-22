@@ -6,36 +6,126 @@
   <title>风格展示 · Bento 网格风格</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, sans-serif; min-height: 100vh; background: #fafafa; color: #1d1d1f; padding: 2rem; }
-    .preview { max-width: 560px; margin: 0 auto; }
-    .preview__back { color: #6366f1; text-decoration: none; margin-bottom: 1.5rem; display: inline-flex; align-items: center; font-size: 0.9rem; transition: color 0.2s, transform 0.2s; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      min-height: 100vh;
+      background: #fafafa;
+      color: #1d1d1f;
+      padding: 2rem 0 3rem;
+    }
+    .preview {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      box-sizing: border-box;
+    }
+    .preview__back {
+      color: #6366f1;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.9rem;
+      transition: color 0.2s, transform 0.2s;
+    }
     .preview__back:hover { color: #4f46e5; transform: translateX(-4px); }
-    .preview__title { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .preview__subtitle { color: #666; margin-bottom: 1.5rem; font-size: 1rem; }
-    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; }
-    .preview__btn { padding: 0.65rem 1.35rem; font-size: 0.9rem; border: none; border-radius: 10px; background: #6366f1; color: #fff; cursor: pointer; transition: background 0.2s, transform 0.2s; }
-    .preview__btn:hover { background: #4f46e5; transform: translateY(-1px); }
-    .preview__cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .preview__card { padding: 1.35rem 1.5rem; border-radius: 12px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: transform 0.25s, box-shadow 0.25s; }
-    .preview__card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
-    .preview__card:first-of-type { grid-column: 1 / -1; background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%); }
-    .preview__card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.35rem; }
-    .preview__card p { font-size: 0.9rem; color: #555; line-height: 1.6; }
+    .preview__title {
+      font-size: clamp(1.75rem, 4vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .preview__subtitle { color: #666; margin-bottom: 1rem; font-size: 1rem; }
+    .preview__rule {
+      width: 48px; height: 4px; border-radius: 2px;
+      background: #c7c7cc;
+      margin-bottom: 1.5rem;
+    }
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview__btn {
+      padding: 0.65rem 1.35rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 12px;
+      background: #6366f1;
+      color: #fff;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .preview__btn:hover { opacity: 0.9; transform: translateY(-2px); }
+    .preview__btn--secondary {
+      background: #fff;
+      color: #6366f1;
+      border: 1px solid #c7d2fe;
+    }
+    .preview__btn--secondary:hover {
+      background: #f5f3ff;
+      transform: translateY(-2px);
+    }
+    /* Bento: 不规则网格，大块=层级，统一间距 16–24px */
+    .preview__cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .preview__card {
+      padding: 1.35rem 1.5rem;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .preview__card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .preview__card--wide { grid-column: span 2; background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%); }
+    .preview__card--tall { grid-row: span 2; align-self: stretch; }
+    .preview__card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .preview__card p { font-size: 0.9rem; color: #555; line-height: 1.5; }
+    .preview__meta { font-size: 0.8rem; color: #888; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(0,0,0,0.06); }
   </style>
 </head>
 <body>
   <div class="preview">
     <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
     <h1 class="preview__title">Bento 网格风格</h1>
-    <p class="preview__subtitle">不规则网格、卡片块、信息分组清晰，像便当盒分格。</p>
+    <p class="preview__subtitle">不规则网格、不同大小的卡片块（像便当盒分格）；大小=层级，统一圆角与间距，信息分组清晰。像 Apple / Notion 的块状布局。</p>
+    <div class="preview__rule" aria-hidden="true"></div>
     <div class="preview__actions">
       <button type="button" class="preview__btn">主要</button>
+      <button type="button" class="preview__btn preview__btn--secondary">次要</button>
     </div>
     <div class="preview__cards">
-      <div class="preview__card"><h3>大块</h3><p>不同大小的卡片块，每块有明确用途。</p></div>
-      <div class="preview__card"><h3>卡片二</h3><p>圆角统一、留白适中。</p></div>
-      <div class="preview__card"><h3>卡片三</h3><p>像 Apple / Notion 的块状布局。</p></div>
+      <div class="preview__card preview__card--wide">
+        <h3>大块 Hero</h3>
+        <p>最重要内容占大块；严格分格、每块有明确用途，统一间距 16–24px。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片二</h3>
+        <p>圆角 12–14px，浅阴影与细边框。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片三</h3>
+        <p>适合 feature 展示、仪表盘、落地页。</p>
+      </div>
+      <div class="preview__card preview__card--tall">
+        <h3>卡片四</h3>
+        <p>CSS Grid，信息密度可调；纵向跨行体现 Bento 不规则。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片五</h3>
+        <p>现代、清晰、模块化。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片六</h3>
+        <p>第三行，与左侧高块呼应。</p>
+      </div>
     </div>
+    <p class="preview__meta">#fafafa · 圆角 12–14px · 统一间距</p>
   </div>
   <script src="back-to-gallery.js"></script>
 </body>

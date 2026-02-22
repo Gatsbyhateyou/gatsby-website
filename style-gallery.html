@@ -364,18 +364,39 @@
     .style-card__preview--ios .style-card__preview-inner::before { content: ''; position: absolute; bottom: 18%; left: 10%; right: 10%; height: 32%; background: rgba(255,255,255,0.9); border-radius: 16px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
     .style-card__preview--ios .style-card__preview-inner::after { content: ''; position: absolute; top: 22%; left: 50%; transform: translateX(-50%); width: 38%; height: 5%; background: #c7c7cc; border-radius: 3px; }
     .style-card__preview--ios::after { content: ''; position: absolute; inset: 0; width: 50%; height: 100%; left: 0; top: 0; background: linear-gradient(95deg, transparent 0%, rgba(255,255,255,0) 28%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 72%, transparent 100%); transform: skewX(-18deg) translateX(-100%); animation: style-card-shine 1.35s ease-out infinite; pointer-events: none; }
-    /* Bento */
+    /* Bento：浅底 + 大块渐变 + 小块，不规则网格感 */
     .style-card__preview--bento .style-card__preview-inner { background: #fafafa; }
-    .style-card__preview--bento .style-card__preview-inner::before { content: ''; position: absolute; top: 15%; left: 12%; width: 35%; height: 35%; background: #e0e7ff; border-radius: 12px; }
-    .style-card__preview--bento .style-card__preview-inner::after { content: ''; position: absolute; top: 15%; right: 12%; bottom: 15%; width: 45%; background: linear-gradient(180deg, #fce7f3 0%, #f3e8ff 100%); border-radius: 12px; }
+    .style-card__preview--bento .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 14%; left: 10%; right: 10%; height: 36%;
+      background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%); border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .style-card__preview--bento .style-card__preview-inner::after {
+      content: ''; position: absolute; bottom: 18%; left: 12%; width: 28%; height: 26%;
+      background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
     /* Clean UI */
-    .style-card__preview--clean-ui .style-card__preview-inner { background: #fff; }
-    .style-card__preview--clean-ui .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60%; height: 38%; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; }
-    .style-card__preview--clean-ui .style-card__preview-inner::after { content: ''; position: absolute; top: 35%; left: 20%; width: 25%; height: 2px; background: #0f172a; }
+    /* 干净界面：浅底 + 主面板 + 短线 */
+    .style-card__preview--clean-ui .style-card__preview-inner { background: #fafafa; }
+    .style-card__preview--clean-ui .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 58%; height: 36%; background: #fff; border: 1px solid #e2e8f0; border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .style-card__preview--clean-ui .style-card__preview-inner::after {
+      content: ''; position: absolute; top: 32%; left: 18%; width: 28%; height: 2px; background: #0f172a; border-radius: 1px;
+    }
     /* Card Layout */
+    /* 卡片式布局：浅灰底 + 双卡 + 统一圆角与阴影 */
     .style-card__preview--card-layout .style-card__preview-inner { background: #f1f5f9; }
-    .style-card__preview--card-layout .style-card__preview-inner::before { content: ''; position: absolute; top: 18%; left: 12%; width: 38%; height: 32%; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-    .style-card__preview--card-layout .style-card__preview-inner::after { content: ''; position: absolute; top: 54%; right: 12%; width: 38%; height: 32%; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .style-card__preview--card-layout .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 16%; left: 10%; width: 40%; height: 34%;
+      background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .style-card__preview--card-layout .style-card__preview-inner::after {
+      content: ''; position: absolute; top: 52%; right: 10%; width: 40%; height: 34%;
+      background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
     .style-card__body { padding: 1rem; flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
     .style-card__name { font-weight: 600; font-size: 1rem; }
     .style-card__copy { margin-top: auto; padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; border: 1px solid var(--color-border); border-radius: 8px; background: transparent; color: inherit; transition: background .2s, border-color .2s; }
@@ -432,9 +453,9 @@
         { id: 'cyberpunk', name: '赛博朋克 Cyberpunk', preview: 'cyberpunk', prompt: '请用赛博朋克/夜城风格做界面：霓虹色（黄 #FCEe0a、粉 #FF2A6D、青 #05d9e8）、高对比暗背景 #0d0d0f/#0a0a12。布局居中 max-width 1000px、padding 0 1.25rem。科技感/等宽字体（Orbitron）；text-shadow/box-shadow 多层做霓虹发光。可加：扫描线（repeating-linear-gradient）、网格、霓虹光晕浮动、广告牌发光字、底部反射光带、雨雾氛围。卡片左侧渐变条（黄→粉）、边框青/黄光效、hover 时 translateY(-2px)、发光加强。按钮直角、描边发光、hover 抬升。整体层次多、夜城感；参考赛博朋克 2077。避免柔和、萌系。' },
         { id: 'material', name: 'Material Design 3', preview: 'material', prompt: '请用 Material Design 3 / Material You 风格做界面：动态色（种子色生成调色板）；主色 #6750a4、primaryContainer #e8def8、表面 #fff、文字 #1d1b20/#49454f。布局居中 max-width 1000px、padding 0 1.25rem。大圆角（按钮 20px、卡片 24px，16–28px 范围）、elevation 柔和阴影（0 2px 12px rgba(0,0,0,0.08) 等）。Roboto 字体；主按钮填充色、次要按钮 tonal（#e8def8）。交互：返回链接 hover translateX(-4px)；按钮/卡片 hover translateY(-2px)~(-4px)、阴影加深。FAB、Bottom App Bar、卡片等组件；动效有物理感。整体清晰、可访问、符合 Material 3 规范。' },
         { id: 'ios', name: 'iOS 设计风格', preview: 'ios', prompt: '请用 iOS / Apple 设计风格做界面：背景 #f2f2f7、系统蓝 #007aff、文字 #1d1d1f/#6e6e73；SF Pro（-apple-system）、大标题 Large Title（25–27pt）；安全区（顶 44–47pt、底 34pt）、触控最小 44pt；毛玻璃（backdrop-blur）卡片、圆角 12–16px；主/次按钮、三列卡片网格、短线分隔；hover 时按钮 translateY(-2px)、卡片 translateY(-2px) 与阴影；符合 iOS HIG，原生感强。' },
-        { id: 'bento', name: 'Bento 网格风格', preview: 'bento', prompt: '请用 Bento 网格布局风格做界面：不规则网格、不同大小的卡片块（像便当盒分格）；信息分组清晰、每块有明确用途。圆角统一、留白适中。整体像 Apple 产品页或 Notion 的块状布局，现代、清晰、信息密度可调。' },
-        { id: 'clean-ui', name: '干净界面', preview: 'clean-ui', prompt: '请用干净界面风格做界面：克制的配色（黑白灰 + 单一强调色）、清晰层次、少装饰；高可读、高对比、留白充足。避免花哨边框与阴影。整体干净、专业、像 Stripe / Linear / Vercel 的克制感。' },
-        { id: 'card-layout', name: '卡片式布局', preview: 'card-layout', prompt: '请用卡片式布局风格做界面：信息以卡片为单位，每张卡片有标题、摘要、可选图；网格或瀑布流排列。卡片统一圆角与阴影、hover 有反馈。适合内容聚合、商品展示。整体清晰、易扫读、模块化，像 Pinterest / Dribbble 的流式布局。' }
+        { id: 'bento', name: 'Bento 网格风格', preview: 'bento', prompt: '请用 Bento 网格布局风格做界面：背景 #fafafa、白卡片与柔和渐变块（#e0e7ff、#f3e8ff）；严格分格、大小=层级（大块放重点）、统一间距 16–24px、圆角 12–14px；CSS Grid 不规则网格（有跨 2 列的大块、可选跨 2 行的块）；浅阴影与细边框、每块有明确用途（hero/proof/action）；hover 抬升 translateY(-2px)、阴影加深。像 Apple / Notion / Linear 的块状布局，现代、清晰、信息密度可调。' },
+        { id: 'clean-ui', name: '干净界面', preview: 'clean-ui', prompt: '请用干净界面风格做界面：背景 #fafafa 或 #fff、文字 #0f172a、中性灰 #64748b/#e2e8f0；黑白灰 + 单一强调色（如深色按钮 #0f172a）；细边框 1px solid #e2e8f0、圆角 6px、极浅阴影 0 4px 12px rgba(0,0,0,0.04)；留白充足、清晰层级、少装饰；hover 时按钮/卡片 translateY(-2px)、边框或阴影略加深。Inter 或 system-ui，正文 14–16px。整体干净、专业、像 Stripe / Linear / Vercel 的克制感。' },
+        { id: 'card-layout', name: '卡片式布局', preview: 'card-layout', prompt: '请用卡片式布局风格做界面：背景 #f1f5f9、白卡片、文字 #1e293b/#64748b；每张卡片有标题、摘要、可选图/缩略图；CSS Grid 多列（如 3 列）或瀑布流、统一间距；圆角 8–12px、box-shadow 0 2px 8px rgba(0,0,0,0.06)；hover 时 translateY(-2px)～(-4px)、阴影加深 0 8px 24px rgba(0,0,0,0.1)。适合内容聚合、商品展示、社交流。整体清晰、易扫读、模块化，像 Pinterest / Dribbble 的流式布局。' }
       ];
 
       var grid = document.getElementById('style-gallery-grid');
