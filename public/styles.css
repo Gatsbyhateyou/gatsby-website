@@ -1454,8 +1454,9 @@ html.mobile-nav .nav-toggle {
 }
 
 /* ---------- 灵感垃圾桶 Idea Bin：Black Gold 重力点 ---------- */
-/* 灵感垃圾桶：绝对最高层级，固定右下角 */
-#idea-bin {
+/* 灵感垃圾桶：绝对最高层级，固定右下角，不随滚动移动 */
+#idea-bin,
+#idea-bin-trigger {
   position: fixed;
   bottom: 30px;
   right: 30px;
@@ -1637,13 +1638,13 @@ html.mobile-nav .nav-toggle {
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* 吞噬动画：吸入黑洞 + 星点飘散（星海感） */
+/* 吞噬动画：吸入黑洞 + 星点飘散（星海感）；z-index 须高于 overlay(99998) 才能看见 */
 .idea-bin-dump-node {
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%) scale(1);
-  z-index: 502;
+  z-index: 100002;
   font-size: 1rem;
   color: rgba(212, 175, 55, 0.95);
   text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
@@ -1674,7 +1675,7 @@ html.mobile-nav .nav-toggle {
   width: 0;
   height: 0;
   transform: translate(-50%, -50%);
-  z-index: 501;
+  z-index: 100001;
   pointer-events: none;
 }
 
