@@ -6,35 +6,113 @@
   <title>风格展示 · iOS 设计风格</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif; min-height: 100vh; background: #f2f2f7; color: #1d1d1f; padding: 2rem; padding-top: max(2rem, env(safe-area-inset-top)); }
-    .preview { max-width: 560px; margin: 0 auto; }
-    .preview__back { color: #007aff; text-decoration: none; margin-bottom: 1.5rem; display: inline-flex; align-items: center; font-size: 0.9rem; transition: color 0.2s, transform 0.2s; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+      min-height: 100vh;
+      background: #f2f2f7;
+      color: #1d1d1f;
+      padding: 2rem 0 3rem;
+      padding-top: max(2rem, env(safe-area-inset-top));
+    }
+    .preview {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      box-sizing: border-box;
+    }
+    .preview__back {
+      color: #007aff;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.9rem;
+      transition: color 0.2s, transform 0.2s;
+    }
     .preview__back:hover { color: #0051d5; transform: translateX(-4px); }
-    .preview__title { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
-    .preview__subtitle { color: #6e6e73; margin-bottom: 1.5rem; font-size: 1rem; }
-    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; }
-    .preview__btn { padding: 0.65rem 1.35rem; font-size: 0.9rem; border: none; border-radius: 12px; background: #007aff; color: #fff; cursor: pointer; transition: opacity 0.2s, transform 0.2s; }
-    .preview__btn:hover { opacity: 0.9; transform: scale(1.02); }
-    .preview__cards { display: flex; flex-direction: column; gap: 1rem; }
-    .preview__card { padding: 1.35rem 1.5rem; border-radius: 16px; background: rgba(255,255,255,0.9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: transform 0.25s, box-shadow 0.25s; }
-    .preview__card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .preview__title {
+      font-size: clamp(1.75rem, 4vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .preview__subtitle { color: #6e6e73; margin-bottom: 1rem; font-size: 1rem; }
+    .preview__rule {
+      width: 48px; height: 4px; border-radius: 2px;
+      background: #aeaeb2;
+      margin-bottom: 1.5rem;
+    }
+    .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview__btn {
+      padding: 0.65rem 1.35rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 12px;
+      background: #007aff;
+      color: #fff;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .preview__btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    .preview__btn--secondary {
+      background: rgba(255,255,255,0.9);
+      color: #007aff;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+    .preview__btn--secondary:hover {
+      background: rgba(255,255,255,0.95);
+      transform: translateY(-2px);
+    }
+    .preview__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .preview__card {
+      padding: 1.35rem 1.5rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.9);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .preview__card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
     .preview__card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
     .preview__card p { font-size: 0.9rem; color: #6e6e73; line-height: 1.5; }
+    .preview__meta { font-size: 0.8rem; color: #8e8e93; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(0,0,0,0.06); }
   </style>
 </head>
 <body>
   <div class="preview">
     <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
     <h1 class="preview__title">iOS 设计风格</h1>
-    <p class="preview__subtitle">大标题、毛玻璃、圆角卡片，符合 iOS HIG。</p>
+    <p class="preview__subtitle">大标题（large title）、毛玻璃导航与 tab 栏；圆角卡片 12–16px、安全区、触控最小 44pt；SF Pro 气质、系统蓝 #007aff。</p>
+    <div class="preview__rule" aria-hidden="true"></div>
     <div class="preview__actions">
       <button type="button" class="preview__btn">主要</button>
+      <button type="button" class="preview__btn preview__btn--secondary">次要</button>
     </div>
     <div class="preview__cards">
-      <div class="preview__card"><h3>卡片一</h3><p>大标题、毛玻璃导航、触控友好 44pt。</p></div>
-      <div class="preview__card"><h3>卡片二</h3><p>列表与分组、分段控件、操作表。</p></div>
-      <div class="preview__card"><h3>卡片三</h3><p>适合 iPhone / iPad、PWA、混合应用。</p></div>
+      <div class="preview__card">
+        <h3>卡片一</h3>
+        <p>大标题、毛玻璃卡片 backdrop-blur，触控友好 44pt。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片二</h3>
+        <p>列表与分组、分段控件、操作表，符合 iOS HIG。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片三</h3>
+        <p>适合 iPhone / iPad、PWA、混合应用；原生感强。</p>
+      </div>
     </div>
+    <p class="preview__meta">#f2f2f7 · 圆角 12–16px · safe area</p>
   </div>
+  <script src="back-to-gallery.js"></script>
 </body>
 </html>

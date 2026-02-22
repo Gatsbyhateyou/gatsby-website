@@ -8,7 +8,7 @@
   "build": "node scripts/copy-styles.js && node scripts/generate-supabase-config.js && node scripts/generate-analytics-config.js && vite build",
   "preview": "vite preview",
     "deploy": "git add -A && git commit -m \"deploy\" && git push",
-    "screenshot": "node scripts/screenshot-preview.js"
+    "screenshot": "node scripts/screenshot-preview.js","next-style":"node scripts/next-style-to-optimize.js"
 },
   "keywords": [],
   "author": "",

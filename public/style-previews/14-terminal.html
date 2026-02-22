@@ -4,25 +4,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>风格展示 · 终端/CLI 风 Terminal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+      font-family: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
       min-height: 100vh;
       background: #0d1117;
+      background-image: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(126,231,135,0.06) 0%, transparent 55%),
+        linear-gradient(0deg, rgba(0,0,0,0.2) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 4px;
       color: #c9d1d9;
-      padding: 2rem;
+      padding: 2rem 0 3rem;
       font-size: 0.9rem;
     }
-    .preview { max-width: 900px; margin: 0 auto; }
-    .preview__back { color: #8b949e; text-decoration: none; margin-bottom: 1.5rem; display: inline-block; font-size: 0.85rem; }
-    .preview__back:hover { color: #c9d1d9; }
-    .preview__prompt { color: #7ee787; margin-bottom: 0.5rem; }
+    .preview {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      box-sizing: border-box;
+    }
+    .preview__back {
+      color: #8b949e;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      font-size: 0.85rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .preview__back:hover { color: #7ee787; transform: translateX(-4px); }
+    .preview__prompt {
+      color: #7ee787;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+    .preview__prompt::after { content: ' ▋'; animation: blink 1s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
     .preview__title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #58a6ff; }
     .preview__subtitle { color: #8b949e; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .preview__rule { width: 32px; height: 1px; background: #30363d; margin-bottom: 1.5rem; }
     .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
     .preview__btn {
-      padding: 0.4rem 1rem;
+      padding: 0.45rem 1rem;
       font-family: inherit;
       font-size: 0.85rem;
       border: 1px solid #30363d;
@@ -30,19 +56,27 @@
       color: #7ee787;
       cursor: pointer;
       border-radius: 4px;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
     }
-    .preview__btn:hover { background: #30363d; border-color: #484f58; }
-    .preview__btn--primary { color: #58a6ff; border-color: #388bfd; background: rgba(56,139,253,0.1); }
-    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .preview__btn:hover { background: #30363d; border-color: #484f58; transform: translateY(-2px); }
+    .preview__btn--primary { color: #58a6ff; border-color: #388bfd; background: rgba(56,139,253,0.12); }
+    .preview__btn--primary:hover { background: rgba(56,139,253,0.2); border-color: #58a6ff; transform: translateY(-2px); }
+    .preview__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
     .preview__card {
-      padding: 1rem;
+      padding: 1rem 1.25rem;
       border: 1px solid #30363d;
       background: #161b22;
       border-radius: 4px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .preview__card:hover {
+      border-color: #484f58;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transform: translateY(-2px);
     }
     .preview__card h3 { font-size: 0.9rem; margin-bottom: 0.4rem; font-weight: 600; color: #e6edf3; }
     .preview__card p { font-size: 0.8rem; color: #8b949e; line-height: 1.5; }
-    .preview__meta { font-size: 0.8rem; color: #6e7681; margin-top: 1rem; }
+    .preview__meta { font-size: 0.8rem; color: #6e7681; margin-top: 1.5rem; }
   </style>
 </head>
 <body>
@@ -50,7 +84,8 @@
     <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
     <p class="preview__prompt" aria-hidden="true">$ style-preview terminal</p>
     <h1 class="preview__title">终端 / CLI 风 Terminal</h1>
-    <p class="preview__subtitle">等宽字体、深色背景、高对比；类命令行区块与按钮。</p>
+    <p class="preview__subtitle">等宽字体、深色背景 #0d1117、4px 细横线网格；提示符绿 #7ee787、链接蓝 #58a6ff。</p>
+    <div class="preview__rule" aria-hidden="true"></div>
     <div class="preview__actions">
       <button type="button" class="preview__btn preview__btn--primary">Run</button>
       <button type="button" class="preview__btn">Cancel</button>
@@ -58,18 +93,19 @@
     <div class="preview__cards">
       <div class="preview__card">
         <h3>Block 1</h3>
-        <p>#0d1117 bg · green/yellow/gray text.</p>
+        <p>#0d1117 bg · #161b22 区块 · green/blue/gray 语义色。</p>
       </div>
       <div class="preview__card">
         <h3>Block 2</h3>
-        <p>Monospace, 细边框，提示符式装饰。</p>
+        <p>Monospace、细边框 #30363d、提示符式装饰。</p>
       </div>
       <div class="preview__card">
         <h3>Block 3</h3>
-        <p>开发工具 / 终端仪表盘风格。</p>
+        <p>开发工具 / 终端仪表盘风格，信息密度适中。</p>
       </div>
     </div>
-    <p class="preview__meta">信息密度适中 · 可读性强</p>
+    <p class="preview__meta">border 1px #30363d · border-radius 4px</p>
   </div>
+  <script src="back-to-gallery.js"></script>
 </body>
 </html>

@@ -170,7 +170,15 @@
       50% { transform: translate(-3%, -2%) scale(1.06); opacity: 1; }
     }
 
-    .preview { max-width: 560px; margin: 0 auto; position: relative; z-index: 1; }
+    .preview {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+    }
     .preview__back {
       color: #05d9e8;
       text-decoration: none;
@@ -204,10 +212,17 @@
     }
     .preview__subtitle {
       color: #8a8a9a;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1rem;
       font-size: 0.95rem;
       line-height: 1.6;
       letter-spacing: 0.02em;
+    }
+    .preview__rule {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, #05d9e8, #FCEe0a);
+      box-shadow: 0 0 10px rgba(5,217,232,0.6);
+      margin-bottom: 1.5rem;
     }
     .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
     .preview__btn {
@@ -229,8 +244,18 @@
       transform: translateY(-2px);
     }
     .preview__btn:active { transform: translateY(0); }
+    .preview__btn--secondary {
+      border-color: #05d9e8;
+      color: #05d9e8;
+      box-shadow: 0 0 20px rgba(5,217,232,0.4), inset 0 0 20px rgba(5,217,232,0.06);
+    }
+    .preview__btn--secondary:hover {
+      background: rgba(5,217,232,0.15);
+      box-shadow: 0 0 30px rgba(5,217,232,0.6), inset 0 0 25px rgba(5,217,232,0.08);
+      transform: translateY(-2px);
+    }
 
-    .preview__cards { display: flex; flex-direction: column; gap: 1.25rem; }
+    .preview__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
     .preview__card {
       padding: 1.35rem 1.5rem;
       border: 1px solid rgba(5,217,232,0.55);
@@ -252,7 +277,7 @@
     .preview__card:hover {
       border-color: rgba(5,217,232,0.85);
       box-shadow: 0 0 40px rgba(5,217,232,0.3), inset 0 0 50px rgba(5,217,232,0.06);
-      transform: translateX(4px);
+      transform: translateY(-2px);
     }
     .preview__card h3 {
       font-size: 1rem;
@@ -274,6 +299,12 @@
       line-height: 1.6;
       letter-spacing: 0.01em;
     }
+    .preview__meta {
+      font-size: 0.8rem;
+      color: #6a6a7a;
+      margin-top: 1.5rem;
+      letter-spacing: 0.03em;
+    }
   </style>
 </head>
 <body>
@@ -285,9 +316,11 @@
   <div class="preview">
     <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
     <h1 class="preview__title">赛博朋克 Cyberpunk</h1>
-    <p class="preview__subtitle">霓虹色、故障、扫描线、高对比暗背景。参考赛博朋克 2077。</p>
+    <p class="preview__subtitle">霓虹黄/粉/青、高对比暗背景；扫描线、光晕、边框光效、HUD 边角。参考赛博朋克 2077。</p>
+    <div class="preview__rule" aria-hidden="true"></div>
     <div class="preview__actions">
       <button type="button" class="preview__btn">执行</button>
+      <button type="button" class="preview__btn preview__btn--secondary">取消</button>
     </div>
     <div class="preview__cards">
       <div class="preview__card">
@@ -303,6 +336,8 @@
         <p>游戏、科幻、音乐、潮流品牌，强视觉冲击落地页。</p>
       </div>
     </div>
+    <p class="preview__meta">#05d9e8 · #FCEe0a · #FF2A6D · 霓虹发光</p>
   </div>
+  <script src="back-to-gallery.js"></script>
 </body>
 </html>

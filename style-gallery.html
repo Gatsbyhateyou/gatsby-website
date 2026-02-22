@@ -131,58 +131,239 @@
     /* 干净 / 设计系统 / Web 规范 */
     .style-card__preview--clean .style-card__preview-inner { background: #f5f5f5; }
     .style-card__preview--clean .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 55%; height: 35%; background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-    /* 仪表盘 */
-    .style-card__preview--dashboard .style-card__preview-inner { background: #fafafa; }
-    .style-card__preview--dashboard .style-card__preview-inner::before { content: ''; position: absolute; left: 12%; bottom: 28%; width: 22%; height: 35%; background: #e0e7ff; border-radius: 4px; }
-    .style-card__preview--dashboard .style-card__preview-inner::after { content: ''; position: absolute; left: 38%; bottom: 28%; width: 22%; height: 50%; background: #c7d2fe; border-radius: 4px; }
-    /* 杂志/编辑风 */
-    .style-card__preview--editorial .style-card__preview-inner { background: #fafaf9; }
-    .style-card__preview--editorial .style-card__preview-inner::before { content: ''; position: absolute; top: 28%; left: 12%; right: 12%; height: 8px; background: #1a1a1a; }
-    .style-card__preview--editorial .style-card__preview-inner::after { content: ''; position: absolute; top: 48%; left: 12%; right: 40%; height: 4px; background: #d4d4d4; }
-    /* 排版 */
-    .style-card__preview--type .style-card__preview-inner { background: #fff; }
-    .style-card__preview--type .style-card__preview-inner::before { content: ''; position: absolute; top: 35%; left: 15%; right: 15%; height: 6px; background: #111; border-radius: 0; }
-    .style-card__preview--type .style-card__preview-inner::after { content: ''; position: absolute; top: 52%; left: 15%; right: 25%; height: 3px; background: #666; }
-    /* 暗黑 */
-    .style-card__preview--dark .style-card__preview-inner { background: #0f172a; }
-    .style-card__preview--dark .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 28%; background: #1e293b; border: 1px solid #334155; border-radius: 8px; }
-    /* 极简 */
-    .style-card__preview--minimal .style-card__preview-inner { background: #fff; }
-    .style-card__preview--minimal .style-card__preview-inner::before { content: ''; position: absolute; bottom: 35%; left: 50%; transform: translateX(-50%); width: 40%; height: 2px; background: #111; }
-    /* 终端 */
-    .style-card__preview--terminal .style-card__preview-inner { background: #0d1117; }
-    .style-card__preview--terminal .style-card__preview-inner::before { content: '$'; position: absolute; left: 15%; top: 42%; font-family: ui-monospace, monospace; font-size: 0.75rem; color: #7ee787; letter-spacing: 0.05em; }
-    .style-card__preview--terminal .style-card__preview-inner::after { content: ''; position: absolute; left: 22%; top: 48%; right: 15%; height: 2px; background: #30363d; }
-    /* 拟物化 */
-    .style-card__preview--skeuomorphic .style-card__preview-inner { background: linear-gradient(145deg, #c9a86c 0%, #8b6914 100%); }
-    .style-card__preview--skeuomorphic .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45%; height: 32%; background: rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), 2px 4px 8px rgba(0,0,0,0.25); }
-    /* 新拟态 */
-    .style-card__preview--neumorphism .style-card__preview-inner { background: #e0e0e0; }
-    .style-card__preview--neumorphism .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 32%; background: #e0e0e0; border-radius: 16px; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff; }
-    /* 有机/自然 */
-    .style-card__preview--organic .style-card__preview-inner { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%); }
+    /* Tailwind 设计系统：渐变 + 径向光晕 + 白卡 + 黑按钮（与预览页一致） */
+    .style-card__preview--tailwind .style-card__preview-inner {
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,0,0,0.02) 0%, transparent 55%),
+        linear-gradient(180deg, #fafafa 0%, #f4f4f5 100%);
+    }
+    .style-card__preview--tailwind .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 52%; height: 34%; background: #fff; border: 1px solid #e4e4e7; border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .style-card__preview--tailwind .style-card__preview-inner::after {
+      content: ''; position: absolute; bottom: 18%; left: 14%; width: 20%; height: 10%;
+      background: #18181b; border-radius: 6px;
+    }
+    /* Vercel / Web 规范：白底 + 极淡蓝光晕 + 主面板 + 蓝条（与预览页一致） */
+    .style-card__preview--web-guidelines .style-card__preview-inner {
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,112,243,0.05) 0%, transparent 55%),
+        linear-gradient(180deg, #fff 0%, #fafafa 100%);
+    }
+    .style-card__preview--web-guidelines .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 52%; height: 32%; background: #fafafa; border: 1px solid #eee; border-radius: 8px;
+    }
+    .style-card__preview--web-guidelines .style-card__preview-inner::after {
+      content: ''; position: absolute; top: 28%; left: 16%; width: 24%; height: 2px; background: #0070f3; border-radius: 1px;
+    }
+    /* 仪表盘：渐变 + 径向光晕 + 网格 + KPI 白卡 + 图表块 */
+    .style-card__preview--dashboard .style-card__preview-inner {
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(99,102,241,0.06) 0%, transparent 55%),
+        linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+      background-size: 100% 100%, 20px 20px, 20px 20px, 100% 100%;
+    }
+    .style-card__preview--dashboard .style-card__preview-inner::before {
+      content: ''; position: absolute; left: 8%; bottom: 22%; width: 18%; height: 28%;
+      background: #fff; border-radius: 8px; border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .style-card__preview--dashboard .style-card__preview-inner::after {
+      content: ''; position: absolute; left: 30%; bottom: 22%; width: 18%; height: 38%;
+      background: #e0e7ff; border-radius: 8px; border: 1px solid #c7d2fe;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    /* 杂志/编辑风：米色底 + 径向渐变 + 粗黑分隔条 + 细灰引文条（与预览页一致） */
+    .style-card__preview--editorial .style-card__preview-inner {
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,0,0,0.03) 0%, transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,0.02) 0%, transparent 30%), #fafaf9;
+    }
+    .style-card__preview--editorial .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 20%; left: 10%; width: 32%; height: 4px; background: #1a1a1a;
+    }
+    .style-card__preview--editorial .style-card__preview-inner::after {
+      content: ''; position: absolute; top: 42%; left: 10%; width: 58%; height: 2px; background: #d4d4d4;
+    }
+    /* 排版：米色底 + 径向渐变 + 粗标题条 + type scale 多级线条 + 左边框块（pull quote） */
+    .style-card__preview--type .style-card__preview-inner {
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,0,0,0.04) 0%, transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,0.02) 0%, transparent 40%), #fafaf9;
+    }
+    .style-card__preview--type .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 22%; left: 12%; width: 38%; height: 5px; background: #111;
+    }
+    .style-card__preview--type .style-card__preview-inner::after {
+      content: ''; position: absolute; top: 38%; left: 12%; right: 12%; height: 18px;
+      background-image: linear-gradient(180deg, #222 0%, #222 2px, transparent 2px),
+        linear-gradient(180deg, #555 0%, #555 2px, transparent 2px),
+        linear-gradient(180deg, #888 0%, #888 2px, transparent 2px);
+      background-size: 52% 6px, 42% 6px, 48% 6px;
+      background-position: 0 0, 0 6px, 0 12px;
+      background-repeat: no-repeat;
+    }
+    /* 暗黑：深色底 + 双径向光晕 + 暗角 + 主面板 + 底栏（与预览页一致） */
+    .style-card__preview--dark .style-card__preview-inner {
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(59,130,246,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 90% 100%, rgba(30,58,138,0.08) 0%, transparent 50%),
+        linear-gradient(180deg, #0f172a 0%, #0c1222 100%);
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.2);
+    }
+    .style-card__preview--dark .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 50%; height: 28%; background: #1e293b; border: 1px solid #334155; border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .style-card__preview--dark .style-card__preview-inner::after {
+      content: ''; position: absolute; bottom: 14%; left: 12%; right: 12%; height: 10%;
+      background: #1e293b; border: 1px solid #334155; border-radius: 6px;
+    }
+    /* 极简：白底 + 细线（主面板简化） */
+    /* 极简：白底 + 极淡渐变 + 2px #111 短分隔线（与预览页一致） */
+    .style-card__preview--minimal .style-card__preview-inner {
+      background: linear-gradient(180deg, rgba(0,0,0,0.012) 0%, transparent 18%), #fff;
+    }
+    .style-card__preview--minimal .style-card__preview-inner::before { content: ''; position: absolute; bottom: 38%; left: 50%; transform: translateX(-50%); width: 28%; height: 2px; background: #111; }
+    /* 终端：深色底 + 4px 网格 + 极淡绿光晕 + 提示符 $ + 横线（与预览页一致） */
+    .style-card__preview--terminal .style-card__preview-inner {
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(126,231,135,0.04) 0%, transparent 55%),
+        linear-gradient(0deg, rgba(0,0,0,0.2) 1px, transparent 1px), #0d1117;
+      background-size: 100% 100%, 100% 4px, 100% 100%;
+    }
+    .style-card__preview--terminal .style-card__preview-inner::before { content: '$'; position: absolute; left: 12%; top: 38%; font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: 0.7rem; color: #7ee787; letter-spacing: 0.05em; }
+    .style-card__preview--terminal .style-card__preview-inner::after { content: ''; position: absolute; left: 18%; top: 48%; right: 12%; height: 2px; background: #30363d; }
+    /* 拟物化：金棕渐变 + 径向高光 + 主面板 + 凸起按钮条（与预览页一致） */
+    .style-card__preview--skeuomorphic .style-card__preview-inner {
+      background: radial-gradient(ellipse 50% 40% at 30% 20%, rgba(255,255,255,0.2) 0%, transparent 50%),
+        linear-gradient(165deg, #c9a86c 0%, #a68b4a 40%, #8b6914 100%);
+    }
+    .style-card__preview--skeuomorphic .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 48%; height: 34%; background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(0,0,0,0.08) 100%);
+      border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.15), 2px 4px 10px rgba(0,0,0,0.25);
+    }
+    .style-card__preview--skeuomorphic .style-card__preview-inner::after {
+      content: ''; position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      width: 28%; height: 14%; background: linear-gradient(180deg, #e8d5a3 0%, #c9a86c 50%, #a68b4a 100%);
+      border-radius: 8px; border: 2px solid #5c4a2a;
+      box-shadow: 0 3px 0 #5c4a2a, inset 0 1px 0 rgba(255,255,255,0.4);
+    }
+    /* 新拟态：浅灰底 + 径向光 + 凸起主面板 */
+    /* 新拟态：同色底 + 径向高光 + 凸起主面板 + 凹陷块（与预览页一致） */
+    .style-card__preview--neumorphism .style-card__preview-inner {
+      background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(255,255,255,0.6) 0%, transparent 55%), #e0e0e0;
+    }
+    .style-card__preview--neumorphism .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 50%; height: 34%; background: #e0e0e0; border-radius: 20px;
+      box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff;
+    }
+    .style-card__preview--neumorphism .style-card__preview-inner::after {
+      content: ''; position: absolute; bottom: 18%; right: 12%; width: 24%; height: 14%;
+      background: #e0e0e0; border-radius: 12px;
+      box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #fff;
+    }
+    /* 有机/自然：渐变 + 径向光晕 + 主面板 + 散落有机块 */
+    .style-card__preview--organic .style-card__preview-inner {
+      background: radial-gradient(ellipse 70% 50% at 20% 20%, rgba(129,199,132,0.5) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(129,199,132,0.35) 0%, transparent 50%),
+        linear-gradient(145deg, #e8f5e9 0%, #c8e6c9 45%, #a5d6a7 100%);
+    }
+    .style-card__preview--organic .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 15%; left: 10%; right: 10%; bottom: 20%;
+      background: rgba(255,255,255,0.5);
+      border-radius: 40% 60% 55% 45% / 55% 45% 55% 45%;
+      border: 1px solid rgba(129,199,132,0.35);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .style-card__preview--organic .style-card__preview-inner::after {
+      content: ''; position: absolute; bottom: 22%; left: 18%; right: 18%; height: 18%;
+      background: rgba(129,199,132,0.4);
+      border-radius: 50% 50% 45% 55% / 60% 40% 60% 40%;
+    }
     /* 可爱/Kawaii */
     .style-card__preview--cute .style-card__preview-inner { background: linear-gradient(135deg, #ffe4ec 0%, #fff0f5 50%, #e8f4f8 100%); }
     .style-card__preview--cute .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48%; height: 32%; background: #ffb6c1; border-radius: 24px; box-shadow: 0 8px 24px rgba(255,182,193,0.5); }
     .style-card__preview--cute .style-card__preview-inner::after { content: '♡'; position: absolute; right: 18%; top: 30%; font-size: 1.2rem; color: rgba(255,105,180,0.6); }
-    .style-card__preview--organic .style-card__preview-inner::before { content: ''; position: absolute; bottom: 25%; left: 20%; right: 20%; height: 24%; background: rgba(129,199,132,0.4); border-radius: 50% 50% 45% 55% / 60% 40% 60% 40%; }
     /* macOS */
-    .style-card__preview--macos .style-card__preview-inner { background: linear-gradient(180deg, #f5f5f7 0%, #e8e8ed 100%); }
-    .style-card__preview--macos .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 55%; height: 40%; background: rgba(255,255,255,0.5); border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+    /* macOS：浅色渐变 + 径向高光 + 毛玻璃主面板 + 顶栏条（与预览页一致） */
+    .style-card__preview--macos .style-card__preview-inner {
+      background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(255,255,255,0.8) 0%, transparent 55%),
+        linear-gradient(180deg, #f5f5f7 0%, #e8e8ed 100%);
+    }
+    .style-card__preview--macos .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 54%; height: 38%; background: rgba(255,255,255,0.65); border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    }
+    .style-card__preview--macos .style-card__preview-inner::after {
+      content: ''; position: absolute; top: 14%; left: 12%; right: 12%; height: 12%;
+      background: rgba(255,255,255,0.5); border-radius: 8px 8px 0 0;
+      border: 1px solid rgba(0,0,0,0.06); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    }
+    .style-card__preview--macos::after {
+      content: ''; position: absolute; inset: 0; width: 50%; height: 100%; left: 0; top: 0;
+      background: linear-gradient(95deg, transparent 0%, rgba(255,255,255,0) 28%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 72%, transparent 100%);
+      transform: skewX(-18deg) translateX(-100%); animation: style-card-shine 1.35s ease-out infinite;
+      pointer-events: none;
+    }
     /* Fluent */
-    .style-card__preview--fluent .style-card__preview-inner { background: linear-gradient(135deg, #f3f2f1 0%, #edebe9 100%); }
-    .style-card__preview--fluent .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 35%; background: rgba(255,255,255,0.6); border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8); }
+    /* Fluent：中性灰渐变 + 径向高光 + 主面板 + 品牌蓝条（与预览页一致） */
+    .style-card__preview--fluent .style-card__preview-inner {
+      background: radial-gradient(ellipse 60% 40% at 80% 10%, rgba(255,255,255,0.9) 0%, transparent 50%),
+        linear-gradient(135deg, #f3f2f1 0%, #edebe9 100%);
+    }
+    .style-card__preview--fluent .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 52%; height: 36%; background: rgba(255,255,255,0.85); border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+    .style-card__preview--fluent .style-card__preview-inner::after {
+      content: ''; position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+      width: 24%; height: 8%; background: #0078d4; border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
     /* Cyberpunk */
-    .style-card__preview--cyberpunk .style-card__preview-inner { background: #0a0a12; }
-    .style-card__preview--cyberpunk .style-card__preview-inner::before { content: ''; position: absolute; bottom: 25%; left: 15%; right: 15%; height: 3px; background: linear-gradient(90deg, transparent, #ff00ff, #00ffff, transparent); opacity: 0.8; box-shadow: 0 0 12px #ff00ff; }
-    .style-card__preview--cyberpunk .style-card__preview-inner::after { content: ''; position: absolute; top: 30%; left: 20%; width: 40%; height: 25%; border: 1px solid #00ffff; box-shadow: 0 0 8px rgba(0,255,255,0.5); }
+    /* 赛博朋克：暗底 + 霓虹发光条 + 带左侧色条的卡片块（与预览页一致） */
+    .style-card__preview--cyberpunk .style-card__preview-inner {
+      background: linear-gradient(180deg, rgba(5,217,232,0.08) 0%, transparent 40%, transparent 60%, rgba(252,238,10,0.06) 100%), #0a0a12;
+    }
+    .style-card__preview--cyberpunk .style-card__preview-inner::before {
+      content: ''; position: absolute; bottom: 22%; left: 12%; right: 12%; height: 2px;
+      background: linear-gradient(90deg, #05d9e8, #FCEe0a); box-shadow: 0 0 10px rgba(5,217,232,0.6);
+    }
+    .style-card__preview--cyberpunk .style-card__preview-inner::after {
+      content: ''; position: absolute; top: 28%; left: 18%; width: 38%; height: 28%;
+      border: 1px solid rgba(5,217,232,0.55);
+      background: linear-gradient(90deg, #FCEe0a 0%, #FF2A6D 4px, rgba(5,217,232,0.08) 4px, rgba(5,217,232,0.08) 100%);
+      box-shadow: 0 0 20px rgba(5,217,232,0.2);
+    }
     /* Material */
-    .style-card__preview--material .style-card__preview-inner { background: linear-gradient(135deg, #e8def8 0%, #f3e8ff 50%, #fff7ed 100%); }
-    .style-card__preview--material .style-card__preview-inner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 36%; background: #fff; border-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06); }
-    /* iOS */
+    /* Material 3：紫系渐变 + 主卡片 + FAB 圆钮（与预览页一致） */
+    .style-card__preview--material .style-card__preview-inner {
+      background: radial-gradient(ellipse 60% 50% at 30% 10%, rgba(103,80,164,0.12) 0%, transparent 55%),
+        linear-gradient(135deg, #e8def8 0%, #f3e8ff 50%, #fff7ed 100%);
+    }
+    .style-card__preview--material .style-card__preview-inner::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 52%; height: 36%; background: #fff; border-radius: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .style-card__preview--material .style-card__preview-inner::after {
+      content: ''; position: absolute; bottom: 14%; right: 14%; width: 18%; height: 18%;
+      background: #6750a4; border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(103,80,164,0.35);
+    }
+    /* iOS：反光高光扫过（快扫 + 间隔 1s） */
+    @keyframes style-card-shine { 0% { transform: skewX(-18deg) translateX(-100%); } 26% { transform: skewX(-18deg) translateX(200%); } 100% { transform: skewX(-18deg) translateX(200%); } }
     .style-card__preview--ios .style-card__preview-inner { background: #f2f2f7; }
-    .style-card__preview--ios .style-card__preview-inner::before { content: ''; position: absolute; bottom: 20%; left: 12%; right: 12%; height: 28%; background: rgba(255,255,255,0.9); border-radius: 16px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-    .style-card__preview--ios .style-card__preview-inner::after { content: ''; position: absolute; top: 25%; left: 50%; transform: translateX(-50%); width: 35%; height: 6%; background: #c7c7cc; border-radius: 3px; }
+    .style-card__preview--ios .style-card__preview-inner::before { content: ''; position: absolute; bottom: 18%; left: 10%; right: 10%; height: 32%; background: rgba(255,255,255,0.9); border-radius: 16px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+    .style-card__preview--ios .style-card__preview-inner::after { content: ''; position: absolute; top: 22%; left: 50%; transform: translateX(-50%); width: 38%; height: 5%; background: #c7c7cc; border-radius: 3px; }
+    .style-card__preview--ios::after { content: ''; position: absolute; inset: 0; width: 50%; height: 100%; left: 0; top: 0; background: linear-gradient(95deg, transparent 0%, rgba(255,255,255,0) 28%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 72%, transparent 100%); transform: skewX(-18deg) translateX(-100%); animation: style-card-shine 1.35s ease-out infinite; pointer-events: none; }
     /* Bento */
     .style-card__preview--bento .style-card__preview-inner { background: #fafafa; }
     .style-card__preview--bento .style-card__preview-inner::before { content: ''; position: absolute; top: 15%; left: 12%; width: 35%; height: 35%; background: #e0e7ff; border-radius: 12px; }
@@ -202,10 +383,17 @@
     .style-card__copy.copied { border-color: #22c55e; color: #22c55e; }
     .style-gallery__back { display: inline-block; margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--color-text-muted); text-decoration: none; }
     .style-gallery__back:hover { color: var(--color-text); }
+    .style-preview-overlay { position: fixed; inset: 0; z-index: 100; background: #fff; display: flex; flex-direction: column; }
+    .style-preview-overlay[hidden] { display: none !important; }
+    .style-preview-frame { flex: 1; width: 100%; border: none; }
   </style>
 </head>
 <body class="style-gallery-page">
   <div class="bg-gradient"></div>
+  <!-- 内嵌预览层：点击预览框时在本页 iframe 中打开，不新开标签页 -->
+  <div id="style-preview-overlay" class="style-preview-overlay" role="dialog" aria-label="风格预览" aria-modal="true" hidden>
+    <iframe id="style-preview-frame" class="style-preview-frame" title="风格预览内容"></iframe>
+  </div>
   <div class="page-content">
     <main class="style-gallery">
       <a href="/" class="style-gallery__back">← 返回 Lin's Lab</a>
@@ -227,23 +415,23 @@
         { id: 'retro-css', name: '复古 CSS 架构', preview: 'retro-css', prompt: '请用复古 CSS 架构做界面：retro.css 或 NES.css 风格；Press Start 2P 像素字体；深色背景（#0f0f0f）+ 可选 CRT 扫描线；按钮/卡片用 border-top/bottom 6px 厚边框（border-y-6）、border-left/right 细边框；绿色/青色语义色（#0f0、#0ff）；rounded-none；可选闪烁光标、绿光晕；图片 image-rendering: pixelated。Tailwind 优先，组件用 active:translate-y-1 等。整体 NES/Famicom 游戏菜单感。' },
         { id: 'brutalist', name: '新粗野主义 Neobrutalism', preview: 'brutalist', prompt: '请用新粗野主义（Neobrutalism）做界面：硬阴影（box-shadow: 5–6px 5–6px 0 #000，无模糊、100% 不透明度）、粗黑边框（3–4px solid #000）、高对比纯色背景（黄 #FFEB3B、粉 #FF6B9D、蓝 #7DD3FC、绿 #BBF7D0、白 #fff），无渐变无透明。标题用 Space Grotesk 或 Bebas Neue 等粗体 display 字体，text-transform: uppercase。按钮/卡片 hover 时阴影变大（7–8px）+ translate(-2px, -2px)，active 时阴影缩小。可加可见网格（repeating-linear-gradient）、散落几何色块装饰。禁止软阴影、细边框、低饱和色、模糊效果。' },
         { id: 'flat-design', name: '界面设计 Interface Design', preview: 'flat-design', prompt: '请按界面设计工艺做仪表盘/后台/工具类界面：先明确用户是谁、要完成什么、整体气质（温暖/冷静/克制）。背景 #fafafa，主区 #fff；边框 1px solid rgba(0,0,0,0.06)；box-shadow 0 1px 2px rgba(0,0,0,0.04)、hover 时 0 4px 12px rgba(0,0,0,0.06)。Inter 或类似 sans；字号 0.875–1.5rem、字重 500/600/700。顶栏 + 侧栏 + 主区；侧栏激活项用 border-left: 3px solid #3b82f6 或淡蓝背景；指标区 4–6 列，关键指标可用单一强调色（#3b82f6）；hover translateY(-1px)。参考 Vercel/Linear/Stripe：层次克制、留白充足、数据与操作并置；避免装饰、渐变、高饱和。' },
-        { id: 'dashboard', name: 'KPI 仪表盘', preview: 'dashboard', prompt: '请按 KPI 仪表盘设计：战略/战术/运营层级清晰，每屏 5–7 个核心指标，带趋势与对比；布局用 Executive Summary（4–6 个 headline KPI）+ 图表区 + 告警。颜色语义一致（红=差/绿=好），留白、可下钻，避免 3D 图表与虚荣指标。' },
-        { id: 'editorial', name: '杂志/编辑风 Editorial', preview: 'editorial', prompt: '请用杂志/时尚编辑风做界面：大标题、大量留白、有意不对称；主色黑白灰/米色，仅一个强调色且克制使用。图片优先、可满屏，文字可叠图。按钮与组件扁平、无厚重边框。动效仅透明度/轻微位移，无弹跳。整体像现代时尚杂志的一页。' },
-        { id: 'typography', name: '网页排版 Web Typography', preview: 'type', prompt: '请按 On Web Typography 原则做排版：正文 16–18px、行高 1.5–1.7、行宽 45–75 字（max-width: 65ch）；标题与正文层次用字号+字重区分。选字体时区分「瞬间型」（标题/按钮）与「长读型」（正文），配对时保持明显对比（如 serif 标题 + sans 正文）。注意 font-display 与加载性能。' },
-        { id: 'dark-mode', name: '暗黑 / 深色主题 Dark Mode', preview: 'dark', prompt: '请用暗黑/深色主题做界面：支持 prefers-color-scheme 或 .dark 类切换；背景与文字用语义化 token（如 bg-gray-900 / text-gray-100、dark: 变体）；保证对比度（WCAG），交互元素有 focus 环；可选三档（亮/暗/跟随系统）与 localStorage 持久化。' },
-        { id: 'tailwind-design-system', name: 'Tailwind 设计系统', preview: 'clean', prompt: '请按 Tailwind 设计系统做界面：用 @theme 定义语义色与圆角等 token，组件用 CVA 做 variant/size；移动优先断点、支持 dark 变体；焦点与禁用状态完整，避免硬编码颜色。可参考 shadcn/ui 的层次与语义命名。' },
-        { id: 'web-design-guidelines', name: 'Vercel / 现代 Web 规范', preview: 'clean', prompt: '请按 Vercel Web Interface Guidelines 做界面：无障碍（ARIA、对比度、焦点可见）、语义化结构、布局清晰、交互可预测；符合现代 Web 最佳实践，适合「审查 UI / 检查无障碍 / 设计审计」场景。' },
-        { id: 'minimal', name: '极简 Minimal', preview: 'minimal', prompt: '请用极简风格做界面：大量留白、最少必要元素、黑白灰或单一强调色；无装饰性边框与阴影，仅保留必要信息与操作。字体与间距统一、可预测，整体安静、高可读、无视觉噪音。' },
-        { id: 'terminal', name: '终端 / CLI 风 Terminal', preview: 'terminal', prompt: '请用终端/CLI 风格做界面：等宽字体、深色背景（如 #0d1117）、高对比文字（绿/黄/灰/白）；区块与按钮简洁、类命令行，可选细边框与「提示符」式装饰。整体像开发工具或终端仪表盘，信息密度适中、可读性强。' },
-        { id: 'skeuomorphic', name: '拟物化 Skeuomorphic', preview: 'skeuomorphic', prompt: '请用拟物化（skeuomorphic）风格做界面：用视觉隐喻模拟真实材质——皮革、木纹、金属、玻璃等；明确的高光与暗部、立体阴影与质感，图标与控件像可触摸的实体。避免纯扁平与大面积纯色，保持层次与「实物感」。适合仪表盘控件、音乐/创意类工具、或需要温暖质感的界面。' },
-        { id: 'neumorphism', name: '新拟态 Neumorphism', preview: 'neumorphism', prompt: '请用新拟态（neumorphism / soft UI）风格做界面：背景与控件同色系（如浅灰 #e0e0e0），用双阴影（一侧亮、一侧暗）营造凸起或凹陷，无硬边框、大圆角；整体柔和、像从背景浮起或压入。注意对比度与可读性，避免大面积使用导致层次不清。' },
-        { id: 'organic', name: '有机 / 自然视觉 Organic', preview: 'organic', prompt: '请用有机/自然视觉风格做界面：流动的曲线与有机形态（非严格网格）、柔和色彩与自然感渐变、留白与呼吸感；可配合柔和动效。整体像自然生长、非机械排版；避免硬边与直角主导，保持温暖、流动的气质。适合品牌页、落地页或强调自然/生命感的产品。' },
+        { id: 'dashboard', name: 'KPI 仪表盘', preview: 'dashboard', prompt: '请按 KPI 仪表盘设计做界面：背景浅灰渐变（#f8fafc→#e2e8f0）+ 可选 24px 细网格（repeating-linear-gradient）；Inter 或类似 sans，字重 500/600/700。Executive Summary 区 4–6 个 KPI 卡片：白底、border 1px #e2e8f0、border-radius 10px、box-shadow 0 1px 3px rgba(0,0,0,0.04)；数值大字号加粗，趋势用语义色（绿 #059669 正/红 #dc2626 负）。图表区与告警区同卡片风格；hover 时卡片 translateY(-2px)、阴影加深。布局 F 型、关键指标左上；留白、可下钻，避免 3D 与虚荣指标。' },
+        { id: 'editorial', name: '杂志/编辑风 Editorial', preview: 'editorial', prompt: '请用杂志/时尚编辑风做界面：背景 #fafaf9 + 极淡径向/线性渐变（radial-gradient ellipse 90% 50%、linear-gradient）；布局可左右拉满（width:100%、padding 2.5rem）。标题 serif（Playfair Display、Georgia）、大字号 clamp(2.5rem, 6vw, 4rem)、letter-spacing -0.03em；正文 sans（Source Sans 3）。可选 category 标签（uppercase、0.2em 字间距、#888）；加粗分隔线 48px×3px #1a1a1a、或细灰线 #d4d4d4；pull quote 用斜体 serif + border-left 3px #1a1a1a。卡片 border-left 1px #d4d4d4 引文感；按钮扁平、border-bottom 1px。主色黑白灰/米色、单强调色克制；大量留白、有意不对称。整体像现代时尚杂志一页。' },
+        { id: 'typography', name: '网页排版 Web Typography', preview: 'type', prompt: '请按 Web Typography 原则做排版：背景 #fafaf9 + 极淡径向/线性渐变。标题 serif（Libre Baskerville、Georgia）、clamp(2rem, 5vw, 2.5rem)、字重 700；正文 sans-serif（Source Sans 3）、16–18px、行高 1.5–1.7、行宽 max-width: 65ch。可见 type scale（多级字号 12/14/16/20/24/32px 或比例 1.25）；2px #111 短分隔线；可选 pull quote（斜体 serif + 左边框）、首字下沉。配色 #111/#222/#555/#888；font-display: swap。' },
+        { id: 'dark-mode', name: '暗黑 / 深色主题 Dark Mode', preview: 'dark', prompt: '请用暗黑/深色主题做界面：避免纯黑，背景深灰 #0f172a→#0c1222 渐变 + 径向光晕（rgba(59,130,246,0.12) 于 50% 0%、可选第二层蓝紫于右下）+ 暗角（box-shadow inset）。布局居中 max-width 1000px、margin 0 auto。顶栏可半透明 #1e293b、border #334155、border-radius 10px；卡片 bg #1e293b、border #334155、border-radius 12px、box-shadow 0 4px 12px rgba(0,0,0,0.2)；可选左侧蓝条强调卡（border-left 或 3px #3b82f6）。按钮主色 #3b82f6、次要 #1e293b+描边 #334155；focus-visible:ring 2px 强调色。文字 #f8fafc 标题、#e2e8f0 正文、#94a3b8 次要。Inter 或 system-ui。WCAG 4.5:1；prefers-color-scheme 或 .dark 类；可选三档与 localStorage。' },
+        { id: 'tailwind-design-system', name: 'Tailwind 设计系统', preview: 'tailwind', prompt: '请按 Tailwind 设计系统做界面：背景 #fafafa→#f4f4f5 渐变 + 极淡径向光晕；布局居中 max-width 1000px。顶栏可白底、border #e4e4e7、border-radius 0.5rem 展示 Design tokens（--background、--foreground、--border、--ring）。标题 #09090b、正文 #71717a；短分隔线 2px #e4e4e7。按钮黑底 #18181b / outline 白底透明、圆角 0.375rem；focus-visible:ring-2。卡片 bg #fff、border #e4e4e7、border-radius 0.5rem、box-shadow 0 1px 2px rgba(0,0,0,0.05)。Inter 或 system-ui。CVA variant/size；移动优先、.dark 变体；无硬编码颜色。参考 shadcn/ui。' },
+        { id: 'web-design-guidelines', name: 'Vercel / 现代 Web 规范', preview: 'web-guidelines', prompt: '请按 Vercel Web Interface Guidelines 做界面：背景 #fff→#fafafa 渐变 + 极淡蓝径向光晕（rgba(0,112,243,0.04)）；布局居中 max-width 1000px。顶栏可浅灰 #fafafa、border #eee、border-radius 6px 标注重点（Focus visible、WCAG）。主色 #0070f3；短分隔线 2px #0070f3。按钮主色 #0070f3、次要白底 border #ddd；focus-visible:outline 2px #0070f3 outline-offset 2px；hover 时 translateY(-2px)。卡片 bg #fafafa、border #eee、border-radius 8px；hover translateY(-2px)、box-shadow 加深。Inter 或 system-ui。ARIA、对比度 WCAG、语义化；布局清晰、交互可预测。适合审查 UI / 无障碍 / 设计审计。' },
+        { id: 'minimal', name: '极简 Minimal', preview: 'minimal', prompt: '请用极简风格做界面：背景 #fff 或极淡线性渐变（rgba(0,0,0,0.01)）；布局居中 max-width 1000px、padding 0 1.25rem。色彩：黑白灰 + 单一强调色（#111 主按钮、#666 次要文字）。无装饰边框与阴影；卡片用 border-top 1px #eee 分隔，hover 时 border-color 略深（#ddd）、极淡背景或 translateY(-1px）反馈。字体 system-ui，1–2 种字体、字重/字号建层级，正文 16–18px、留白充足。可选 2px #111 短分隔线。交互：返回链接 hover translateX(-4px)；按钮 hover translateY(-1px)；整体安静、高可读、无视觉噪音。' },
+        { id: 'terminal', name: '终端 / CLI 风 Terminal', preview: 'terminal', prompt: '请用终端/CLI 风格做界面：等宽字体（JetBrains Mono、Fira Code 等）、深色背景 #0d1117，可加 4px 细横线网格与极淡绿径向光晕增强层次。布局居中 max-width 1000px、margin 0 auto、padding 0 1.25rem。文字 #c9d1d9、提示符绿 #7ee787、链接/标题蓝 #58a6ff；区块 border 1px #30363d、bg #161b22、border-radius 4px。交互：返回链接 hover 时 color 变绿、transform translateX(-4px)；按钮 hover 时 translateY(-2px)、边框/背景略亮；卡片 hover 时 translateY(-2px)、box-shadow 加深、border-color 变亮。整体像开发工具或终端仪表盘，信息密度适中。' },
+        { id: 'skeuomorphic', name: '拟物化 Skeuomorphic', preview: 'skeuomorphic', prompt: '请用拟物化（skeuomorphic）风格做界面：模拟真实材质（皮革、木纹、金属）。色彩：金棕系 #c9a86c、#8b6914、#e8d5a3、#5c4a2a、#2d1f0a；背景渐变 + 左上径向高光（rgba(255,255,255,0.2)）。布局居中 max-width 1000px、padding 0 1.25rem。控件像可触摸实体：多层 box-shadow（外阴影 + inset 0 1px 0 高光）、圆角 8–12px、细边框；主按钮底部硬阴影（0 4px 0 #5c4a2a），hover 时 translateY(-2px)、active 时 translateY(2px)+阴影缩小模拟按下。卡片用 inset + 外阴影、hover 抬升+阴影加深。字体 system-ui，标题可 text-shadow 增强刻字感。避免过度纹理导致杂乱；适合仪表盘控件、音乐/创意工具、温暖质感界面。' },
+        { id: 'neumorphism', name: '新拟态 Neumorphism', preview: 'neumorphism', prompt: '请用新拟态（neumorphism / soft UI）风格做界面：背景与控件同色（浅灰 #e0e0e0），单色阶 + 双阴影营造层次。凸起：box-shadow 6–8px 6–8px 12–16px #bebebe、-6px -6px 12–16px #fff；凹陷：box-shadow inset 4px 4px 8px #bebebe、inset -4px -4px 8px #fff。无硬边框、大圆角（16–20px）。布局居中 max-width 1000px、padding 0 1.25rem。交互：返回链接 hover translateX(-4px)；凸起按钮/卡片 hover 时 translateY(-2px)、双阴影略加深；active 时凸起变 inset 凹陷感。可选径向高光（radial-gradient 左上）增强层次。注意对比度与可读性；可提供切换至普通模式以兼顾无障碍。' },
+        { id: 'organic', name: '有机 / 自然视觉 Organic', preview: 'organic', prompt: '请用有机/自然视觉风格做界面：背景用柔和渐变（绿系如 #e8f5e9→#c8e6c9→#a5d6a7）+ 径向光晕（radial-gradient 模拟光透过树叶）、散落柔和色块装饰；主内容区用半透明白色面板、有机圆角（border-radius: 40% 60% 55% 45% / 55% 45% 55% 45% 或 32px 28px 28px 32px）、细边框 rgba(129,199,132,0.35)、软阴影。Quicksand 或 Nunito 等圆润字体； earthy 色调（绿/米/褐），留白充足。卡片用非对称圆角、hover 时 translateY(-4px)。整体像自然生长、非机械排版；避免硬边与直角主导。' },
         { id: 'cute', name: '可爱风 Cute/Kawaii', preview: 'cute', prompt: '请用可爱/Kawaii 风格做界面：柔和 Pastel 色（粉、薄荷、薰衣草、奶油、 Peach 等）、大圆角（border-radius 16px 以上）、软阴影（blur 明显、无硬边）、背景以浅色为主。可加俏皮元素（小圆点、心形、星星、气泡）。字体可选圆润款，按钮/卡片 hover 时有轻微弹跳或缩放。整体温暖、治愈、萌系；避免冷峻、硬朗、科技感强的视觉。' },
-        { id: 'macos', name: 'macOS 设计风格', preview: 'macos', prompt: '请用 macOS Big Sur / Monterey 设计风格做界面：毛玻璃与半透明（backdrop-blur、vibrancy）、大圆角（10–12px）、SF Pro 气质字体；浅色背景、活力强调色（系统蓝/绿/橙）。侧边栏与工具栏层级清晰，图标简洁。整体通透、克制、符合 Apple Human Interface Guidelines。' },
-        { id: 'fluent', name: 'Microsoft Fluent Design', preview: 'fluent', prompt: '请用 Microsoft Fluent Design 2 风格做界面：亚克力材质（半透明 + backdrop-blur）、深度与层次（elevation、reveal 效果）、柔和光影；圆角 4–8px。微动效（hover 高亮、press 反馈）。色彩可用中性灰 + 品牌强调色。整体现代、专业、企业级，符合 Fluent 设计语言。' },
-        { id: 'cyberpunk', name: '赛博朋克 Cyberpunk', preview: 'cyberpunk', prompt: '请用赛博朋克/夜城风格做界面：霓虹色密布（黄、粉、青）、高对比暗背景；科技感/等宽字体。可加雨雾氛围（雨丝、雾蒙蒙）、霓虹光晕浮动、广告牌发光字、扫描线/网格、底部反射光带。边框光效、HUD 式边角。整体拥挤、层次多、夜城感。参考赛博朋克 2077。避免柔和、萌系。' },
-        { id: 'material', name: 'Material Design 3', preview: 'material', prompt: '请用 Material Design 3 / Material You 风格做界面：动态色（从种子色生成调色板）、大圆角（16–28px）、明确层级（elevation、surface）；FAB、Bottom App Bar、卡片等组件。动效有物理感。整体清晰、可访问、符合 Material 3 规范。' },
-        { id: 'ios', name: 'iOS 设计风格', preview: 'ios', prompt: '请用 iOS / Apple 移动端设计风格做界面：大标题（large title）、毛玻璃导航与 tab 栏；圆角卡片、安全区、触控友好（最小 44pt）；SF Pro 气质、系统色。列表与分组、分段控件、操作表。整体符合 iOS Human Interface Guidelines，原生感强。' },
+        { id: 'macos', name: 'macOS 设计风格', preview: 'macos', prompt: '请用 macOS Big Sur / Monterey 设计风格做界面：毛玻璃与半透明（backdrop-blur 12px、vibrancy）、大圆角 10–12px、SF Pro 气质（-apple-system）；背景 #f5f5f7→#e8e8ed 渐变 + 径向高光；主色系统蓝 #0071e3/#0077ed，文字 #1d1d1f/#6e6e73。布局居中 max-width 1000px、padding 0 1.25rem。卡片/次要按钮用 rgba(255,255,255,0.65)+backdrop-blur、border 1px rgba(0,0,0,0.06)、border-radius 12px、box-shadow 0 4px 16px rgba(0,0,0,0.06)。交互：返回链接 hover translateX(-4px)；主/次按钮与卡片 hover translateY(-2px)~(-3px)、阴影略加深。侧边栏与工具栏层级清晰、图标简洁。整体通透、克制、符合 Apple Human Interface Guidelines。' },
+        { id: 'fluent', name: 'Microsoft Fluent Design', preview: 'fluent', prompt: '请用 Microsoft Fluent Design 2 风格做界面：亚克力材质（半透明 + backdrop-blur）、深度与层次（elevation、reveal）；背景 #f3f2f1→#edebe9 渐变 + 径向高光。中性灰 #323130/#605e5c/#201f1e + 品牌蓝 #0078d4/#106ebe。布局居中 max-width 1000px、padding 0 1.25rem。圆角 4–8px；卡片/次要按钮用 rgba(255,255,255,0.85)、box-shadow 柔和 + inset 0 1px 0 高光、border 1px rgba(0,0,0,0.06)。主按钮 box-shadow 0 2px 6px rgba(0,0,0,0.12)。交互：返回链接 hover translateX(-4px)；按钮/卡片 hover translateY(-2px)~(-3px)、阴影加深；focus 描边加粗。字体 Segoe UI。整体现代、专业、企业级，符合 Fluent 设计语言。' },
+        { id: 'cyberpunk', name: '赛博朋克 Cyberpunk', preview: 'cyberpunk', prompt: '请用赛博朋克/夜城风格做界面：霓虹色（黄 #FCEe0a、粉 #FF2A6D、青 #05d9e8）、高对比暗背景 #0d0d0f/#0a0a12。布局居中 max-width 1000px、padding 0 1.25rem。科技感/等宽字体（Orbitron）；text-shadow/box-shadow 多层做霓虹发光。可加：扫描线（repeating-linear-gradient）、网格、霓虹光晕浮动、广告牌发光字、底部反射光带、雨雾氛围。卡片左侧渐变条（黄→粉）、边框青/黄光效、hover 时 translateY(-2px)、发光加强。按钮直角、描边发光、hover 抬升。整体层次多、夜城感；参考赛博朋克 2077。避免柔和、萌系。' },
+        { id: 'material', name: 'Material Design 3', preview: 'material', prompt: '请用 Material Design 3 / Material You 风格做界面：动态色（种子色生成调色板）；主色 #6750a4、primaryContainer #e8def8、表面 #fff、文字 #1d1b20/#49454f。布局居中 max-width 1000px、padding 0 1.25rem。大圆角（按钮 20px、卡片 24px，16–28px 范围）、elevation 柔和阴影（0 2px 12px rgba(0,0,0,0.08) 等）。Roboto 字体；主按钮填充色、次要按钮 tonal（#e8def8）。交互：返回链接 hover translateX(-4px)；按钮/卡片 hover translateY(-2px)~(-4px)、阴影加深。FAB、Bottom App Bar、卡片等组件；动效有物理感。整体清晰、可访问、符合 Material 3 规范。' },
+        { id: 'ios', name: 'iOS 设计风格', preview: 'ios', prompt: '请用 iOS / Apple 设计风格做界面：背景 #f2f2f7、系统蓝 #007aff、文字 #1d1d1f/#6e6e73；SF Pro（-apple-system）、大标题 Large Title（25–27pt）；安全区（顶 44–47pt、底 34pt）、触控最小 44pt；毛玻璃（backdrop-blur）卡片、圆角 12–16px；主/次按钮、三列卡片网格、短线分隔；hover 时按钮 translateY(-2px)、卡片 translateY(-2px) 与阴影；符合 iOS HIG，原生感强。' },
         { id: 'bento', name: 'Bento 网格风格', preview: 'bento', prompt: '请用 Bento 网格布局风格做界面：不规则网格、不同大小的卡片块（像便当盒分格）；信息分组清晰、每块有明确用途。圆角统一、留白适中。整体像 Apple 产品页或 Notion 的块状布局，现代、清晰、信息密度可调。' },
         { id: 'clean-ui', name: '干净界面', preview: 'clean-ui', prompt: '请用干净界面风格做界面：克制的配色（黑白灰 + 单一强调色）、清晰层次、少装饰；高可读、高对比、留白充足。避免花哨边框与阴影。整体干净、专业、像 Stripe / Linear / Vercel 的克制感。' },
         { id: 'card-layout', name: '卡片式布局', preview: 'card-layout', prompt: '请用卡片式布局风格做界面：信息以卡片为单位，每张卡片有标题、摘要、可选图；网格或瀑布流排列。卡片统一圆角与阴影、hover 有反馈。适合内容聚合、商品展示。整体清晰、易扫读、模块化，像 Pinterest / Dribbble 的流式布局。' }
@@ -273,9 +461,8 @@
         var previewLink = document.createElement('a');
         previewLink.className = 'style-card__preview style-card__preview--' + (s.preview || 'clean');
         previewLink.href = previewUrl;
-        previewLink.target = '_blank';
-        previewLink.rel = 'noopener';
-        previewLink.setAttribute('aria-label', '在新标签页打开预览页：' + s.name);
+        previewLink.setAttribute('data-preview-url', previewUrl);
+        previewLink.setAttribute('aria-label', '在本页打开预览：' + s.name);
 
         var inner = document.createElement('div');
         inner.className = 'style-card__preview-inner';
@@ -291,6 +478,25 @@
         card.appendChild(body);
         grid.appendChild(card);
       });
+
+      var overlay = document.getElementById('style-preview-overlay');
+      var frame = document.getElementById('style-preview-frame');
+      if (overlay && frame) {
+        grid.addEventListener('click', function (e) {
+          var link = e.target.closest('.style-card__preview');
+          if (link && link.href) {
+            e.preventDefault();
+            frame.src = link.getAttribute('data-preview-url') || link.href;
+            overlay.hidden = false;
+          }
+        });
+        window.addEventListener('message', function (event) {
+          if (event.data && event.data.type === 'STYLE_GALLERY_BACK') {
+            overlay.hidden = true;
+            frame.src = 'about:blank';
+          }
+        });
+      }
 
       grid.addEventListener('click', function (e) {
         var btn = e.target.closest('.style-card__copy');

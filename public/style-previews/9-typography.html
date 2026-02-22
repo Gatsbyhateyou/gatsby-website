@@ -4,29 +4,125 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>风格展示 · 网页排版 Web Typography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Georgia, serif; font-size: 1.125rem; line-height: 1.6; color: #222; padding: 2rem; background: #fff; }
-    .preview { max-width: 65ch; margin: 0 auto; }
-    .preview__title { font-family: system-ui, sans-serif; font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 0.5rem; color: #111; }
-    .preview__subtitle { font-size: 1rem; color: #555; margin-bottom: 1.5rem; }
+    body {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: #222;
+      padding: 2rem 0 3rem;
+      background: #fafaf9;
+      background-image: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(0,0,0,0.03) 0%, transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,0.015) 0%, transparent 20%);
+    }
+    .preview { max-width: 1000px; width: 100%; margin: 0 auto; padding: 0 1.25rem; border-left: 3px solid rgba(0,0,0,0.08); padding-left: 1.5rem; box-sizing: border-box; }
+    .preview__back { color: #666; text-decoration: none; margin-bottom: 2rem; display: inline-block; font-size: 0.9rem; transition: color 0.2s, transform 0.2s; }
+    .preview__back:hover { color: #111; transform: translateX(-4px); }
+    .preview__title {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+    .preview__subtitle { font-size: 0.95rem; color: #555; margin-bottom: 1.5rem; }
+    .preview__rule { width: 32px; height: 2px; background: #111; margin-bottom: 2rem; }
+
+    /* Type scale 展示：层级可见 */
+    .preview__scale-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+    }
+    .preview__scale {
+      margin-bottom: 2rem;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .preview__h2 {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #111;
+      margin: 1.5rem 0 0.5rem;
+    }
+    .preview__scale-line { line-height: 1.3; color: #222; transition: color 0.2s; }
+    .preview__scale-line:hover { color: #111; }
+    .preview__scale-line--xs { font-size: 0.75rem; }
+    .preview__scale-line--sm { font-size: 0.875rem; }
+    .preview__scale-line--base { font-size: 1rem; }
+    .preview__scale-line--md { font-size: 1.25rem; font-weight: 600; }
+    .preview__scale-line--lg { font-size: 1.5rem; font-weight: 600; }
+    .preview__scale-line--xl {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #111;
+    }
+
     .preview__prose { margin-bottom: 2rem; }
-    .preview__prose p { margin-bottom: 1em; }
-    .preview__back { font-family: system-ui, sans-serif; color: #666; text-decoration: none; margin-bottom: 1.5rem; display: inline-block; font-size: 0.9rem; }
-    .preview__back:hover { color: #111; }
-    .preview__meta { font-size: 0.875rem; color: #888; }
+    .preview__prose p { margin-bottom: 1.2em; }
+    .preview__prose strong { font-weight: 600; }
+    /* 首字下沉（编辑感） */
+    .preview__prose .preview__dropcap::first-letter {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      float: left;
+      font-size: 2.5em;
+      line-height: 1;
+      margin-right: 0.08em;
+      color: #111;
+    }
+    /* Pull quote */
+    .preview__quote {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      line-height: 1.5;
+      color: #333;
+      margin: 1.5rem 0;
+      padding-left: 1rem;
+      border-left: 3px solid #111;
+      transition: border-left-color 0.2s, color 0.2s;
+    }
+    .preview__quote:hover { border-left-color: #333; color: #111; }
+    .preview__meta { font-size: 0.8125rem; color: #888; }
   </style>
 </head>
 <body>
   <div class="preview">
     <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
     <h1 class="preview__title">Web Typography</h1>
-    <p class="preview__subtitle">65ch · 1.6 line-height · 层级与配对</p>
+    <p class="preview__subtitle">65ch · type scale · serif / sans pairing</p>
+    <div class="preview__rule" aria-hidden="true"></div>
+
+    <div class="preview__scale">
+      <div class="preview__scale-label">Type scale (Major Third ~1.25)</div>
+      <div class="preview__scale-line preview__scale-line--xs">12px · caption</div>
+      <div class="preview__scale-line preview__scale-line--sm">14px · small</div>
+      <div class="preview__scale-line preview__scale-line--base">16px · body</div>
+      <div class="preview__scale-line preview__scale-line--md">20px · lead</div>
+      <div class="preview__scale-line preview__scale-line--lg">24px · H2</div>
+      <div class="preview__scale-line preview__scale-line--xl">32px · H1</div>
+    </div>
+
     <div class="preview__prose">
-      <p>Typography is the voice of your content. Body 16–18px, line length 45–75 characters, line height 1.5–1.7. Headlines need weight and presence; body needs comfort for sustained reading.</p>
-      <p>Pair typefaces with clear contrast: serif for headlines, sans for UI; or one family with weight variation. Test at actual sizes.</p>
+      <p class="preview__dropcap"><strong>Typography is the voice of your content.</strong> 正文 16–18px，行宽 45–75 字（max-width: 65ch），行高 1.5–1.7。标题用 serif 强化重量感，正文用 sans 保证长读舒适。</p>
+      <h2 class="preview__h2">Measure &amp; scale</h2>
+      <p>行宽 65ch、type scale 用 1.25 比例递进，能形成稳定层级。H1 用 serif，正文用 sans，对比清晰。</p>
+      <blockquote class="preview__quote">Pairing serif headlines with sans body creates clear hierarchy and contrast.</blockquote>
+      <p>配对时保持明显对比：serif 标题 + sans 正文；或同族用字重区分。注意 font-display: swap 与加载性能。</p>
     </div>
     <p class="preview__meta">max-width: 65ch · font-display: swap</p>
   </div>
+  <script src="back-to-gallery.js"></script>
 </body>
 </html>

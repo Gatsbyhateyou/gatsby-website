@@ -7,45 +7,77 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
       min-height: 100vh;
       background: #fff;
+      background-image: linear-gradient(180deg, rgba(0,0,0,0.012) 0%, transparent 18%);
       color: #111;
-      padding: 3rem 2rem;
+      padding: 2rem 0 3rem;
+      font-size: 1rem;
+      line-height: 1.6;
     }
-    .preview { max-width: 560px; margin: 0 auto; }
-    .preview__back { color: #666; text-decoration: none; margin-bottom: 2rem; display: inline-block; font-size: 0.9rem; }
-    .preview__back:hover { color: #111; }
-    .preview__title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; letter-spacing: -0.02em; }
-    .preview__subtitle { color: #666; margin-bottom: 2.5rem; font-size: 0.95rem; }
-    .preview__actions { display: flex; gap: 1rem; margin-bottom: 2.5rem; }
+    .preview {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      box-sizing: border-box;
+    }
+    .preview__back {
+      color: #666;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      display: inline-block;
+      font-size: 0.9rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .preview__back:hover { color: #111; transform: translateX(-4px); }
+    .preview__title {
+      font-size: clamp(1.5rem, 4vw, 1.75rem);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.02em;
+    }
+    .preview__subtitle { color: #666; margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .preview__rule { width: 32px; height: 2px; background: #111; margin-bottom: 2rem; }
+    .preview__actions { display: flex; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
     .preview__btn {
       padding: 0.6rem 1.25rem;
+      font-family: inherit;
       font-size: 0.9rem;
       border: none;
       background: #111;
       color: #fff;
       cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
     }
+    .preview__btn:hover { opacity: 0.9; transform: translateY(-1px); }
     .preview__btn--ghost { background: transparent; color: #111; }
-    .preview__btn--ghost:hover { text-decoration: underline; }
-    .preview__cards { display: flex; flex-direction: column; gap: 1.5rem; }
+    .preview__btn--ghost:hover { text-decoration: underline; transform: translateY(-1px); }
+    .preview__cards { display: flex; flex-direction: column; gap: 0; }
     .preview__card {
-      padding: 0;
+      padding: 1.5rem 0 0;
       border: none;
       background: none;
       border-top: 1px solid #eee;
-      padding-top: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
+    }
+    .preview__card:hover {
+      border-top-color: #ddd;
+      transform: translateY(-1px);
+      background: rgba(0,0,0,0.012);
     }
     .preview__card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.35rem; }
     .preview__card p { font-size: 0.9rem; color: #555; line-height: 1.6; }
+    .preview__meta { font-size: 0.8rem; color: #999; margin-top: 2rem; }
   </style>
 </head>
 <body>
   <div class="preview">
     <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
     <h1 class="preview__title">极简 Minimal</h1>
-    <p class="preview__subtitle">留白、最少元素、无装饰。</p>
+    <p class="preview__subtitle">留白、最少必要元素、黑白灰或单一强调色；无装饰边框与阴影，字体与间距统一。</p>
+    <div class="preview__rule" aria-hidden="true"></div>
     <div class="preview__actions">
       <button type="button" class="preview__btn">主要</button>
       <button type="button" class="preview__btn preview__btn--ghost">次要</button>
@@ -53,17 +85,19 @@
     <div class="preview__cards">
       <div class="preview__card">
         <h3>卡片一</h3>
-        <p>仅必要信息与操作，字体与间距统一。</p>
+        <p>仅必要信息与操作，type scale 与留白建立层级。</p>
       </div>
       <div class="preview__card">
         <h3>卡片二</h3>
-        <p>黑白灰或单一强调色，无边框与阴影。</p>
+        <p>黑白灰或单一强调色（#111），border-top 1px #eee 分隔即可。</p>
       </div>
       <div class="preview__card">
         <h3>卡片三</h3>
-        <p>整体安静、高可读、无视觉噪音。</p>
+        <p>整体安静、高可读、无视觉噪音；hover 反馈克制。</p>
       </div>
     </div>
+    <p class="preview__meta">背景 #fff · 无装饰 · 可预测间距</p>
   </div>
+  <script src="back-to-gallery.js"></script>
 </body>
 </html>

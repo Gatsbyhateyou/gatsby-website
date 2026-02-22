@@ -6,33 +6,113 @@
   <title>风格展示 · 新拟态 Neumorphism</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, sans-serif; min-height: 100vh; background: #e0e0e0; color: #333; padding: 2rem; }
-    .preview { max-width: 900px; margin: 0 auto; }
-    .preview__back { color: #666; text-decoration: none; margin-bottom: 1.5rem; display: inline-block; font-size: 0.9rem; }
-    .preview__back:hover { color: #111; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      background: #e0e0e0;
+      background-image: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(255,255,255,0.6) 0%, transparent 55%), #e0e0e0;
+      color: #333;
+      padding: 2rem 0 3rem;
+    }
+    .preview {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      box-sizing: border-box;
+    }
+    .preview__back {
+      color: #666;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      font-size: 0.9rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .preview__back:hover { color: #333; transform: translateX(-4px); }
     .preview__title { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; color: #333; }
-    .preview__subtitle { color: #666; margin-bottom: 1.5rem; font-size: 1rem; }
+    .preview__subtitle { color: #666; margin-bottom: 1rem; font-size: 1rem; }
+    .preview__rule {
+      width: 48px; height: 4px; border-radius: 2px;
+      background: #e0e0e0;
+      box-shadow: inset 2px 2px 4px #bebebe, inset -2px -2px 4px #fff;
+      margin-bottom: 1.5rem;
+    }
     .preview__actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .preview__btn { padding: 0.6rem 1.25rem; font-size: 0.9rem; border: none; background: #e0e0e0; color: #333; cursor: pointer; border-radius: 16px; box-shadow: 6px 6px 12px #bebebe, -6px -6px 12px #fff; }
-    .preview__btn:hover { box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #fff; }
-    .preview__btn:active { box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #fff; }
-    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
-    .preview__card { padding: 1.25rem; border-radius: 20px; background: #e0e0e0; border: none; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff; }
-    .preview__card h3 { font-size: 1rem; margin-bottom: 0.5rem; font-weight: 600; }
+    .preview__btn {
+      padding: 0.6rem 1.25rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      border: none;
+      background: #e0e0e0;
+      color: #333;
+      cursor: pointer;
+      border-radius: 16px;
+      box-shadow: 6px 6px 12px #bebebe, -6px -6px 12px #fff;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .preview__btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff;
+    }
+    .preview__btn:active {
+      box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #fff;
+      transform: translateY(0);
+    }
+    .preview__btn--flat {
+      box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #fff;
+    }
+    .preview__btn--flat:hover {
+      box-shadow: inset 3px 3px 6px #bebebe, inset -3px -3px 6px #fff;
+      transform: translateY(-1px);
+    }
+    .preview__btn--flat:active {
+      box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #fff;
+    }
+    .preview__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .preview__card {
+      padding: 1.25rem;
+      border-radius: 20px;
+      background: #e0e0e0;
+      border: none;
+      box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .preview__card:hover {
+      transform: translateY(-2px);
+      box-shadow: 10px 10px 20px #bebebe, -10px -10px 20px #fff;
+    }
+    .preview__card h3 { font-size: 1rem; margin-bottom: 0.5rem; font-weight: 600; color: #333; }
     .preview__card p { font-size: 0.875rem; color: #555; line-height: 1.5; }
+    .preview__meta { font-size: 0.8rem; color: #777; margin-top: 1.5rem; }
   </style>
 </head>
 <body>
   <div class="preview">
     <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
     <h1 class="preview__title">新拟态 Neumorphism</h1>
-    <p class="preview__subtitle">同色系双阴影，凸起/凹陷，无硬边框、大圆角。</p>
-    <div class="preview__actions"><button type="button" class="preview__btn">凸起按钮</button></div>
-    <div class="preview__cards">
-      <div class="preview__card"><h3>卡片一</h3><p>亮侧 + 暗侧阴影，像从背景浮起。</p></div>
-      <div class="preview__card"><h3>卡片二</h3><p>柔和、可触摸感，注意对比度。</p></div>
-      <div class="preview__card"><h3>卡片三</h3><p>Soft UI，避免大面积导致层次不清。</p></div>
+    <p class="preview__subtitle">背景与控件同色 #e0e0e0；双阴影（亮 #fff、暗 #bebebe）营造凸起或凹陷，无硬边框、大圆角。Soft UI。</p>
+    <div class="preview__rule" aria-hidden="true"></div>
+    <div class="preview__actions">
+      <button type="button" class="preview__btn">凸起</button>
+      <button type="button" class="preview__btn preview__btn--flat">凹陷</button>
     </div>
+    <div class="preview__cards">
+      <div class="preview__card">
+        <h3>卡片一</h3>
+        <p>亮侧 + 暗侧双阴影，像从背景浮起；hover 时阴影略加深、微抬升。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片二</h3>
+        <p>同色系、大圆角 16–20px，注意对比度与可读性。</p>
+      </div>
+      <div class="preview__card">
+        <h3>卡片三</h3>
+        <p>避免大面积使用导致层次不清；可提供切换至普通模式。</p>
+      </div>
+    </div>
+    <p class="preview__meta">box-shadow 双值 · 凸起 / inset 凹陷</p>
   </div>
+  <script src="back-to-gallery.js"></script>
 </body>
 </html>

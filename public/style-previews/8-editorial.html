@@ -4,36 +4,120 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>风格展示 · 杂志/编辑风 Editorial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, sans-serif; background: #f5f0eb; color: #1a1a1a; padding: 2rem; }
-    .preview { max-width: 900px; margin: 0 auto; }
-    .preview__title { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 300; letter-spacing: -0.03em; margin-bottom: 0.25rem; line-height: 0.95; }
-    .preview__subtitle { color: #555; margin-bottom: 3rem; font-size: 0.95rem; }
-    .preview__actions { display: flex; gap: 1.5rem; margin-bottom: 3rem; }
-    .preview__btn { padding: 0.6rem 0; font-size: 0.9rem; border: none; background: none; color: #1a1a1a; cursor: pointer; border-bottom: 1px solid #1a1a1a; }
-    .preview__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2rem; }
-    .preview__card { padding: 0; }
-    .preview__card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
-    .preview__card p { font-size: 0.875rem; color: #666; line-height: 1.6; }
-    .preview__back { color: #666; text-decoration: none; margin-bottom: 2rem; display: inline-block; }
-    .preview__back:hover { color: #1a1a1a; }
+    body {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      min-height: 100vh;
+      background: #fafaf9;
+      background-image: radial-gradient(ellipse 90% 50% at 50% 0%, rgba(0,0,0,0.025) 0%, transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,0.02) 0%, transparent 18%),
+        linear-gradient(0deg, rgba(0,0,0,0.015) 0%, transparent 25%);
+      color: #1a1a1a;
+      padding: 2rem 0 3rem;
+    }
+    .preview {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      box-sizing: border-box;
+    }
+    .preview__back { color: #555; text-decoration: none; margin-bottom: 2rem; display: inline-block; font-size: 0.9rem; transition: color 0.2s, transform 0.2s; }
+    .preview__back:hover { color: #1a1a1a; transform: translateX(-4px); }
+    .preview__category {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 0.75rem;
+    }
+    .preview__title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+    }
+    .preview__subtitle {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.01em;
+    }
+    .preview__rule {
+      width: 48px;
+      height: 3px;
+      background: #1a1a1a;
+      margin-bottom: 2rem;
+    }
+    .preview__rule--full {
+      width: 100%;
+      height: 1px;
+      background: rgba(0,0,0,0.06);
+      margin: 0 -1.25rem 2rem;
+    }
+    .preview__actions { display: flex; gap: 2rem; margin-bottom: 3rem; flex-wrap: wrap; }
+    .preview__btn {
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: none;
+      background: none;
+      color: #1a1a1a;
+      cursor: pointer;
+      border-bottom: 1px solid #1a1a1a;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .preview__btn:hover { opacity: 0.7; transform: translateY(-1px); }
+    .preview__quote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+      font-style: italic;
+      line-height: 1.5;
+      color: #333;
+      margin-bottom: 2.5rem;
+      padding-left: 1.25rem;
+      border-left: 3px solid #1a1a1a;
+    }
+    .preview__cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem 3rem; }
+    .preview__card {
+      padding: 0;
+      border-left: 1px solid #d4d4d4;
+      padding-left: 1.25rem;
+      transition: border-left-color 0.2s, background 0.2s;
+    }
+    .preview__card:hover { border-left-color: #1a1a1a; background: rgba(0,0,0,0.02); }
+    .preview__card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1a1a1a; }
+    .preview__card p { font-size: 0.875rem; color: #666; line-height: 1.7; }
+    .preview__card--lead h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; }
   </style>
 </head>
 <body>
   <div class="preview">
     <a href="../../style-gallery.html" class="preview__back">← 返回画廊</a>
+    <p class="preview__category">Fashion &amp; Culture</p>
     <h1 class="preview__title">Editorial</h1>
     <p class="preview__subtitle">大标题 · 留白 · 黑白灰/米色 · 单强调色</p>
+    <div class="preview__rule" aria-hidden="true"></div>
+    <div class="preview__rule preview__rule--full" aria-hidden="true"></div>
     <div class="preview__actions">
       <button type="button" class="preview__btn">主要</button>
       <button type="button" class="preview__btn">次要</button>
     </div>
+    <blockquote class="preview__quote">Less interface, more atmosphere. 像时尚杂志的一页，克制、自信。</blockquote>
     <div class="preview__cards">
-      <div class="preview__card"><h3>Less interface, more atmosphere</h3><p>像时尚杂志的一页，克制、自信。</p></div>
-      <div class="preview__card"><h3>Typography 为主</h3><p>大标题、强对比、无装饰字体。</p></div>
-      <div class="preview__card"><h3>留白即功能</h3><p>呼吸感、不塞满。</p></div>
+      <div class="preview__card preview__card--lead"><h3>Typography 为主</h3><p>大标题、强对比、serif 配 sans，无多余装饰。</p></div>
+      <div class="preview__card"><h3>留白即功能</h3><p>呼吸感、不塞满、有意不对称。</p></div>
+      <div class="preview__card"><h3>粗线 · 细线</h3><p>加粗分隔线或细灰线强化层次。</p></div>
     </div>
   </div>
+  <script src="back-to-gallery.js"></script>
 </body>
 </html>
