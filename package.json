@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "deploy": "git add -A && git commit -m \"deploy\" && git push",
     "screenshot": "node scripts/screenshot-preview.js",
-    "next-style": "node scripts/next-style-to-optimize.js"
+    "next-style": "node scripts/next-style-to-optimize.js",
+    "commit": "node scripts/quick-commit.js"
   },
   "keywords": [],
   "author": "",
