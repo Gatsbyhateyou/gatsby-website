@@ -54,8 +54,8 @@ create policy "允许匿名读取"
 
 ## 3. 本地配置（不要提交到 Git）
 
-1. 在项目根目录复制示例配置：
-   - 把 `supabase-config.example.js` 复制为 `supabase-config.js`。
+1. 复制示例配置到项目根目录或 `public/`：
+   - 把 **`config/supabase-config.example.js`** 复制为 **`supabase-config.js`**（放在根目录或 `public/`，站点从 `public/supabase-config.js` 加载；构建时也会生成到 `public/`）。
 2. 打开 `supabase-config.js`，把里面的占位符换成你在第 1 步拿到的：
    - `SUPABASE_URL`：你的 Project URL
    - `SUPABASE_ANON_KEY`：你的 anon public key
@@ -79,5 +79,5 @@ create policy "允许匿名读取"
 |------|--------|--------|
 | ① | 拿到 Project URL 和 Publishable key（或 anon key） | Supabase 控制台 → Project Settings → API Keys（URL 可能在 General） |
 | ② | 执行建表 SQL | 控制台左侧 SQL Editor → New query → 粘贴下面整段 SQL → Run |
-| ③ | 复制 `supabase-config.example.js` 为 `supabase-config.js`，填上 ① 的两个值 | 项目根目录 |
+| ③ | 复制 **`config/supabase-config.example.js`** 为 **`public/supabase-config.js`**（或根目录），填上 ① 的两个值 | 项目根目录 / public |
 | ④ | 本地跑起来并试一次「吞噬」 | 终端 `npm run dev`，浏览器打开站点，用灵感垃圾桶投一条，再到 Table Editor 看 `inspirations` 表是否有新行 |

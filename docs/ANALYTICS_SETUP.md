@@ -6,7 +6,7 @@
 
 ## 第一步：复制并填写配置
 
-1. 在 **`public`** 目录下，将 `analytics-config.example.js` 复制为 **`analytics-config.js`**（开发与部署都会从该路径加载）。
+1. 将项目根目录下 **`config/analytics-config.example.js`** 复制到 **`public`** 目录并重命名为 **`analytics-config.js`**（开发与部署都会从该路径加载）。
 2. 打开 `public/analytics-config.js`，填入你在 GA 和 PostHog 后台获取的值：
 
 | 变量 | 说明 | 从哪里获取 |
