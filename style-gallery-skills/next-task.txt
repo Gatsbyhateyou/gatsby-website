@@ -1,0 +1,1 @@
+请严格按照 @style-gallery-skills/style-gallery-workflow.md 优化第 26 个风格（id: card-layout，名称：卡片式布局）。只做这一个，完整执行：0. Web search（必须）→ 1. 优化预览页（层次丰富、居中、1b hover 必做）→ 2. 优化 prompt → 3. 优化画廊小框 → 4. 三轮截图并每轮读图反思与修改。预览页路径：public/style-previews/26-card-layout.html；截图命令：node scripts/screenshot-preview.js 26-card-layout。

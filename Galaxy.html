@@ -46,6 +46,23 @@
             cursor: none !important;
         }
 
+        /* 从顶部向下的动态光柱层（Enter 风格），在 canvas 之下 */
+        .galaxy-light-beams {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 45% at 20% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 45%),
+                radial-gradient(ellipse 60% 45% at 80% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 45%);
+            animation: galaxy-beam-pulse 4.5s ease-in-out infinite;
+        }
+        @keyframes galaxy-beam-pulse {
+            0%, 100% { opacity: 0.65; }
+            50% { opacity: 1; }
+        }
+
         /* 召唤浮层：太空感 + 虚幻 */
         #search-overlay {
             position: fixed;
@@ -262,6 +279,7 @@
 </head>
 <body>
     <a href="/" class="galaxy-back-link"><span class="galaxy-back-link__text">返回</span><span class="galaxy-back-link__arrow" aria-hidden="true">↑</span></a>
+    <div class="galaxy-light-beams" aria-hidden="true"></div>
     <canvas id="galaxyCanvas"></canvas>
 
     <div id="star-card-overlay">
@@ -308,12 +326,13 @@ const PARALLAX_FACTOR = 0.01; // 视差反向位移系数
 function initBackgroundStars() {
     backgroundStars.length = 0;
     for (let i = 0; i < STAR_COUNT; i++) {
+        const isFar = i < STAR_COUNT * 0.7; // 远景：更小、更淡、闪烁更快
         backgroundStars.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            size: Math.random() * 1.2,
-            opacity: Math.random() * 0.5,
-            blinkSpeed: 0.01 + Math.random() * 0.02,
+            size: (Math.random() * 1.2) * (isFar ? 0.5 : 1),
+            opacity: (Math.random() * 0.5 + 0.2) * (isFar ? 0.6 : 1),
+            blinkSpeed: (0.01 + Math.random() * 0.02) * (isFar ? 1.5 : 1),
             phase: Math.random() * Math.PI * 2,
             color: Math.random() > 0.8 ? '#aaccff' : '#d4af37' // 80% 金，20% 星际蓝
         });
@@ -324,12 +343,17 @@ function drawDeepSpace() {
     // 视差：根据鼠标速度对背景星做极小幅反向位移（远山感）
     const offsetX = mouseVel.x * PARALLAX_FACTOR;
     const offsetY = mouseVel.y * PARALLAX_FACTOR;
+    // 时间漂移：极慢的 x/y 偏移，增强「粒子在动」的动感
+    const driftScale = 2;
+    const driftX = driftScale * Math.sin(tick * 0.02);
+    const driftY = driftScale * 0.5 * Math.cos(tick * 0.015);
 
-    backgroundStars.forEach(s => {
+    backgroundStars.forEach(function (s, i) {
         s.phase += s.blinkSpeed;
         const currentOpacity = s.opacity * (Math.sin(s.phase) * 0.5 + 0.5);
-        const px = s.x - offsetX;
-        const py = s.y - offsetY;
+        const perStar = 0.3 * Math.sin(tick * 0.01 + s.phase) + 0.7;
+        const px = s.x - offsetX + driftX * perStar;
+        const py = s.y - offsetY + driftY * perStar;
 
         ctx.save();
         ctx.globalAlpha = currentOpacity;
