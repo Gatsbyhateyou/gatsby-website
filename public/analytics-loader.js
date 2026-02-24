@@ -5,15 +5,29 @@
   var phHost = window.__POSTHOG_HOST__;
 
   if (gaId) {
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
-    document.head.appendChild(s);
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', gaId);
+    var gtagUrl = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function () { controller.abort(); }, 3000);
+    fetch(gtagUrl, { method: 'HEAD', signal: controller.signal })
+      .then(function (r) {
+        clearTimeout(timeoutId);
+        if (!r.ok) return;
+        var s = document.createElement('script');
+        s.async = true;
+        s.onload = function () {
+          gtag('js', new Date());
+          gtag('config', gaId);
+        };
+        s.onerror = function () {};
+        s.src = gtagUrl;
+        document.head.appendChild(s);
+      })
+      .catch(function () {
+        clearTimeout(timeoutId);
+      });
   }
 
   if (phKey && phHost) {
