@@ -7,3 +7,6 @@ supabase-config.js
 public/supabase-config.js
 analytics-config.js
 public/analytics-config.js
+
+# Obsidian 仓库配置/工作区状态（打开某文件夹为 Vault 时自动生成）
+.obsidian
