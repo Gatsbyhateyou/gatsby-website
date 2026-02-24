@@ -183,6 +183,74 @@
     </div>
   </div>
 
+  <!-- Flair 光标跟随（diary 页）：按 gsap-fundamentals 用 transform 定位 + force3D -->
+  <div id="flair-cursor-layer" aria-hidden="true">
+    <img class="flair-cursor" src="/flair/Revised-Flair.png" alt="">
+    <img class="flair-cursor" src="/flair/Revised-Flair-1.png" alt="">
+    <img class="flair-cursor" src="/flair/Revised-Flair-2.png" alt="">
+    <img class="flair-cursor" src="/flair/Revised-Flair-3.png" alt="">
+    <img class="flair-cursor" src="/flair/Revised-Flair-4.png" alt="">
+    <img class="flair-cursor" src="/flair/Revised-Flair-5.png" alt="">
+    <img class="flair-cursor" src="/flair/Revised-Flair-6.png" alt="">
+    <img class="flair-cursor" src="/flair/Revised-Flair-7.png" alt="">
+    <img class="flair-cursor" src="/flair/Revised-Flair-8.png" alt="">
+  </div>
+  <style>
+    #flair-cursor-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+    }
+    #flair-cursor-layer .flair-cursor {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 80px;
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+
+  <script src="/gsap.min.js"></script>
+  <script>
+    (function () {
+      if (typeof gsap === 'undefined') return;
+      var flair = document.querySelectorAll('#flair-cursor-layer .flair-cursor');
+      if (!flair.length) return;
+      var gap = 100;
+      var index = 0;
+      var wrapper = gsap.utils.wrap(0, flair.length);
+      var mousePos = { x: 0, y: 0 };
+      var lastMousePos = { x: 0, y: 0 };
+      window.addEventListener('mousemove', function (e) {
+        mousePos.x = e.clientX;
+        mousePos.y = e.clientY;
+      });
+      gsap.ticker.add(tick);
+      function tick() {
+        var dx = mousePos.x - lastMousePos.x;
+        var dy = mousePos.y - lastMousePos.y;
+        if (Math.sqrt(dx * dx + dy * dy) <= gap) return;
+        lastMousePos.x = mousePos.x;
+        lastMousePos.y = mousePos.y;
+        var img = flair[wrapper(index++)];
+        gsap.killTweensOf(img);
+        gsap.set(img, {
+          x: mousePos.x,
+          y: mousePos.y,
+          xPercent: -50,
+          yPercent: -50,
+          force3D: true,
+          opacity: 1
+        });
+        gsap.timeline()
+          .from(img, { opacity: 0, scale: 0, duration: 0.45, ease: 'elastic.out(1, 0.3)' })
+          .to(img, { rotation: 'random(-360, 360)' }, '<')
+          .to(img, { y: '+=120vh', ease: 'back.in(0.4)', duration: 1 }, 0.25);
+      }
+    })();
+  </script>
   <script>window.__GA_MEASUREMENT_ID__=window.__GA_MEASUREMENT_ID__||'';window.__POSTHOG_KEY__=window.__POSTHOG_KEY__||'';window.__POSTHOG_HOST__=window.__POSTHOG_HOST__||'';</script>
   <script src="/analytics-bootstrap.js"></script>
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
