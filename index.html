@@ -23,10 +23,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css?v=4">
+  <style>
+    .emoji-particle-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .emoji-particle-bg canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
 </head>
 <body>
   <div class="bg-gradient"></div>
   <div class="halo" id="halo" aria-hidden="true"></div>
+  <div class="emoji-particle-bg" id="emoji-particle-bg" aria-hidden="true">
+    <canvas id="emoji-particle-canvas"></canvas>
+  </div>
   <div class="page-content">
     <button type="button" class="theme-toggle" aria-label="切换暗黑模式" title="切换主题">
       <span class="theme-icon sun" aria-hidden="true">☀</span>
@@ -77,8 +93,91 @@
     </div>
   </div>
 
+  <script src="/gsap.min.js"></script>
+  <script>
+    (function () {
+      if (typeof gsap === "undefined") return;
+      var EMOJI_LIST = [
+        "😀","😎","🤩","🥳","😇","🤠","🥶","😈","👻","💀","🤖","👾","🐶","🐱","🦊","🐻","🐼","🦁","🐯","🐨",
+        "🐸","🐵","🐔","🐧","🦄","🐲","🌵","🍄","🌈","⭐","🔥","💧","🌸","🍀","🍎","🍕","🎃","🎄","🎸","⚽","🎮","🚀","💎","❤️","👍","🎯"
+      ];
+      var OFFSCREEN_SIZE = 256;
+      var BASE_DISPLAY_SIZE = 320;
+      var EMOJI_FONT = '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif';
+      var emojiCanvasCache = {};
+      function getEmojiCanvas(emoji) {
+        if (emojiCanvasCache[emoji]) return emojiCanvasCache[emoji];
+        var el = document.createElement("canvas");
+        el.width = OFFSCREEN_SIZE;
+        el.height = OFFSCREEN_SIZE;
+        var ctx = el.getContext("2d");
+        ctx.font = (OFFSCREEN_SIZE * 0.85) + "px " + EMOJI_FONT;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(emoji, OFFSCREEN_SIZE / 2, OFFSCREEN_SIZE / 2);
+        emojiCanvasCache[emoji] = el;
+        return el;
+      }
+      var c = document.getElementById("emoji-particle-canvas");
+      if (!c) return;
+      var ctx = c.getContext("2d");
+      var cw = (c.width = window.innerWidth);
+      var ch = (c.height = window.innerHeight);
+      var radius = Math.max(cw, ch);
+      var PARTICLE_COUNT = 99;
+      var particles = [];
+      for (var i = 0; i < PARTICLE_COUNT; i++) {
+        var emoji = EMOJI_LIST[i % EMOJI_LIST.length];
+        particles.push({ x: 0, y: 0, scale: 0, rotate: 0, img: getEmojiCanvas(emoji) });
+      }
+      var tl = gsap.timeline({ onUpdate: draw })
+        .fromTo(particles, {
+          x: function(i) {
+            var angle = (i / particles.length * Math.PI * 2) - Math.PI / 2;
+            return Math.cos(angle * 10) * radius;
+          },
+          y: function(i) {
+            var angle = (i / particles.length * Math.PI * 2) - Math.PI / 2;
+            return Math.sin(angle * 10) * radius;
+          },
+          scale: 1.1,
+          rotate: 0
+        }, {
+          duration: 5,
+          ease: "sine",
+          x: 0,
+          y: 0,
+          scale: 0,
+          rotate: -3,
+          stagger: { each: -0.05, repeat: -1 }
+        }, 0)
+        .seek(99);
+      function draw() {
+        particles.sort(function(a, b) { return a.scale - b.scale; });
+        ctx.clearRect(0, 0, cw, ch);
+        particles.forEach(function(p) {
+          ctx.save();
+          ctx.translate(cw / 2, ch / 2);
+          ctx.rotate(p.rotate);
+          var size = Math.max(1, BASE_DISPLAY_SIZE * p.scale);
+          ctx.drawImage(p.img, 0, 0, p.img.width, p.img.height, p.x, p.y, size, size);
+          ctx.restore();
+        });
+      }
+      window.addEventListener("resize", function() {
+        cw = c.width = window.innerWidth;
+        ch = c.height = window.innerHeight;
+        radius = Math.max(cw, ch);
+        tl.invalidate();
+      });
+      document.addEventListener("pointerup", function(e) {
+        if (e.target.closest("a, button, [role=button], input, textarea, .idea-bin-trigger")) return;
+        gsap.to(tl, { timeScale: tl.timeScale() === 0 ? 1 : 0 });
+      });
+    })();
+  </script>
   <script src="/analytics-bootstrap.js"></script>
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="/supabase.min.js"></script>
   <script src="/supabase-config.js"></script>
   <script src="/supabase-idea-bin.js"></script>
   <script src="/script.js"></script>
