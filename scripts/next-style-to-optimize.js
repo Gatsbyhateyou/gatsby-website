@@ -63,7 +63,7 @@ function main() {
   if (fs.existsSync(progressPath)) {
     try {
       progress = JSON.parse(fs.readFileSync(progressPath, 'utf8'));
-    } catch (_) {}
+    } catch (_) { /* ignore parse error */ }
   }
 
   const nextIndex = progress.nextToDoIndex;

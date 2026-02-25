@@ -4,7 +4,7 @@
 
 | 文件 | 说明 |
 |------|------|
-| [AGENT_HANDOFF.md](AGENT_HANDOFF.md) | Agent 交接与项目约定 |
+| [AGENT_HANDOFF.md](AGENT_HANDOFF.md) | Agent 交接：指向 .cursor/rules/website-memory.mdc（记忆唯一来源） |
 | [ANALYTICS_SETUP.md](ANALYTICS_SETUP.md) | GA4 + PostHog 数据采集配置 |
 | [DEPLOY.md](DEPLOY.md) | 使用 GitHub + Vercel 发布到公网 |
 | [SUPABASE_SETUP.md](SUPABASE_SETUP.md) | 灵感垃圾桶 · Supabase 配置与建表 |
