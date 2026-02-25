@@ -1,0 +1,20 @@
+---
+description: Git 提交工作流（add + commit，可选 push）
+alwaysApply: false
+---
+
+# Git commit 工作流
+
+当用户要求提交代码、执行 commit、或使用本工作流时，按以下步骤执行：
+
+1. **仅提交（不推送）**
+   - 无自定义说明：在项目根目录执行 `npm run commit`
+   - 有说明：`npm run commit -- <用户提供的说明>`（说明中不要以 `--` 开头）
+   - 项目内对应脚本：`node scripts/quick-commit.js`（`git add -A` + `git commit -m "..."`，默认 message 为 `chore: update`）
+
+2. **提交并推送**
+   - 先按上一步完成 commit，再在项目根目录执行 `git push`
+
+3. **约定**
+   - 不替用户写死 commit message，除非用户明确给出或同意使用默认 `chore: update`
+   - 若用户只说「提交」且未给说明，可询问是否用默认说明，或直接执行 `npm run commit`
