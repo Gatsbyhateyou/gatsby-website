@@ -6,15 +6,60 @@
       "sourceType": "github",
       "computedHash": "95e02ef102bc79c776fe76ecf20193392d85a1f10991583cfa033a61b205e3dd"
     },
+    "api-design": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "cd8dad9f9cf4eae8632a3969cd12f4e9ad1f9d58a9ed607c2d9ce51876d6dd13"
+    },
+    "article-writing": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "c6b3dc9b8503229a33d4adb30f5a29986c13639479d789881aa3d24dc1bbff6d"
+    },
+    "backend-patterns": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "6456e45aca107569db0bf67910f58b60af891330864bfdb3fc1c7a9df1ceffbc"
+    },
+    "coding-standards": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "574803faf98d8a698c2b2151d7ed211208bb084320d411bd3a0919e6b08e48f6"
+    },
+    "content-engine": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "aaedb6025dc30648c67330139f2927b663855f075d32d8c7aa7379d3db06831a"
+    },
+    "e2e-testing": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "8e3ac8d268f7ccd4994fa3368e551df13fa48f489674ed57a6c764bcb31b7d00"
+    },
     "editorial-designer": {
       "source": "heyman333/atelier-ui",
       "sourceType": "github",
       "computedHash": "f51f65bf1fa07064a491bcb55bf4a19de269e60968e7e1df2eb7fc6af2cec221"
     },
+    "eval-harness": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "f9d214022c55b1ee92d208e535b95662fb0730ef20030f02dde375fae30ead7c"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
       "computedHash": "25872a21881a950edc3db1f3329664d60405d539660ce05b3265db2de06a7dfd"
+    },
+    "frontend-patterns": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "d7a58ffcc4668e1521c5eb185f9283459b569fdcb708e2fa89f9686491b72f9a"
+    },
+    "frontend-slides": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "dd9e2cf8da655a10e5953065080aeceb6e67d7ff6be579d597076725021c8711"
     },
     "glassmorphism": {
       "source": "ainergiz/design-inspirations",
@@ -26,10 +71,25 @@
       "sourceType": "github",
       "computedHash": "4d5fe1dacfebc0c1b3837b061405150ed2e4971c096543afc46c23161c5a4f7a"
     },
+    "investor-materials": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "f65d21f96ce34c4d452be3d98117f1c6d2584667bc92cc67b85a5ac4f387cd96"
+    },
+    "investor-outreach": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "3997983d183eb647be49ddd1a4686c1366307594fcc57ce2017de38034bdc5dd"
+    },
     "kpi-dashboard-design": {
       "source": "wshobson/agents",
       "sourceType": "github",
       "computedHash": "ae1aa7914167e9232481e3606cc0cdd1127ac555c5c49bfd96d002e289278953"
+    },
+    "market-research": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "a244b79d8fa662db695963ed8cff55b4a97cf0c746cb16737bb0af04d3ae3001"
     },
     "minimalist-surgical-development": {
       "source": "faulkdev/github-copilot-superpowers",
@@ -46,10 +106,25 @@
       "sourceType": "github",
       "computedHash": "4820b4e06022a8d9e592c13eaf1ac3e0341a8b893f794b1ac9ef3734e3197e69"
     },
+    "search-first": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "f6a756e7f3d2b7afe8215270623ce2786890bebd0117df8eb8ae74200270ed29"
+    },
+    "security-review": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "77465a6213cf679cac8aa50ee3b9ba8438b44fcf7bd7f082ed4f16e9db846acd"
+    },
     "skill-creator": {
       "source": "anthropics/skills",
       "sourceType": "github",
       "computedHash": "1a2f4694384cb90d19d75354975dfb654d5c4ad230041667cb4b5b898474d7df"
+    },
+    "strategic-compact": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "b662e43a0b26c9b3803dfbde24823be1b6a32263030f4d38551d59bba3b00f44"
     },
     "tailwind-design-system": {
       "source": "wshobson/agents",
@@ -61,10 +136,25 @@
       "sourceType": "github",
       "computedHash": "d79ac55dc7b3022be0737e7b30f7207ffea82a0ef8e8359ac8c65a7e0bea57a4"
     },
+    "tdd-workflow": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "b043ab9a253352d5ab49d359cf8f92b9826f6008daf9a9831fd0445c09482df4"
+    },
     "threejs-materials": {
       "source": "cloudai-x/threejs-skills",
       "sourceType": "github",
       "computedHash": "4d181db0b35213b772bf20eff5fe6f72f1c84bdc03294db96d1f712dd9047443"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "computedHash": "4cfe5e95a230616c17d92b44e3cd37bae543ce087a7756a446a62f77d7c58a37"
+    },
+    "verification-loop": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "c936d8f1c28920133a6dd6b4c70e9784315f64f71b8d8bb69e61fa8e044cb175"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",

@@ -1,0 +1,42 @@
+---
+description: ECC 详细讲解生成工作流。当用户说「开始 ECC 讲解」「跑 ECC 工作流」「生成 ECC 详细讲解」或通过脚本接收到 ECC 任务时触发。
+globs: 
+alwaysApply: false
+---
+
+# ECC 详细讲解生成规则
+
+## 工作流（每一项）
+
+1. **查源**：必须先用 Read 工具读取源文件
+   - 命令 → `C:\Users\32538\.cursor\commands\<id>.md`
+   - 技能 → `C:\Users\32538\.cursor\skills\<id>\SKILL.md`
+   - 代理 → 从 `C:\AI-project\ecc-guide\index.html` 表格描述 + 关联命令文件提取
+
+2. **生成讲解**：200-400 字中文，必须包含 4 段（缺一不可）：
+   ```html
+   <h4>是什么</h4>
+   <p>一句话说清核心功能。</p>
+   
+   <h4>什么时候用</h4>
+   <p>至少 2 个具体场景，禁止"在需要时"这种废话。</p>
+   
+   <h4>怎么用</h4>
+   <p>从源文件提取的实际步骤或关键要点。</p>
+   
+   <h4>注意事项</h4>
+   <p>易踩的坑、限制、与相似项的区别。</p>
+   ```
+
+3. **写文件**：在 `C:\AI-project\ecc-guide\details\` 下新建 `<id>.html`
+
+4. **更新 details.js**：在 `C:\AI-project\ecc-guide\details.js` 中将对应 key 的 `body` 改为生成的 HTML 内容
+
+5. **标记完成**：在 `C:\AI-project\ecc-guide\ECC-DETAIL-CHECKLIST.md` 中将 `- [ ] <id>` 改为 `- [x] <id>`
+
+## 质量要求
+
+- 每项 >= 200 字
+- 4 个段落全部要有实质内容
+- 必须基于源文件，禁止凭空编造
+- 通俗易懂，面向 Cursor/Claude Code 新手
